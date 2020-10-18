@@ -30,14 +30,7 @@
 
                         @csrf
  
-                        <div class="form-group">
-                            <label>@lang('site.surgery')</label>
-                            <select name="surgery_id" class="form-control">
-                                @foreach ($surgeries as $surgery)
-                                <option value="{{ $surgery->id }}">{{ $surgery->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
 
                         @foreach(config('translatable.locales') as $locale)
                         <div class="form-group">

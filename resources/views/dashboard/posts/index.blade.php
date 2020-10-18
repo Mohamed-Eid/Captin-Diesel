@@ -52,7 +52,6 @@
                                 <th style="width: 10px">#</th>
                                 <th>@lang('site.name')</th>
                                 <th>@lang('site.image')</th>
-                                <th>@lang('site.surgery')</th>
                                 <th>@lang('site.created_at')</th>
                                 <th>@lang('site.action')</th>
                             </tr>
@@ -67,7 +66,6 @@
                                         <img src="{{ $post->image_path }}" class="img-thumbnail" style="width: 50px;">
                                     </td>
 
-                                    <td>{{ $post->surgery->name }}</td>
 
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
                                     <td>

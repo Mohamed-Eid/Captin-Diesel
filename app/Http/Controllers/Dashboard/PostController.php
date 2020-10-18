@@ -17,9 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $surgeries = Surgery::all();
         $posts = Post::paginate(10);
-        return view('dashboard.posts.index',compact('surgeries','posts'));  
+        return view('dashboard.posts.index',compact('posts'));  
     }
 
     /**
@@ -29,8 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $surgeries = Surgery::all();
-        return view('dashboard.posts.create',compact('surgeries'));    
+        return view('dashboard.posts.create');    
     }
 
     /**
@@ -42,7 +40,6 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'surgery_id' => 'required',
         ];
 
         foreach (config('translatable.locales') as $locale){
@@ -76,8 +73,7 @@ class PostController extends Controller
     public function edit(Post $blog)
     {
         //dd($blog);
-        $surgeries = Surgery::all();
-        return view('dashboard.posts.edit',['surgeries'=>$surgeries , 'post' => $blog]);    
+        return view('dashboard.posts.edit',[ 'post' => $blog]);    
     }
 
     /**
@@ -90,7 +86,6 @@ class PostController extends Controller
     public function update(Request $request,Post $blog)
     {
         $rules = [
-            'surgery_id' => 'required',
         ];
         //dd($blog);
         foreach (config('translatable.locales') as $locale){

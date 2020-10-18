@@ -28,7 +28,9 @@ Route::group(
 
                 Route::resource('/partners','PartnerController');
 
-                
+                Route::resource('/testmonials','TestmonialController');
+
+
                 Route::resource('/image_album','ImageAlbumController')->only(['index' , 'create' , 'store' , 'destroy']);
                 Route::resource('/question_answer','QuestionAnswerController');
                 Route::resource('/videos','VideoController');

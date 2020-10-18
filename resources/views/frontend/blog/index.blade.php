@@ -25,10 +25,6 @@
                                 <i class="fa fa-clock-o"></i>
                                 <span>{{$article->created_at}}</span>
                             </li>
-                            <li>
-                                <i class="fa fa-bookmark"></i>
-                                <span>{{$article->surgery->name}}</span>
-                            </li>
                         </ul>
                         <p class="m-t-20">
                             {!! htmlspecialchars_decode(get_snippts($article->body)) !!} ....
@@ -38,7 +34,7 @@
                 </article>
             </div>                
             @endforeach
-        </div>
+        </div> 
 
         
         <div class="row ">

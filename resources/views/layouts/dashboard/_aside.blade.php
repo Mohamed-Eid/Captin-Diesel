@@ -49,6 +49,10 @@
                 <a href="{{ route('dashboard.partners.index') }}"><i class="fa  fa-video-camera"></i><span>@lang('site.partners')</span></a>
             </li>
 
+            <li class="{{ route('dashboard.testmonials.index')==url()->current() ? 'active' : '' }}">
+                <a href="{{ route('dashboard.testmonials.index') }}"><i class="fa  fa-video-camera"></i><span>@lang('site.testmonials')</span></a>
+            </li>
+
             <li class="{{ route('dashboard.question_answer.index')==url()->current() ? 'active' : '' }}">
                 <a href="{{ route('dashboard.question_answer.index') }}"><i class="fa  fa-question"></i><span>@lang('site.question_answer')</span></a>
             </li>

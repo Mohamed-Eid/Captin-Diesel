@@ -40,20 +40,20 @@ function pages(){
 
 function get_snippts($text , $wordCount = 30){
     $text = strip_tags($text);
-    return $text;
-    // return implode( 
-    //     '', 
-    //     array_slice( 
-    //       preg_split(
-    //         '/([\s,\.;\?\!]+)/', 
-    //         $text, 
-    //         $wordCount*2+1, 
-    //         PREG_SPLIT_DELIM_CAPTURE
-    //       ),
-    //       0,
-    //       $wordCount*2-1
-    //     )
-    //   );
+    //return $text;
+    return implode( 
+        '', 
+        array_slice( 
+          preg_split(
+            '/([\s,\.;\?\!]+)/', 
+            $text, 
+            $wordCount*2+1, 
+            PREG_SPLIT_DELIM_CAPTURE
+          ),
+          0,
+          $wordCount*2-1
+        )
+      );
 }
 
  

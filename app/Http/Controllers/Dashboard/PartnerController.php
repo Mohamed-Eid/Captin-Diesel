@@ -57,7 +57,7 @@ class PartnerController extends Controller
 
         return redirect()->route('dashboard.partners.index');
     }
-
+ 
     /**
      * Display the specified resource.
      *

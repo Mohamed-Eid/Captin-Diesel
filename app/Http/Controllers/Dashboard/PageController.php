@@ -20,7 +20,7 @@ class PageController extends Controller
     {
         $pages = page::paginate(10);
         return view('dashboard.pages.index',compact('pages'));
-    }
+    } 
 
     /**
      * Show the form for creating a new resource.

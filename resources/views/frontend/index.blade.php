@@ -99,62 +99,28 @@
                 <div class=" col-md-12 text-center">
                     <h2 class="middle-title wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">News</h2>
                 </div>
+                @foreach ($posts as $post)
                 <div class="col-md-4  m-t-30 m-b-30 wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">
                     <a href="single-blog.php">
                         <div class="title">
-                            <h3>article title</h3>
+                            <h3>{{$post->name}}</h3>
                         </div>
                         <article class="hoverzoom box-shadow bg-white">
                             <figure>
-                                <img src="{{asset('frontend/Technomasr/images/img11.jpg')}}" alt="" class="w-100 h-100">
+                                <img src="{{$post->image_path}}" alt="" class="w-100 h-100">
                             </figure>
                             <div class="text p-l-10 p-r-10">
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                                <p style="height: 132px;">
+                                    {!! htmlspecialchars_decode(get_snippts($post->body)) !!} ....
                                 </p>
                             </div>
                             <a href="#" class="btn btn-danger pull-right m-r-15 m-b-20">Read More</a>
                         </article>
                     </a>
-                </div>
+                </div>                    
+                @endforeach
 
-                <div class="col-md-4  m-t-30 m-b-30 wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">
-                    <a href="single-blog.php">
-                        <div class="title">
-                            <h3>Where does it come from?</h3>
-                        </div>
-                        <article class="hoverzoom box-shadow bg-white">
-                            <figure>
-                                <img src="{{asset('frontend/Technomasr/images/img13.jpg')}}" alt="" class="w-100 h-100">
-                            </figure>
-                            <div class="text p-l-10 p-r-10">
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                                </p>
-                            </div>
-                            <a href="#" class="btn btn-danger pull-right m-r-15 m-b-20">Read More</a>
-                        </article>
-                    </a>
-                </div>
 
-                <div class="col-md-4  m-t-30 m-b-30 wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">
-                    <a href="single-blog.php">
-                        <div class="title">
-                            <h3> Where can I get some? Powering Your Success </h3>
-                        </div>
-                        <article class="hoverzoom box-shadow bg-white">
-                            <figure>
-                                <img src="{{asset('frontend/Technomasr/images/slide.jpg')}}" alt="" class="w-100 h-100">
-                            </figure>
-                            <div class="text p-l-10 p-r-10">
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                                </p>
-                            </div>
-                            <a href="#" class="btn btn-danger pull-right m-r-15 m-b-20">Read More</a>
-                        </article>
-                    </a>
-                </div>
                 <div class="col-md-12 text-center m-t-20 wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">
                     <a href="blog.php" class="btn-gray btn">View More Articles </a>
                 </div>
@@ -164,56 +130,7 @@
     <!-- #END# services -->
         
     <!-- partners -->
-        <div class="sponsors sec-padding">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="middle-title wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">Partners</h2>
-                </div>
-                <!-- if have partner -->
-                    <div class="owl-demo partners-owl-demo wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">
-                        <div class="item">
-                            <a href="#" target="_blank">
-                                <img src="{{asset('frontend/Technomasr/images/partner-1.png')}}" alt="Owl Image">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" target="_blank">
-                                <img src="{{asset('frontend/Technomasr/images/partner-2.png')}}" alt="Owl Image">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" target="_blank">
-                                <img src="{{asset('frontend/Technomasr/images/partner-3.png')}}" alt="Owl Image">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" target="_blank">
-                                <img src="{{asset('frontend/Technomasr/images/partner-1.png')}}" alt="Owl Image">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" target="_blank">
-                                <img src="{{asset('frontend/Technomasr/images/partner-2.png')}}" alt="Owl Image">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" target="_blank">
-                                <img src="{{asset('frontend/Technomasr/images/partner-3.png')}}" alt="Owl Image">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" target="_blank">
-                                <img src="{{asset('frontend/Technomasr/images/partner-1.png')}}" alt="Owl Image">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="#" target="_blank">
-                                <img src="{{asset('frontend/Technomasr/images/partner-2.png')}}" alt="Owl Image">
-                            </a>
-                        </div>
-                    </div>
-            </div>
-        </div>
+    @include('frontend.includes.partners')
     <!-- #END# partners -->
 </section>
 
