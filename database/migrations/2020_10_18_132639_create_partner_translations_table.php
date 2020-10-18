@@ -15,6 +15,15 @@ class CreatePartnerTranslationsTable extends Migration
     {
         Schema::create('partner_translations', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('partner_id')->unsigned();
+            
+            $table->string('name');
+
+            $table->string('locale')->index();
+            $table->unique(['partner_id','locale']);
+            $table->foreign('partner_id')->references('id')->on('partners')->onDelete('cascade');
+  
             $table->timestamps();
         });
     }

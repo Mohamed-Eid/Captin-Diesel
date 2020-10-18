@@ -25,6 +25,9 @@ Route::group(
                 Route::resource('users' , 'UserController');
                 Route::resource('/categories','CategoryController');
                 Route::resource('/surgery','SurgeryController');
+
+                Route::resource('/partners','PartnerController');
+
                 
                 Route::resource('/image_album','ImageAlbumController')->only(['index' , 'create' , 'store' , 'destroy']);
                 Route::resource('/question_answer','QuestionAnswerController');
