@@ -13,28 +13,18 @@ Route::group(
             Auth::routes(['register' => false]);
 
 
-            Route::get('get_video_ajax/', function () {
-                //return request()->all();
-                return get_video_id(request()->link);
-            })->name('get_video_id');
-
             Route::middleware(['auth'])->group(function(){
                 Route::get('/','DashboardController@index')->name('index');
 
                 //user routes
                 Route::resource('users' , 'UserController');
                 Route::resource('/categories','CategoryController');
-                Route::resource('/surgery','SurgeryController');
 
                 Route::resource('/partners','PartnerController');
 
                 Route::resource('/testmonials','TestmonialController');
+                Route::resource('/cultures','CultureController');
 
-
-                Route::resource('/image_album','ImageAlbumController')->only(['index' , 'create' , 'store' , 'destroy']);
-                Route::resource('/question_answer','QuestionAnswerController');
-                Route::resource('/videos','VideoController');
- 
                 Route::resource('/blog','PostController');
                 Route::resource('/pages','PageController');
 

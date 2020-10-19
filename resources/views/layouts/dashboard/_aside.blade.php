@@ -32,17 +32,7 @@
             </li>
             {{-- @endif --}}
     
-            <li class="{{ route('dashboard.surgery.index')==url()->current() ? 'active' : '' }}">
-                <a href="{{ route('dashboard.surgery.index') }}"><i class="fa  fa-heartbeat"></i><span>@lang('site.surgeries')</span></a>
-            </li>
 
-            <li class="{{ route('dashboard.image_album.index')==url()->current() ? 'active' : '' }}">
-                <a href="{{ route('dashboard.image_album.index') }}"><i class="fa  fa-photo"></i><span>@lang('site.photo_album')</span></a>
-            </li>
-
-            <li class="{{ route('dashboard.videos.index')==url()->current() ? 'active' : '' }}">
-                <a href="{{ route('dashboard.videos.index') }}"><i class="fa  fa-video-camera"></i><span>@lang('site.videos')</span></a>
-            </li>
 
             
             <li class="{{ route('dashboard.partners.index')==url()->current() ? 'active' : '' }}">
@@ -53,8 +43,8 @@
                 <a href="{{ route('dashboard.testmonials.index') }}"><i class="fa  fa-video-camera"></i><span>@lang('site.testmonials')</span></a>
             </li>
 
-            <li class="{{ route('dashboard.question_answer.index')==url()->current() ? 'active' : '' }}">
-                <a href="{{ route('dashboard.question_answer.index') }}"><i class="fa  fa-question"></i><span>@lang('site.question_answer')</span></a>
+            <li class="{{ route('dashboard.cultures.index')==url()->current() ? 'active' : '' }}">
+                <a href="{{ route('dashboard.cultures.index') }}"><i class="fa  fa-video-camera"></i><span>@lang('site.cultures')</span></a>
             </li>
             
             <li class="{{ route('dashboard.blog.index')==url()->current() ? 'active' : '' }}">
