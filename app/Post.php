@@ -17,6 +17,11 @@ class Post extends Model
     public  function getImagePathAttribute(){
         return asset('uploads/blog_images/'.$this->image);
     }
+
+    public function getCreatedAtAttribute($date)
+{
+    return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('j F, Y');
+}
     //==================relations===================//
 
     public function surgery(){

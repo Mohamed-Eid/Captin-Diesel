@@ -46,6 +46,11 @@
             <li class="{{ route('dashboard.cultures.index')==url()->current() ? 'active' : '' }}">
                 <a href="{{ route('dashboard.cultures.index') }}"><i class="fa  fa-video-camera"></i><span>@lang('site.cultures')</span></a>
             </li>
+
+            
+            <li class="{{ route('dashboard.departments.index')==url()->current() ? 'active' : '' }}">
+                <a href="{{ route('dashboard.departments.index') }}"><i class="fa  fa-video-camera"></i><span>@lang('site.departments')</span></a>
+            </li>
             
             <li class="{{ route('dashboard.blog.index')==url()->current() ? 'active' : '' }}">
                 <a href="{{ route('dashboard.blog.index') }}"><i class="fa fa-pencil"></i><span>@lang('site.blog')</span></a>

@@ -69,13 +69,13 @@
                                         <a class="nav-link" href="partners.php">Partners & Testimonials</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="careers.php">Careers</a>
+                                        <a class="nav-link" href="{{ route('frontend.careers.index') }}">Careers</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="culture.php">Culture</a>
+                                        <a class="nav-link" href="{{ route('frontend.cultures.index') }}">Culture</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="blog.php">News</a>
+                                        <a class="nav-link" href="{{ route('frontend.blog.index') }}">News</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="delars.php">Delar Locator</a>

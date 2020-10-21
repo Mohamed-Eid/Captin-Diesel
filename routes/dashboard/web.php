@@ -8,7 +8,7 @@ Route::group(
     ],
     
     function(){
-        Route::prefix('dashboard')->name('dashboard.')->group(function(){
+        Route::prefix('AdminPanel')->name('dashboard.')->group(function(){
            
             Auth::routes(['register' => false]);
 
@@ -24,6 +24,10 @@ Route::group(
 
                 Route::resource('/testmonials','TestmonialController');
                 Route::resource('/cultures','CultureController');
+
+                Route::resource('/departments','DepartmentController');
+                Route::resource('/jobs','JobController');
+
 
                 Route::resource('/blog','PostController');
                 Route::resource('/pages','PageController');

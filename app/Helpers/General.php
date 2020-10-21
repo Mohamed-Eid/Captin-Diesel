@@ -29,6 +29,13 @@ function delete_image($folder , $image)
     Illuminate\Support\Facades\Storage::disk('public_uploads')->delete('/'.$folder.'/' . $image);
 }
 
+
+function upload_file($path, $request_file){
+    $fileName = time().'.'.$request_file->getClientOriginalExtension();
+    $request_file->move(public_path('uploads/'.$path), $fileName);
+    return $fileName;
+}
+
 function get_video_id($link){
     preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $link, $match);
     return $match[1];
@@ -37,6 +44,8 @@ function get_video_id($link){
 function pages(){
     return \App\Page::all();
 }
+
+
 
 function get_snippts($text , $wordCount = 30){
     $text = strip_tags($text);

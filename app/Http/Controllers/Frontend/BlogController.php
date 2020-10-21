@@ -10,7 +10,7 @@ use Psy\Command\ShowCommand;
 class BlogController extends Controller
 {
     public function index(){
-        $articles = Post::paginate(10);
+        $articles = Post::paginate(5);
         return view('frontend.blog.index',compact('articles'));
     }
 

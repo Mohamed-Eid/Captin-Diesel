@@ -29,10 +29,21 @@ Route::group(
         Route::get('/blog/{post}','BlogController@show')->name('blog.show');
 
         
-        Route::get('/about','PagesController@about_page')->name('pages.about');
+        //Route::get('/about','PagesController@about_page')->name('pages.about');
 
         Route::get('/cultures','CultureController@index')->name('cultures.index');
         
+        Route::get('/careers','CareerController@index')->name('careers.index');
+
+        Route::get('/careers/{department}/vacancies','CareerController@vacancies')->name('careers.vacancies');
+
+        Route::get('/careers/{department}/vacancies/{job}','CareerController@vacancy')->name('careers.vacancy');
+
+        Route::get('/careers/{department}/vacancies/{job}/apply','CareerController@apply')->name('careers.vacancy.apply');
+
+        Route::post('/careers/{department}/vacancies/{job}/apply','CareerController@apply_post')->name('careers.vacancy.apply_post');
+
+
         //Route::get('/before_after','PagesController@before_after')->name('pages.before_after');
 
         Route::get('/contact','ContactController@index')->name('contact.index');
@@ -41,3 +52,4 @@ Route::group(
 
         });//end of frontend routes
 });
+  
