@@ -19,6 +19,10 @@ Route::group(
                 //user routes
                 Route::resource('users' , 'UserController');
                 Route::resource('/categories','CategoryController');
+                Route::resource('/sub_categories','SubcategoryController');
+                
+                Route::resource('/products','productController');
+
 
                 Route::resource('/partners','PartnerController');
 

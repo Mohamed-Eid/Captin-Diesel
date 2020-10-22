@@ -57,9 +57,9 @@
                                         <a class="nav-link" href="about.php">About us</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="products.php">Products</a>
+                                        <a class="nav-link" href="{{ route('frontend.categories.index') }}">Products</a>
                                         <ul class="sub-menu simple-shadow">
-                                            <li><a href="inventory.php">View Inventory</a></li>
+                                            <li><a href="{{ route('frontend.products.index') }}">View Inventory</a></li>
                                             <li><a href="product.php">Product</a></li>
                                             <li><a href="market-sectors.php">market sectors</a></li>
                                             

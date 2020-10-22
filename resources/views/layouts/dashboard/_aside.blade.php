@@ -30,6 +30,10 @@
             <li class="{{ route('dashboard.categories.index')==url()->current() ? 'active' : '' }}">
                 <a href="{{ route('dashboard.categories.index') }}"><i class="fa  fa-cube"></i><span>@lang('site.categories')</span></a>
             </li>
+
+            <li class="{{ route('dashboard.sub_categories.index')==url()->current() ? 'active' : '' }}">
+                <a href="{{ route('dashboard.sub_categories.index') }}"><i class="fa  fa-cube"></i><span>@lang('site.sub_categories')</span></a>
+            </li>
             {{-- @endif --}}
     
 

@@ -35,6 +35,11 @@ Route::group(
         
         Route::get('/careers','CareerController@index')->name('careers.index');
 
+        Route::get('/categories','CategoryController@index')->name('categories.index');
+
+        Route::get('/inventory','ProductController@index')->name('products.index');
+
+
         Route::get('/careers/{department}/vacancies','CareerController@vacancies')->name('careers.vacancies');
 
         Route::get('/careers/{department}/vacancies/{job}','CareerController@vacancy')->name('careers.vacancy');

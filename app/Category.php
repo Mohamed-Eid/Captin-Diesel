@@ -8,22 +8,24 @@ class Category extends Model
 {
     use \Dimsav\Translatable\Translatable;
 
-    public $translatedAttributes = ['name'];
-    protected $guarded = [];
-    protected  $appends = ['image_path'];
+    public $translatedAttributes = ['name','description'];
+    public $guarded = [];
+    protected  $appends = ['image_path',];
 
 
     public  function getImagePathAttribute(){
         return asset('uploads/category_images/'.$this->image);
     }
 
-    //==================relations===================//
-
-    public function surgeries(){
-        return $this->hasMany(Surgery::class);
+    public function ScopeParent($q){
+        return $q->where('parent_id',NULL);
     }
 
-    public function expectations(){
-        return $this->hasMany(Expectation::class);
+    public function parent(){
+        return $this->belongsTo(Category::class,'parent_id')->with('parent');
+    }
+
+    public function children(){
+        return $this->hasMany(Category::class,'parent_id');
     }
 }
