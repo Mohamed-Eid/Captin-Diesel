@@ -26,7 +26,7 @@ class CategoryController extends Controller
 
 
         return view('dashboard.categories.index' , compact('categories'));
-    }
+    } 
 
     /**
      * Show the form for creating a new resource.

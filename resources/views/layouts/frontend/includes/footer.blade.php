@@ -127,6 +127,8 @@
         wow.init();
     </script>
 
+    @stack('scripts')
+
     <!-- end scripts -->
 
 </body>

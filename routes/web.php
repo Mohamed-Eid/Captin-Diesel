@@ -49,9 +49,10 @@ Route::group(
         Route::get('/categories','CategoryController@index')->name('categories.index');
 
         Route::get('/inventory','ProductController@index')->name('products.index');
+
         Route::get('/inventory/{product}','ProductController@show')->name('products.show');
 
-
+        Route::get('/delars','DelarController@index')->name('delars.index');
 
 
 

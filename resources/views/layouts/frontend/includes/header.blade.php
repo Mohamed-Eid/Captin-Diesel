@@ -78,7 +78,7 @@
                                         <a class="nav-link" href="{{ route('frontend.blog.index') }}">News</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="delars.php">Delar Locator</a>
+                                        <a class="nav-link" href="{{ route('frontend.delars.index') }}">Delar Locator</a>
                                     </li>
                                 
                                 </ul>

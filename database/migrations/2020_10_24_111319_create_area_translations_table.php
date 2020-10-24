@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDelarsTable extends Migration
+class CreateAreaTranslationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,17 @@ class CreateDelarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('delars', function (Blueprint $table) {
+        Schema::create('area_translations', function (Blueprint $table) {
             $table->increments('id');
-
-            $table->string('contact_info');
-            $table->text('map');
-
-
-            $table->integer('city_id')->unsigned();
-
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
-
+            
             $table->integer('area_id')->unsigned();
 
+            $table->string('name');
+        
+            $table->string('locale')->index();
+            $table->unique(['area_id','locale']);
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
-
-
-            $table->timestamps();
+          
         });
     }
 
@@ -40,6 +34,6 @@ class CreateDelarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('delars');
+        Schema::dropIfExists('area_translations');
     }
 }

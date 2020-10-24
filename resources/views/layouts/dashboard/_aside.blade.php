@@ -51,6 +51,36 @@
                 <a href="{{ route('dashboard.cultures.index') }}"><i class="fa  fa-video-camera"></i><span>@lang('site.cultures')</span></a>
             </li>
 
+            <li class="treeview">
+                <a href="#">
+                  <i class="fa fa-share"></i> 
+                  <span>@lang('site.delars')</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-folder pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="page-list {{route('dashboard.pages.index')==url()->current() ? 'active' : '' }}">
+                        <a href="{{ route('dashboard.pages.index') }}">
+                            <i class="fa fa-folder-open"></i> @lang('site.cities')
+                        </a>
+                    </li>
+
+                    <li class="page-list {{route('dashboard.pages.index')==url()->current() ? 'active' : '' }}">
+                        <a href="{{ route('dashboard.pages.index') }}">
+                            <i class="fa fa-folder-open"></i> @lang('site.areas')
+                        </a>
+                    </li>
+
+                    <li class="page-list {{route('dashboard.pages.index')==url()->current() ? 'active' : '' }}">
+                        <a href="{{ route('dashboard.pages.index') }}">
+                            <i class="fa fa-folder-open"></i> @lang('site.delars')
+                        </a>
+                    </li>
+
+                    
+                </ul>
+            </li>
             
             <li class="{{ route('dashboard.departments.index')==url()->current() ? 'active' : '' }}">
                 <a href="{{ route('dashboard.departments.index') }}"><i class="fa  fa-video-camera"></i><span>@lang('site.departments')</span></a>
@@ -63,6 +93,9 @@
             <li class="{{ route('dashboard.contact.index')==url()->current() ? 'active' : '' }}">
                 <a href="{{ route('dashboard.contact.index') }}"><i class="fa fa-pencil"></i><span>@lang('site.contact')</span></a>
             </li>
+
+
+
 
             <li class="treeview">
                 <a href="#">
@@ -86,10 +119,10 @@
                     </li>
                     @endforeach
                 </ul>
-              </li>
+            </li>
 
 
-              <li class="treeview">
+            <li class="treeview">
                 <a href="#">
                   <i class="fa fa-share"></i> 
                   <span>@lang('site.settings')</span>
@@ -109,7 +142,7 @@
                         </a>
                     </li>
                 </ul>
-              </li>
+            </li>
 
         </ul>
 

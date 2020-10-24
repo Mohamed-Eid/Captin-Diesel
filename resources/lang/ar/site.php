@@ -121,10 +121,8 @@ return [
     'price' => 'السعر',
 
 
-    //'cities' => 'المدن',
-    'cities' => 'الدول',
-    //'city'   => 'المدينه',
-    'city'   => 'الدوله',
+    'cities' => 'المدن',
+    'city'   => 'المدينه',
     'created_at' => 'منذ',
     'notifications' => 'الإشعارات',
     //'districts' => 'الاحياء',

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAreasTable extends Migration
+class CreateCityTranslationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,17 @@ class CreateAreasTable extends Migration
      */
     public function up()
     {
-        Schema::create('areas', function (Blueprint $table) {
+        Schema::create('city_translations', function (Blueprint $table) {
             $table->increments('id');
-
+            
             $table->integer('city_id')->unsigned();
 
+            $table->string('name');
+        
+            $table->string('locale')->index();
+            $table->unique(['city_id','locale']);
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
-
+            
             $table->timestamps();
         });
     }
@@ -31,6 +35,6 @@ class CreateAreasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('areas');
+        Schema::dropIfExists('city_translations');
     }
 }
