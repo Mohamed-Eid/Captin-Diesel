@@ -66,7 +66,7 @@
                                         </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="partners.php">Partners & Testimonials</a>
+                                        <a class="nav-link" href="{{ route('frontend.partners.index') }}">Partners & Testimonials</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('frontend.careers.index') }}">Careers</a>

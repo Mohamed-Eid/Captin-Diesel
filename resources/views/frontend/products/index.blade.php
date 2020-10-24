@@ -43,7 +43,7 @@
                                     <div class="data" style="height: 72px">
                                         <h4>{{$product->name}} </h4>
                                         <h5 class="m-t-15  m-b-30" ><b>Price :</b>{{$product->price}} EGP</h5>
-                                        <a href="product.php" class="btn btn-danger pull-right">Read More</a>
+                                        <a href="{{ route('frontend.products.show',$product) }}" class="btn btn-danger pull-right">Read More</a>
                                     </div>
                                 </div>
                             </div>                               

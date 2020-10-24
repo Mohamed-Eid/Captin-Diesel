@@ -22,4 +22,12 @@ class ProductController extends Controller
 
         return view('frontend.products.index',compact('products','categories'));
     }
+
+    public function show(Product $product){
+
+        $related_products = Product::where('category_id',$product->category_id)
+                                    ->where('id','!=',$product->id)
+                                    ->get();
+        return view('frontend.products.show',compact('product','related_products'));   
+    }
 }

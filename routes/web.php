@@ -31,14 +31,12 @@ Route::group(
         
         //Route::get('/about','PagesController@about_page')->name('pages.about');
 
+        Route::get('/partners','PartnerController@index')->name('partners.index');
+
+
         Route::get('/cultures','CultureController@index')->name('cultures.index');
         
         Route::get('/careers','CareerController@index')->name('careers.index');
-
-        Route::get('/categories','CategoryController@index')->name('categories.index');
-
-        Route::get('/inventory','ProductController@index')->name('products.index');
-
 
         Route::get('/careers/{department}/vacancies','CareerController@vacancies')->name('careers.vacancies');
 
@@ -47,6 +45,15 @@ Route::group(
         Route::get('/careers/{department}/vacancies/{job}/apply','CareerController@apply')->name('careers.vacancy.apply');
 
         Route::post('/careers/{department}/vacancies/{job}/apply','CareerController@apply_post')->name('careers.vacancy.apply_post');
+
+        Route::get('/categories','CategoryController@index')->name('categories.index');
+
+        Route::get('/inventory','ProductController@index')->name('products.index');
+        Route::get('/inventory/{product}','ProductController@show')->name('products.show');
+
+
+
+
 
 
         //Route::get('/before_after','PagesController@before_after')->name('pages.before_after');
