@@ -54,7 +54,7 @@
                                         <a class="nav-link" href="{{ route('frontend.contact.index') }}">Contact us</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="about.php">About us</a>
+                                        <a class="nav-link" href="{{ route('frontend.about_us') }}">About us</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('frontend.categories.index') }}">Products</a>

@@ -79,9 +79,6 @@ function get_setting_by_key($key){
     return \App\Setting::where('key',$key)->first();
 }
 
-use \App\Category;
-function serviecs(){
-    return Category::has('surgeries')->get();
-}
+
 
 ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2020 at 04:27 PM
+-- Generation Time: Oct 25, 2020 at 03:47 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -24,12 +24,87 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `applicants`
+--
+
+CREATE TABLE `applicants` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `job_id` int(10) UNSIGNED NOT NULL,
+  `fullname` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `current_job_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `current_job_location` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `qualifications` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `years_of_experience` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cv` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `applicants`
+--
+
+INSERT INTO `applicants` (`id`, `job_id`, `fullname`, `email`, `current_job_title`, `current_job_location`, `qualifications`, `years_of_experience`, `cv`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Soly', 'ss@ss.com', 'fornt end', 'Tecno Masr', '1', '1', '1603290157.pdf', '2020-10-21 14:22:37', '2020-10-21 14:22:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `areas`
+--
+
+CREATE TABLE `areas` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `city_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `areas`
+--
+
+INSERT INTO `areas` (`id`, `city_id`, `created_at`, `updated_at`) VALUES
+(1, 2, '2020-10-24 10:05:55', '2020-10-24 10:05:55'),
+(3, 1, '2020-10-24 10:07:28', '2020-10-24 10:07:28'),
+(4, 1, '2020-10-24 10:07:39', '2020-10-24 10:07:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `area_translations`
+--
+
+CREATE TABLE `area_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `area_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `area_translations`
+--
+
+INSERT INTO `area_translations` (`id`, `area_id`, `name`, `locale`) VALUES
+(1, 1, 'العباسية', 'ar'),
+(2, 1, 'El Abasya', 'en'),
+(5, 3, 'المنصورة', 'ar'),
+(6, 3, 'El Mansoura', 'en'),
+(7, 4, 'طلخا', 'ar'),
+(8, 4, 'Talkha', 'en');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
   `id` int(10) UNSIGNED NOT NULL,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default.png',
+  `parent_id` int(10) UNSIGNED DEFAULT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -38,16 +113,16 @@ CREATE TABLE `categories` (
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `image`, `created_at`, `updated_at`) VALUES
-(2, 'Q0VPV1sROzg7ZqT0RggcGWyqacIMk9zGtA0r5Ybn.jpeg', '2020-10-11 13:16:00', '2020-10-11 13:16:00'),
-(3, 'koeu1h43le2K57zfwI17xH2fZQpDurqE2Z2MeCTC.jpeg', '2020-10-11 13:16:12', '2020-10-11 13:16:12'),
-(4, 'j7rJ7iejxLjtOluYUYxk5coU5mlX7w4LpG4IFPC4.png', '2020-10-13 23:11:07', '2020-10-13 23:11:07'),
-(5, 'x8N2xirJJ0BThyW9b9x8vD6rpFVRUssT8wXWB2Wo.jpeg', '2020-10-15 10:20:09', '2020-10-15 10:20:09'),
-(6, 'oFXrYQzKhRFwf3FKNDEw5mMionkxLJQVHJQrP6Tu.jpeg', '2020-10-15 10:20:28', '2020-10-15 10:20:28'),
-(7, 'BeZPuaeu2XrKNzy4g2Dt8ygHqyqz2ymbZyQ08APd.jpeg', '2020-10-16 20:18:44', '2020-10-16 20:18:44'),
-(8, 'bwQHGfdIhEhUudsQ6XfIIG8WKcOGPXkaKY5W3wiY.jpeg', '2020-10-17 14:30:09', '2020-10-17 14:30:09'),
-(9, 'Z5ZQ2G6JJT6IiEyVvl2WAlCwOGuveZSSjmfzVdvg.png', '2020-10-17 14:31:20', '2020-10-17 14:31:20'),
-(10, 'LmOtk9FQXR6PyOCC1a4eo8lCgJKuEnHbEx9yplCE.jpeg', '2020-10-17 14:31:45', '2020-10-17 14:31:45');
+INSERT INTO `categories` (`id`, `parent_id`, `image`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'Qokap1Q4gs3Bv7wzK3qBWguroTnRBQniK2NSVqIl.jpeg', '2020-10-22 09:04:40', '2020-10-22 09:04:40'),
+(2, NULL, '36xirxPgEG6I5Qgcqy59HEstY2RN8n07TzIHrFEW.jpeg', '2020-10-22 09:05:30', '2020-10-22 09:05:30'),
+(3, NULL, '2tRFNY5OVoBXaMML04yaQeZEPyieJFn3y1MnFcMO.jpeg', '2020-10-22 09:05:51', '2020-10-22 09:05:51'),
+(4, 1, NULL, '2020-10-22 09:24:40', '2020-10-22 09:24:40'),
+(5, 3, NULL, '2020-10-22 09:32:09', '2020-10-22 09:32:09'),
+(6, 3, NULL, '2020-10-22 09:51:58', '2020-10-22 09:51:58'),
+(7, 3, NULL, '2020-10-22 09:56:52', '2020-10-22 09:56:52'),
+(8, 3, NULL, '2020-10-22 09:57:03', '2020-10-22 09:57:03'),
+(9, 1, NULL, '2020-10-22 09:57:26', '2020-10-22 09:57:26');
 
 -- --------------------------------------------------------
 
@@ -59,32 +134,80 @@ CREATE TABLE `category_translations` (
   `id` int(10) UNSIGNED NOT NULL,
   `category_id` int(10) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `category_translations`
 --
 
-INSERT INTO `category_translations` (`id`, `category_id`, `name`, `locale`) VALUES
-(3, 2, 'تست 31', 'ar'),
-(4, 2, 'test 31', 'en'),
-(5, 3, 'تست 311', 'ar'),
-(6, 3, 'test 311', 'en'),
-(7, 4, 'تست', 'ar'),
-(8, 4, 'test', 'en'),
-(9, 5, 'سييرفيس', 'ar'),
-(10, 5, 'service', 'en'),
-(11, 6, 'تست 32asd', 'ar'),
-(12, 6, 'asfasdfasdf', 'en'),
-(13, 7, 'قسم', 'ar'),
-(14, 7, 'category', 'en'),
-(15, 8, 'تست 3', 'ar'),
-(16, 8, 'test 3', 'en'),
-(17, 9, 'سيباسيباسيبالسي', 'ar'),
-(18, 9, 'sdfgsdgsdgasdgasdg', 'en'),
-(19, 10, 'سيباسيباسيبالسيzxfdsa', 'ar'),
-(20, 10, 'sdfgsdgsdgasdgasdgشسبشسب', 'en');
+INSERT INTO `category_translations` (`id`, `category_id`, `name`, `description`, `locale`, `created_at`, `updated_at`) VALUES
+(1, 1, 'تست', NULL, 'ar', NULL, NULL),
+(2, 1, 'test', NULL, 'en', NULL, NULL),
+(3, 2, 'قسم 2', NULL, 'ar', NULL, NULL),
+(4, 2, 'Category 2', NULL, 'en', NULL, NULL),
+(5, 3, 'كاتيجوري 3', NULL, 'ar', NULL, NULL),
+(6, 3, 'Category 3', NULL, 'en', NULL, NULL),
+(7, 4, 'تست 1', 'وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف', 'ar', NULL, NULL),
+(8, 4, 'test 1', 'desc desc desc desc desc desc desc desc desc desc desc desc desc desc', 'en', NULL, NULL),
+(9, 5, 'قسم فرعي', 'وصف قسم فرعي وصف قسم فرعي وصف قسم فرعي وصف قسم فرعي وصف قسم فرعي وصف قسم فرعي', 'ar', NULL, NULL),
+(10, 5, 'SubCategory', 'SubCategory Desc SubCategory Desc SubCategory Desc SubCategory Desc SubCategory Desc SubCategory Desc', 'en', NULL, NULL),
+(11, 6, 'قسم فرعي 2', 'قسم فرعي وصف 2 قسم فرعي وصف 2 قسم فرعي وصف 2 قسم فرعي وصف 2 قسم فرعي وصف 2 قسم فرعي وصف 2', 'ar', NULL, NULL),
+(12, 6, 'Sub Category 2', 'Sub Category 2 desc Sub Category 2 desc Sub Category 2 desc Sub Category 2 desc Sub Category 2 desc Sub Category 2 desc Sub Category 2 desc Sub Category 2 desc Sub Category 2 desc Sub Category 2 desc Sub Category 2 desc Sub Category 2 desc Sub Category 2 desc Sub Category 2 desc Sub Category 2 desc', 'en', NULL, NULL),
+(13, 7, 'Category 4', 'Category 4Category 4Category 4Category 4', 'ar', NULL, NULL),
+(14, 7, 'Category 4', 'Category 4Category 4Category 4Category 4Category 4Category 4Category 4Category 4Category 4Category 4Category 4Category 4Category 4Category 4', 'en', NULL, NULL),
+(15, 8, 'Category 5', 'Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5', 'ar', NULL, NULL),
+(16, 8, 'Category 5', 'Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5Category 5', 'en', NULL, NULL),
+(17, 9, 'Category 6', 'Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6', 'ar', NULL, NULL),
+(18, 9, 'Category 6', 'Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6Category 6', 'en', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cities`
+--
+
+CREATE TABLE `cities` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cities`
+--
+
+INSERT INTO `cities` (`id`, `created_at`, `updated_at`) VALUES
+(1, '2020-10-24 09:49:06', '2020-10-24 09:49:06'),
+(2, '2020-10-24 09:50:31', '2020-10-24 09:50:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `city_translations`
+--
+
+CREATE TABLE `city_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `city_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `city_translations`
+--
+
+INSERT INTO `city_translations` (`id`, `city_id`, `name`, `locale`, `created_at`, `updated_at`) VALUES
+(1, 1, 'الدقهليه', 'ar', NULL, NULL),
+(2, 1, 'Ad Daqhlia', 'en', NULL, NULL),
+(3, 2, 'القاهره', 'ar', NULL, NULL),
+(4, 2, 'Cairo', 'en', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -95,7 +218,8 @@ INSERT INTO `category_translations` (`id`, `category_id`, `name`, `locale`) VALU
 CREATE TABLE `contact_messages` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subject` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -106,15 +230,156 @@ CREATE TABLE `contact_messages` (
 -- Dumping data for table `contact_messages`
 --
 
-INSERT INTO `contact_messages` (`id`, `name`, `phone`, `email`, `message`, `created_at`, `updated_at`) VALUES
-(2, 'تستستست', '01015960452', 'medoeid50@gmail.com', 'تست تست تست تست ستتس تست تست تست', '2020-10-17 08:31:13', '2020-10-17 08:31:13'),
-(3, 'تستستست', '1234124124', 'test@test.com', 'ewtgweryweryweyr', '2020-10-17 08:49:54', '2020-10-17 08:49:54'),
-(4, 'تستستست', '1234124124', 'test@test.com', 'تستستستستستستت', '2020-10-17 10:58:40', '2020-10-17 10:58:40'),
-(5, 'تستستست', '1234124124', 'test@test.com', 'QDAsf', '2020-10-17 11:00:09', '2020-10-17 11:00:09'),
-(6, 'تستستست', '1234124124', 'medoeid50@gmail.com', 'szdgasdgasdg', '2020-10-17 11:00:26', '2020-10-17 11:00:26'),
-(7, 'تستستست', '1234124124', 'test@test.com', 'qertyweryw', '2020-10-17 11:00:55', '2020-10-17 11:00:55'),
-(8, 'تستستست', '1234124124', 'test@test.com', 'zdfgafdgarfd', '2020-10-17 11:01:24', '2020-10-17 11:01:24'),
-(9, 'تستستست', '01015960452', 'medoeid50@gmail.com', 'zsdfgasdgsadfg', '2020-10-17 11:01:38', '2020-10-17 11:01:38');
+INSERT INTO `contact_messages` (`id`, `name`, `phone`, `subject`, `email`, `message`, `created_at`, `updated_at`) VALUES
+(2, 'تستستست', '01015960452', NULL, 'medoeid50@gmail.com', 'تست تست تست تست ستتس تست تست تست', '2020-10-17 08:31:13', '2020-10-17 08:31:13'),
+(3, 'تستستست', '1234124124', NULL, 'test@test.com', 'ewtgweryweryweyr', '2020-10-17 08:49:54', '2020-10-17 08:49:54'),
+(4, 'تستستست', '1234124124', NULL, 'test@test.com', 'تستستستستستستت', '2020-10-17 10:58:40', '2020-10-17 10:58:40'),
+(5, 'تستستست', '1234124124', NULL, 'test@test.com', 'QDAsf', '2020-10-17 11:00:09', '2020-10-17 11:00:09'),
+(6, 'تستستست', '1234124124', NULL, 'medoeid50@gmail.com', 'szdgasdgasdg', '2020-10-17 11:00:26', '2020-10-17 11:00:26'),
+(7, 'تستستست', '1234124124', NULL, 'test@test.com', 'qertyweryw', '2020-10-17 11:00:55', '2020-10-17 11:00:55'),
+(8, 'تستستست', '1234124124', NULL, 'test@test.com', 'zdfgafdgarfd', '2020-10-17 11:01:24', '2020-10-17 11:01:24'),
+(9, 'تستستست', '01015960452', NULL, 'medoeid50@gmail.com', 'zsdfgasdgsadfg', '2020-10-17 11:01:38', '2020-10-17 11:01:38'),
+(10, 'كابتل ديزيل', NULL, 'aaaa', 'test@test.com', 'ADXasfdasdf', '2020-10-25 11:06:29', '2020-10-25 11:06:29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cultures`
+--
+
+CREATE TABLE `cultures` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cultures`
+--
+
+INSERT INTO `cultures` (`id`, `image`, `created_at`, `updated_at`) VALUES
+(1, 'Y5MJ2xwouhc27ZPI9sDHoXtwNxAIwRW1ZEnfBngD.jpeg', '2020-10-19 10:01:34', '2020-10-19 10:02:15'),
+(2, 'Fdtg4jYD1N1oDBTOVXAjQd4eL9LJ3JBKr6SocIi5.jpeg', '2020-10-19 10:06:24', '2020-10-19 10:06:24'),
+(3, 'pCqNvH4ULCoFr8uoDVXTOPR9NSHBCysJqNipwaeI.jpeg', '2020-10-19 10:06:55', '2020-10-19 10:06:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `culture_translations`
+--
+
+CREATE TABLE `culture_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `culture_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `job` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `culture_translations`
+--
+
+INSERT INTO `culture_translations` (`id`, `culture_id`, `name`, `job`, `body`, `locale`, `created_at`, `updated_at`) VALUES
+(1, 1, 'سولي11', 'فرونت اند11', '<p>11بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;بايو&nbsp;</p>', 'ar', NULL, NULL),
+(2, 1, 'Sloy11', 'front end11', '<p>11Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bi1o&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;Bio&nbsp;</p>', 'en', NULL, NULL),
+(3, 2, 'سولي 2', 'فرونت اند 2', '<p>فرونت اند 2فرونت اند 2فرونت اند 2فرونت اند 2فرونت اند 2فرونت اند 2</p>', 'ar', NULL, NULL),
+(4, 2, 'soly 2', 'front end 2', '<p>front end 2front end 2front end 2front end 2front end 2front end 2</p>', 'en', NULL, NULL),
+(5, 3, 'تست 3', 'فورنت اند ديفولوبر', '<p>شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;شسبشسب&nbsp;</p>', 'ar', NULL, NULL),
+(6, 3, 'test 3', 'Front end eveloper', '<p>test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;test&nbsp;</p>', 'en', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `delars`
+--
+
+CREATE TABLE `delars` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `contact_info` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `map` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city_id` int(10) UNSIGNED NOT NULL,
+  `area_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `delars`
+--
+
+INSERT INTO `delars` (`id`, `contact_info`, `map`, `city_id`, `area_id`, `created_at`, `updated_at`) VALUES
+(2, '0100000, 010000000000 , 01 000000000', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3418.9582766687977!2d31.375416185002408!3d31.027412078421893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f79dcbe88f6c25%3A0x859ee8ea1a8da4ae!2z2LTYsdmD2Kkg2KrZg9mG2Ygg2YXYtdixINmE2YTYqNix2YXYrNmK2KfYqiDZiNiq2LXZhdmK2YUg2KfZhNmF2YjYp9mC2Lk!5e0!3m2!1sar!2seg!4v1603538104919!5m2!1sar!2seg\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0;\" allowfullscreen=\"\" aria-hidden=\"false\" tabindex=\"0\"></iframe>', 1, 3, '2020-10-24 11:16:25', '2020-10-24 11:16:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `delar_translations`
+--
+
+CREATE TABLE `delar_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `delar_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `delar_translations`
+--
+
+INSERT INTO `delar_translations` (`id`, `delar_id`, `name`, `address`, `locale`) VALUES
+(1, 2, 'تست 3', 'عنوان', 'ar'),
+(2, 2, 'test 3', 'عنوان بالانجليزي', 'en');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `departments`
+--
+
+CREATE TABLE `departments` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `departments`
+--
+
+INSERT INTO `departments` (`id`, `image`, `created_at`, `updated_at`) VALUES
+(1, 'DKdEPVOj0tUWxDAdtRcVhpAQYWYWSqIDG6deK4di.jpeg', '2020-10-21 11:50:40', '2020-10-21 11:50:40'),
+(2, 'vG1LuLPt3DRN7WU9KRm9QMBThKtjVj0PCl2mflXQ.jpeg', '2020-10-21 11:51:29', '2020-10-21 11:51:29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `department_translations`
+--
+
+CREATE TABLE `department_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `department_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `department_translations`
+--
+
+INSERT INTO `department_translations` (`id`, `department_id`, `name`, `locale`) VALUES
+(1, 1, 'قسم الموارد البشريه', 'ar'),
+(2, 1, 'HR1', 'en'),
+(3, 2, 'قسم تكنولوجيا المعلومات', 'ar'),
+(4, 2, 'IT', 'en');
 
 -- --------------------------------------------------------
 
@@ -175,6 +440,54 @@ INSERT INTO `images` (`id`, `image`, `surgery_id`, `created_at`, `updated_at`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jobs`
+--
+
+CREATE TABLE `jobs` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `department_id` int(10) UNSIGNED NOT NULL,
+  `deadline` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `jobs`
+--
+
+INSERT INTO `jobs` (`id`, `department_id`, `deadline`, `created_at`, `updated_at`) VALUES
+(1, 2, '2020-10-11', '2020-10-21 12:43:57', '2020-10-21 13:47:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_translations`
+--
+
+CREATE TABLE `job_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `job_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `responsabilities` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `qualifications` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `salary` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `benefits` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reporting_line` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contract_type` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `job_translations`
+--
+
+INSERT INTO `job_translations` (`id`, `job_id`, `name`, `responsabilities`, `qualifications`, `salary`, `benefits`, `reporting_line`, `contract_type`, `locale`) VALUES
+(1, 1, 'فرونت اند ديفولوبر', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.', '5100 EGP per month', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.', 'Lorem Ipsum is simply dummy', 'Lorem Ipsum is simply dummy', 'ar'),
+(2, 1, 'Frontnd Developer', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.', '5100 EGP per month', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.', 'Lorem Ipsum is simply dummy', 'Lorem Ipsum is simply dummy', 'en');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -192,8 +505,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (5, '2020_04_07_204105_laratrust_setup_tables', 1),
-(73, '2020_06_24_053603_create_categories_table', 2),
-(74, '2020_06_24_053727_create_category_translations_table', 2),
 (75, '2020_10_11_110146_create_surgeries_table', 2),
 (76, '2020_10_11_110204_create_surgery_translations_table', 2),
 (77, '2020_10_11_153605_create_images_table', 3),
@@ -214,7 +525,28 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (102, '2020_10_18_132547_create_partners_table', 12),
 (103, '2020_10_18_132639_create_partner_translations_table', 12),
 (104, '2020_10_18_140613_create_testmonials_table', 13),
-(105, '2020_10_18_140636_create_testmonial_translations_table', 13);
+(105, '2020_10_18_140636_create_testmonial_translations_table', 13),
+(106, '2020_10_19_114135_create_cultures_table', 14),
+(107, '2020_10_19_114450_create_culture_translations_table', 14),
+(108, '2020_10_21_120315_create_departments_table', 15),
+(109, '2020_10_21_120507_create_department_translations_table', 15),
+(110, '2020_10_21_120524_create_jobs_table', 15),
+(111, '2020_10_21_120539_create_job_translations_table', 15),
+(112, '2020_10_21_120632_create_applicants_table', 15),
+(115, '2020_10_22_104135_create_categories_table', 16),
+(116, '2020_10_22_104337_create_category_translations_table', 16),
+(120, '2020_10_22_123148_create_products_table', 17),
+(121, '2020_10_22_123639_create_product_translations_table', 17),
+(122, '2020_10_22_123656_create_product_images_table', 17),
+(129, '2020_10_24_111000_create_cities_table', 18),
+(130, '2020_10_24_111103_create_areas_table', 18),
+(131, '2020_10_24_111126_create_delars_table', 18),
+(132, '2020_10_24_111244_create_city_translations_table', 18),
+(133, '2020_10_24_111319_create_area_translations_table', 18),
+(134, '2020_10_24_111331_create_delar_translations_table', 18),
+(135, '2020_10_24_143351_create_sectors_table', 19),
+(136, '2020_10_24_143421_create_sector_translations_table', 19),
+(137, '2020_10_25_130756_create_subscribers_table', 20);
 
 -- --------------------------------------------------------
 
@@ -476,6 +808,84 @@ INSERT INTO `post_translations` (`id`, `post_id`, `name`, `body`, `locale`) VALU
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `price` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `price`, `category_id`, `created_at`, `updated_at`) VALUES
+(1, '680', 5, '2020-10-22 12:58:21', '2020-10-22 12:58:21'),
+(2, '11111', 4, '2020-10-22 13:27:03', '2020-10-22 13:27:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_images`
+--
+
+CREATE TABLE `product_images` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_images`
+--
+
+INSERT INTO `product_images` (`id`, `image`, `product_id`, `created_at`, `updated_at`) VALUES
+(1, '8zN5CkzLrAvGGIhj5SqplpnUOXHXWBfD7f8Gc69A.jpeg', 1, '2020-10-22 12:58:22', '2020-10-22 12:58:22'),
+(2, 'tAzpRXGoCUQvxFs0LHntC54xzqrt4f3ZVMQcE8Z9.jpeg', 1, '2020-10-22 12:58:22', '2020-10-22 12:58:22'),
+(3, '4Ss6WGGbEzlaGqxEtkyylfzUSHsAAYmoH0xjYxF9.jpeg', 1, '2020-10-22 12:58:22', '2020-10-22 12:58:22'),
+(4, 'Z9N6oC6ZTGVzlEvUwCT5nT635Rcq2IPCuBaRVg3E.png', 2, '2020-10-22 13:27:03', '2020-10-22 13:27:03'),
+(5, 'H4QvwS8pySjQ6HiGkF4xn0S1mWoWeFxqF1T0GXys.jpeg', 2, '2020-10-22 13:27:03', '2020-10-22 13:27:03'),
+(6, 'XEbc2LxH211oq9hZUw4FZ557nL57HkfNlEGH4U9n.jpeg', 2, '2020-10-22 13:27:04', '2020-10-22 13:27:04'),
+(7, '5blzu73lCKWX7J6QsNKUaBzRoBA0TJGBSUsBnnap.png', 2, '2020-10-22 13:27:04', '2020-10-22 13:27:04'),
+(8, 'fK3ZkoCovdKqNzXiQUOXK6WTgYQ8JUih4wMFBUhD.jpeg', 2, '2020-10-22 13:27:04', '2020-10-22 13:27:04'),
+(9, 'W7dvObhK0FH1S5Vdbd4F0nSJ9dnefcOiJmc8bcB0.jpeg', 2, '2020-10-22 13:27:04', '2020-10-22 13:27:04'),
+(10, 'siFOlNm2dgNxx6MJpvyuXxorpB8gQyJLJGNfxw7J.jpeg', 2, '2020-10-22 13:27:04', '2020-10-22 13:27:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_translations`
+--
+
+CREATE TABLE `product_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_translations`
+--
+
+INSERT INTO `product_translations` (`id`, `product_id`, `name`, `description`, `locale`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Christen Mcclain', 'Est at voluptates id', 'ar', NULL, NULL),
+(2, 1, 'Karly Hammond', 'Libero reprehenderit', 'en', NULL, NULL),
+(3, 2, 'منتج 2', 'منتج 2منتج 2منتج 2منتج 2منتج 2', 'ar', NULL, NULL),
+(4, 2, 'product 2', 'product 2product 2product 2product 2product 2', 'en', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `roles`
 --
 
@@ -520,12 +930,58 @@ INSERT INTO `role_user` (`role_id`, `user_id`, `user_type`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sectors`
+--
+
+CREATE TABLE `sectors` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sectors`
+--
+
+INSERT INTO `sectors` (`id`, `image`, `created_at`, `updated_at`) VALUES
+(1, 'Fgk356LMUNmq2KlTtKiWqSESS2dvJX7B1tnwRAWC.jpeg', '2020-10-24 12:51:22', '2020-10-24 12:51:22'),
+(2, '98fIhD33qgdof8MaBcfJrQnA1q07RfBLfWJFZK6s.jpeg', '2020-10-25 10:38:35', '2020-10-25 10:38:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sector_translations`
+--
+
+CREATE TABLE `sector_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `sector_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sector_translations`
+--
+
+INSERT INTO `sector_translations` (`id`, `sector_id`, `name`, `description`, `locale`) VALUES
+(1, 1, 'سيكتور 1', 'وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف', 'ar'),
+(2, 1, 'Sector 1', 'description description description description description description', 'en'),
+(3, 2, 'سيكتور 2', 'وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف', 'ar'),
+(4, 2, 'sector 2', 'desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc', 'en');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `settings`
 --
 
 CREATE TABLE `settings` (
   `id` int(10) UNSIGNED NOT NULL,
   `key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `one_value` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `class` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -537,31 +993,34 @@ CREATE TABLE `settings` (
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id`, `key`, `type`, `class`, `image`, `created_at`, `updated_at`) VALUES
-(14, 'slider_image_1', 'image', 'slider', '7cc5UmLqDi7Yp2vGkVXCy4g3kUs8KZdNIPzaLCiy.jpeg', '2020-10-17 09:14:31', '2020-10-17 09:14:31'),
-(15, 'slider_image_2', 'image', 'slider', 'v6AluYcL4uwka7M6mXdSW9D60zpSUYvAZzSLGhd2.jpeg', '2020-10-17 09:26:24', '2020-10-17 09:26:24'),
-(16, 'slider_image_3', 'image', 'slider', 'UkoZMZcnAHu3Bu7akt5QgUt88ZOiHH7sMJe4SsjX.jpeg', '2020-10-17 09:27:05', '2020-10-17 09:27:05'),
-(17, 'about_center_image', 'image', 'about_center', '1XSJHXUYxreTNBLyZiGucmolc7Yl5rsD5WwoUVdy.jpeg', '2020-10-17 09:28:54', '2020-10-17 09:28:54'),
-(18, 'about_center_image_2', 'image', 'about_center', 'BZHA5lwBd4YPrg1MFLY85y60yXAfNUX5EDu7TkMF.jpeg', '2020-10-17 09:29:43', '2020-10-17 09:29:43'),
-(19, 'feature_1', 'image', 'features', 'zKU6nKfAlWWuJ4udgNWhGiimEjcT8csIF48s73Ql.png', '2020-10-17 09:40:48', '2020-10-17 09:40:48'),
-(20, 'feature_4', 'image', 'features', 'E2tt9f6FiYuv4IiO2GfrCVEHRG9E6CecSNBJAE9I.png', '2020-10-17 09:42:54', '2020-10-17 09:42:54'),
-(21, 'feature_3', 'image', 'features', 'GTLs76yTZrec4rAHoD1mqQCzk2nXGMN8aPMP2G9N.png', '2020-10-17 09:43:00', '2020-10-17 09:43:00'),
-(22, 'feature_2', 'image', 'features', '2KwXKYXfEWrvyyTin1UlUUWRTIwPOSJzDEBqoVMw.png', '2020-10-17 09:43:09', '2020-10-17 09:43:09'),
-(23, 'fb_link', 'text', 'contact', NULL, '2020-10-17 09:50:48', '2020-10-17 09:50:48'),
-(24, 'youtube', 'text', 'contact', NULL, '2020-10-17 09:51:42', '2020-10-17 09:51:42'),
-(25, 'instagram', 'text', 'contact', NULL, '2020-10-17 09:52:52', '2020-10-17 09:52:52'),
-(26, 'twitter', 'text', 'contact', NULL, '2020-10-17 09:54:03', '2020-10-17 09:54:03'),
-(27, 'email', 'text', 'contact', NULL, '2020-10-17 09:59:33', '2020-10-17 09:59:33'),
-(28, 'address', 'text', 'contact', NULL, '2020-10-17 10:13:49', '2020-10-17 10:13:49'),
-(29, 'phone', 'text', 'contact', NULL, '2020-10-17 10:19:49', '2020-10-17 10:19:49'),
-(33, 'service_feature_4', 'image', 'service_features', 'lEDO42k49wPzc0x9FrGW49GbgBPErFCX70YgDky8.png', '2020-10-17 10:42:47', '2020-10-17 10:42:47'),
-(34, 'service_feature_3', 'image', 'service_features', 'SYjD29NF4cw5Ly2PI7HeVuIJn9TfNKggKwn3qXtZ.png', '2020-10-17 10:42:49', '2020-10-17 10:42:49'),
-(35, 'service_feature_2', 'image', 'service_features', 'jt9HAKPfPvQEH4waz4RLbnphH7N2qpNtq4Utjqc2.png', '2020-10-17 10:42:51', '2020-10-17 10:42:51'),
-(36, 'service_feature_1', 'image', 'service_features', 'HFzbpz63fl3fzUIdpnaT3jimY7b6IjI55NKxovzP.png', '2020-10-17 10:42:53', '2020-10-17 10:42:53'),
-(37, 'map', 'text', 'contact', NULL, '2020-10-17 11:09:03', '2020-10-17 11:09:03'),
-(38, 'author', 'text', 'meta', NULL, '2020-10-17 14:17:13', '2020-10-17 14:17:13'),
-(39, 'keywords', 'text', 'meta', NULL, '2020-10-17 14:18:13', '2020-10-17 14:18:13'),
-(40, 'description', 'text', 'meta', NULL, '2020-10-17 14:20:24', '2020-10-17 14:20:24');
+INSERT INTO `settings` (`id`, `key`, `one_value`, `type`, `class`, `image`, `created_at`, `updated_at`) VALUES
+(41, 'slider_image_1', NULL, 'image', 'slider', 'utjMDdmA9JpiAkXVCFnZNZshIq1q9WvSrHabCXrC.jpeg', '2020-10-25 12:23:24', '2020-10-25 12:23:24'),
+(42, 'slider_image_2', NULL, 'image', 'slider', 'bPcXQ7SMJUF7HTYyqpfapq0OsqQK8ziSSEv8yUwm.jpeg', '2020-10-25 12:24:22', '2020-10-25 12:24:22'),
+(43, 'slider_image_3', NULL, 'image', 'slider', 'RXIhzntJZpCcVdZ7XktR3vhGZU9iyqzfk9qdRkBR.jpeg', '2020-10-25 12:25:09', '2020-10-25 12:25:09'),
+(44, 'slider_image_4', NULL, 'image', 'slider', 'zJNWlm9qTWULhbMh5pDKFrM5HW3cCZhawfYnNJBy.jpeg', '2020-10-25 12:25:53', '2020-10-25 12:25:53'),
+(45, 'slider_image_5', NULL, 'image', 'slider', 'omfHlZpVCfON5vthfqvyZg9RmE421k7Ea69OJvgZ.jpeg', '2020-10-25 12:26:35', '2020-10-25 12:26:35'),
+(46, 'feature_1', NULL, 'image', 'features', 'Pz4a4c7UypZA2OSkdYe5DuBHQyGK2tg144Mx7EQB.png', '2020-10-25 12:38:00', '2020-10-25 12:38:00'),
+(47, 'feature_2', NULL, 'image', 'features', 'gmvyrtO6eIJQWT4wvpnQvEHqAtTx1gQer0NSeVkP.png', '2020-10-25 12:38:48', '2020-10-25 12:38:48'),
+(48, 'feature_3', NULL, 'image', 'features', 'jpTPSxjGjfgAy875ckiKluVnzAUyEOkItnDnbmb8.png', '2020-10-25 12:39:17', '2020-10-25 12:39:17'),
+(49, 'feature_4', NULL, 'image', 'features', 'kmlvBsdiDbiqzr7NLTSHbhPGrRmd33iszz53MVDa.png', '2020-10-25 12:39:47', '2020-10-25 12:39:47'),
+(50, 'email', 'info@example.com', 'text', 'contact', NULL, '2020-10-25 12:49:06', '2020-10-25 13:01:05'),
+(51, 'address', 'Your address will display here, Cairo – Egypt, Cairo – Egypt', 'text', 'contact', NULL, '2020-10-25 12:49:39', '2020-10-25 13:01:05'),
+(52, 'contact_info', '+2010000000000 -0101224564 - 0154377 -0124564454787', 'text', 'contact', NULL, '2020-10-25 12:50:27', '2020-10-25 13:01:05'),
+(53, 'map', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3452.126808002631!2d31.32490691444457!3d30.090554423349182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fd901f5756d%3A0x661a26a44d7c3894!2z2YXYrdi32Kkg2YXYqtix2Ygg2KfZhNij2YfYsdin2YU!5e0!3m2!1sen!2seg!4v1560917733588!5m2!1sen!2seg\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>', 'text', 'contact', NULL, '2020-10-25 12:50:54', '2020-10-25 14:05:46'),
+(54, 'facebook', 'facebook.com', 'text', 'contact', NULL, '2020-10-25 12:51:26', '2020-10-25 13:01:06'),
+(55, 'linked_in', 'linkedin.com', 'text', 'contact', NULL, '2020-10-25 12:52:11', '2020-10-25 13:01:06'),
+(56, 'twitter', 'twitter.com', 'text', 'contact', NULL, '2020-10-25 12:52:43', '2020-10-25 13:01:06'),
+(57, 'about_header_image', NULL, 'image', 'about', 'ksZ5PtB4HgRfcKzsbntCs90OrztPlFOvXx8OwVoC.jpeg', '2020-10-25 13:10:20', '2020-10-25 13:55:13'),
+(58, 'about_header_text', NULL, 'text', 'about', 'xWfTtjKNtrFq3Qi0BvLtKnQRZokz150Xe8TPnVfv.jpeg', '2020-10-25 13:11:00', '2020-10-25 13:54:31'),
+(59, 'about_our_vision', NULL, 'text', 'about', NULL, '2020-10-25 13:11:34', '2020-10-25 13:11:34'),
+(60, 'about_our_mission', NULL, 'text', 'about', NULL, '2020-10-25 13:12:14', '2020-10-25 13:12:14'),
+(61, 'about_certifications', NULL, 'text', 'about', NULL, '2020-10-25 13:12:58', '2020-10-25 13:12:58'),
+(62, 'about_certifications_image', NULL, 'image', 'about', 'YezAQWu8jDUujog935hziYw5LXNhQX6qlbtmxb3X.jpeg', '2020-10-25 13:13:54', '2020-10-25 13:54:21'),
+(63, 'about_certifications_image_2', NULL, 'image', 'about', 'YadFyWFBOQK0QddovWZQ95OmGcZKRQHCKvvUJRpE.jpeg', '2020-10-25 13:14:31', '2020-10-25 13:14:31'),
+(64, 'career_header', NULL, 'image', 'career', 'lnScnLbEeSoj3Qx5hDIB4utqj391vVL9OYRAcbbq.jpeg', '2020-10-25 14:10:07', '2020-10-25 14:23:32'),
+(65, 'culture_header', NULL, 'image', 'culture', '7i6HBv806mPfMTPT8ZGXZMgQm4OFs95fi2qdCD93.jpeg', '2020-10-25 14:11:17', '2020-10-25 14:22:12'),
+(66, 'default_language', 'ar', 'text', 'general', NULL, '2020-10-25 14:28:18', '2020-10-25 14:40:50'),
+(67, 'copy_rights', NULL, 'text', 'general', NULL, '2020-10-25 14:28:54', '2020-10-25 14:28:54');
 
 -- --------------------------------------------------------
 
@@ -585,54 +1044,80 @@ CREATE TABLE `setting_translations` (
 --
 
 INSERT INTO `setting_translations` (`id`, `setting_id`, `name`, `value`, `title`, `description`, `link`, `locale`) VALUES
-(27, 14, 'صوره اسلايدر', 'تستستستتست', 'تستست', 'لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص، بل انه حتى صار مستخدماً وبشكله الأصلي في الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن مع إصدار رقائق \"ليتراسيت\" (Letraset) البلاستيكية تحوي مقاطع من هذا النص، وعاد لينتشر مرة أخرى مؤخراَ مع ظهور برامج النشر الإلكتروني مثل \"ألدوس بايج مايكر\" (Aldus PageMaker) والتي حوت أيضاً على نسخ من نص لوريم إيبسوم.', 'https://ar.lipsum.com/', 'ar'),
-(28, 14, 'Slider Image', 'teset stetsetsest', NULL, 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'https://en.lipsum.com/', 'en'),
-(29, 15, 'صوره سلايدر 2', NULL, NULL, NULL, NULL, 'ar'),
-(30, 15, 'Slider Image 2', NULL, NULL, NULL, NULL, 'en'),
-(31, 16, 'صورة سلادير 3', NULL, NULL, NULL, NULL, 'ar'),
-(32, 16, 'Slider Image 3', NULL, NULL, NULL, NULL, 'en'),
-(33, 17, 'صورة عن السنتر الصفحه الرئيسية', 'مركز د/ عطية خفاجه', NULL, 'لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص، بل انه حتى صار مستخدماً وبشكله الأصلي في الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن مع إصدار رقائق \"ليتراسيت\" (Letraset) البلاستيكية تحوي مقاطع من هذا النص، وعاد لينتشر مرة أخرى مؤخراَ مع ظهور برامج النشر الإلكتروني مثل \"ألدوس بايج مايكر\" (Aldus PageMaker) والتي حوت أيضاً على نسخ من نص لوريم إيبسوم.', NULL, 'ar'),
-(34, 17, 'About Center Image In Home', 'Dr. Attia Khafaga Cosmetic Center', NULL, 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', NULL, 'en'),
-(35, 18, 'صورة عن السنتر الصفحه الرئيسية 2', 'مركز د/ عطية خفاجه', NULL, 'لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص، بل انه حتى صار مستخدماً وبشكله الأصلي في الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن مع إصدار رقائق \"ليتراسيت\" (Letraset) البلاستيكية تحوي مقاطع من هذا النص، وعاد لينتشر مرة أخرى مؤخراَ مع ظهور برامج النشر الإلكتروني مثل \"ألدوس بايج مايكر\" (Aldus PageMaker) والتي حوت أيضاً على نسخ من نص لوريم إيبسوم.', NULL, 'ar'),
-(36, 18, 'Dr. Attia Khafaga Cosmetic Center 2', 'Dr. Attia Khafaga Center', NULL, 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', NULL, 'en'),
-(37, 19, 'صورة مصغره الصفحه الرئيسيه 1', 'فيتشر 1', NULL, NULL, NULL, 'ar'),
-(38, 19, 'Home Page Icon 1', 'feature 1', NULL, NULL, NULL, 'en'),
-(39, 20, 'صورة مصغره الصفحه الرئيسيه 4', 'فيتشر 2', NULL, NULL, NULL, 'ar'),
-(40, 20, 'Home page icon 4', 'فيتشر 2', NULL, NULL, NULL, 'en'),
-(41, 21, 'صورة مصغره الصفحه الرئيسيه 3', 'فيتشر 3', NULL, NULL, NULL, 'ar'),
-(42, 21, 'Home page icon 3', 'فيتشر 3', NULL, NULL, NULL, 'en'),
-(43, 22, 'صورة مصغره الصفحه الرئيسيه 2', 'فيتشر 4', NULL, NULL, NULL, 'ar'),
-(44, 22, 'Home page icon 2', 'فيتشر 4', NULL, NULL, NULL, 'en'),
-(45, 23, 'لينك الفيسبوك', 'https://ar-ar.facebook.com/', NULL, NULL, NULL, 'ar'),
-(46, 23, 'Facebook Link', 'https://ar-ar.facebook.com/', NULL, NULL, NULL, 'en'),
-(47, 24, 'رابط اليوتيوب', 'https://www.youtube.com/', NULL, NULL, NULL, 'ar'),
-(48, 24, 'youtube link', 'https://www.youtube.com/', NULL, NULL, NULL, 'en'),
-(49, 25, 'لينك الانستجرام', 'https://www.instagram.com/', NULL, NULL, NULL, 'ar'),
-(50, 25, 'Instagram Link', 'https://www.instagram.com/', NULL, NULL, NULL, 'en'),
-(51, 26, 'لينك تويتر', 'https://twitter.com/login?lang=ar', NULL, NULL, NULL, 'ar'),
-(52, 26, 'twitter link', 'https://twitter.com/login?lang=ar', NULL, NULL, NULL, 'en'),
-(53, 27, 'ايميل التواصل', 'info@example.com', NULL, NULL, NULL, 'ar'),
-(54, 27, 'Contact Email', 'info@example.com', NULL, NULL, NULL, 'en'),
-(55, 28, 'العنوان', 'Your Address , Nasr City Cairo', NULL, '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13813.242678657061!2d31.321352830299766!3d30.05662818240419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583e5d94c66301%3A0xddddf100de42206c!2sNasr%20City%2C%20Al%20Manteqah%20Al%20Oula%2C%20Nasr%20City%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1602933107952!5m2!1sen!2seg\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0;\" allowfullscreen=\"\" aria-hidden=\"false\" tabindex=\"0\"></iframe>', NULL, 'ar'),
-(56, 28, 'Address', 'مدينه نصر', NULL, '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13813.242678657061!2d31.321352830299766!3d30.05662818240419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583e5d94c66301%3A0xddddf100de42206c!2sNasr%20City%2C%20Al%20Manteqah%20Al%20Oula%2C%20Nasr%20City%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1602933107952!5m2!1sen!2seg\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0;\" allowfullscreen=\"\" aria-hidden=\"false\" tabindex=\"0\"></iframe>', NULL, 'en'),
-(57, 29, 'رقم الهاتف', '0101010101010101010', NULL, NULL, NULL, 'ar'),
-(58, 29, 'Phone Number', '0111000010001000001', NULL, NULL, NULL, 'en'),
-(62, 33, 'صوره صفحه الخدمات4', NULL, NULL, NULL, NULL, 'ar'),
-(63, 33, 'صوره صفحه الخدمات4', NULL, NULL, NULL, NULL, 'en'),
-(64, 34, 'صوره صفحه الخدمات3', NULL, NULL, NULL, NULL, 'ar'),
-(65, 34, 'صوره صفحه الخدمات3', NULL, NULL, NULL, NULL, 'en'),
-(66, 35, 'صوره صفحه الخدمات2', NULL, NULL, NULL, NULL, 'ar'),
-(67, 35, 'صوره صفحه الخدمات2', NULL, NULL, NULL, NULL, 'en'),
-(68, 36, 'صوره صفحه الخدمات', NULL, NULL, NULL, NULL, 'ar'),
-(69, 36, 'صوره صفحه الخدمات', NULL, NULL, NULL, NULL, 'en'),
-(70, 37, 'الخريطه', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110532.89549083744!2d31.30329406893522!3d30.032468600716175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583c1380cba7ef%3A0xd541260e9e06978d!2sNasr%20City%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1601175174423!5m2!1sen!2seg', NULL, NULL, NULL, 'ar'),
-(71, 37, 'Map', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110532.89549083744!2d31.30329406893522!3d30.032468600716175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583c1380cba7ef%3A0xd541260e9e06978d!2sNasr%20City%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1601175174423!5m2!1sen!2seg', NULL, NULL, NULL, 'en'),
-(72, 38, 'مالك الموقع', 'د/ عطية خفاجه', NULL, NULL, NULL, 'ar'),
-(73, 38, 'Author', 'Dr. Attia Khafaga', NULL, NULL, NULL, 'en'),
-(74, 39, 'الكلمات الدلالية', NULL, NULL, NULL, NULL, 'ar'),
-(75, 39, 'Key Words', NULL, NULL, NULL, NULL, 'en'),
-(76, 40, 'الوصف', NULL, NULL, NULL, NULL, 'ar'),
-(77, 40, 'Description', NULL, NULL, NULL, NULL, 'en');
+(78, 41, 'صورة الاسلايدر #1', 'صورة اسلايدر', NULL, NULL, NULL, 'ar'),
+(79, 41, 'Slider Image #1', 'Slider Images', NULL, NULL, NULL, 'en'),
+(80, 42, 'صورة الاسلايدر #2', NULL, NULL, NULL, NULL, 'ar'),
+(81, 42, 'Slider Image #2', NULL, NULL, NULL, NULL, 'en'),
+(82, 43, 'صورة الاسلايدر #3', NULL, NULL, NULL, NULL, 'ar'),
+(83, 43, 'Slider Image #3', NULL, NULL, NULL, NULL, 'en'),
+(84, 44, 'صورة الاسلايدر #4', NULL, NULL, NULL, NULL, 'ar'),
+(85, 44, 'Slider Image #4', NULL, NULL, NULL, NULL, 'en'),
+(86, 45, 'صورة الاسلايدر #5', NULL, NULL, NULL, NULL, 'ar'),
+(87, 45, 'Slider Image #5', NULL, NULL, NULL, NULL, 'en'),
+(88, 46, 'مميزات الشركة #1', '1Feature', NULL, NULL, NULL, 'ar'),
+(89, 46, 'Company Feature #1', 'Feature 1', NULL, NULL, NULL, 'en'),
+(90, 47, 'مميزات الشركة #2', 'Feature Title', NULL, NULL, NULL, 'ar'),
+(91, 47, 'Company Feature #2', 'Feature Title', NULL, NULL, NULL, 'en'),
+(92, 48, 'مميزات الشركة #3', 'Feature Title', NULL, NULL, NULL, 'ar'),
+(93, 48, 'Company Feature #3', 'Feature Title', NULL, NULL, NULL, 'en'),
+(94, 49, 'مميزات الشركة #4', 'Feature Title', NULL, NULL, NULL, 'ar'),
+(95, 49, 'Company Feature #4', 'Feature Title', NULL, NULL, NULL, 'en'),
+(96, 50, 'البريد الإلكتروني', NULL, NULL, NULL, NULL, 'ar'),
+(97, 50, 'Email', NULL, NULL, NULL, NULL, 'en'),
+(98, 51, 'العنوان', NULL, NULL, NULL, NULL, 'ar'),
+(99, 51, 'Address', NULL, NULL, NULL, NULL, 'en'),
+(100, 52, 'أرقام التواصل', NULL, NULL, NULL, NULL, 'ar'),
+(101, 52, 'Contact Numbers', NULL, NULL, NULL, NULL, 'en'),
+(102, 53, 'الخريطه', NULL, NULL, NULL, NULL, 'ar'),
+(103, 53, 'Map', NULL, NULL, NULL, NULL, 'en'),
+(104, 54, 'رابط الفيسبوك', NULL, NULL, NULL, NULL, 'ar'),
+(105, 54, 'Facebook Link', NULL, NULL, NULL, NULL, 'en'),
+(106, 55, 'رابط لينكد إن', NULL, NULL, NULL, NULL, 'ar'),
+(107, 55, 'LinkedIn url', NULL, NULL, NULL, NULL, 'en'),
+(108, 56, 'رابط تويتر', NULL, NULL, NULL, NULL, 'ar'),
+(109, 56, 'Twitter', NULL, NULL, NULL, NULL, 'en'),
+(110, 57, 'صورة الهيدر', NULL, NULL, NULL, NULL, 'ar'),
+(111, 57, 'Header Image', NULL, NULL, NULL, NULL, 'en'),
+(112, 58, 'نص الهيدر', NULL, NULL, 'لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص، بل انه حتى صار مستخدماً وبشكله الأصلي في الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن مع إصدار رقائق \"ليتراسيت\" (Letraset) البلاستيكية تحوي مقاطع من هذا النص، وعاد لينتشر مرة أخرى مؤخراَ مع ظهور برامج النشر الإلكتروني مثل \"ألدوس بايج مايكر\" (Aldus PageMaker) والتي حوت أيضاً على نسخ من نص لوريم إيبسوم.', NULL, 'ar'),
+(113, 58, 'Header text', NULL, NULL, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', NULL, 'en'),
+(114, 59, 'رؤيتنا', NULL, NULL, 'لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص، بل انه حتى صار مستخدماً وبشكله الأصلي في الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن مع إصدار رقائق \"ليتراسيت\" (Letraset) البلاستيكية تحوي مقاطع من هذا النص، وعاد لينتشر مرة أخرى مؤخراَ مع ظهور برامج النشر الإلكتروني مثل \"ألدوس بايج مايكر\" (Aldus PageMaker) والتي حوت أيضاً على نسخ من نص لوريم إيبسوم.', NULL, 'ar'),
+(115, 59, 'Our Vision', NULL, NULL, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', NULL, 'en'),
+(116, 60, 'مهمتنا', NULL, NULL, 'لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص، بل انه حتى صار مستخدماً وبشكله الأصلي في الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن مع إصدار رقائق \"ليتراسيت\" (Letraset) البلاستيكية تحوي مقاطع من هذا النص، وعاد لينتشر مرة أخرى مؤخراَ مع ظهور برامج النشر الإلكتروني مثل \"ألدوس بايج مايكر\" (Aldus PageMaker) والتي حوت أيضاً على نسخ من نص لوريم إيبسوم.', NULL, 'ar'),
+(117, 60, 'Our Mission', NULL, NULL, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', NULL, 'en'),
+(118, 61, 'الشهادات', NULL, NULL, 'لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص، بل انه حتى صار مستخدماً وبشكله الأصلي في الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن مع إصدار رقائق \"ليتراسيت\" (Letraset) البلاستيكية تحوي مقاطع من هذا النص، وعاد لينتشر مرة أخرى مؤخراَ مع ظهور برامج النشر الإلكتروني مثل \"ألدوس بايج مايكر\" (Aldus PageMaker) والتي حوت أيضاً على نسخ من نص لوريم إيبسوم.', NULL, 'ar'),
+(119, 61, 'Certifications', NULL, NULL, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', NULL, 'en'),
+(120, 62, 'صورة الشهادات #1', NULL, NULL, NULL, NULL, 'ar'),
+(121, 62, 'Certifications image #1', NULL, NULL, NULL, NULL, 'en'),
+(122, 63, 'صورة الشهادات #2', NULL, NULL, NULL, NULL, 'ar'),
+(123, 63, 'Certifications image #2', NULL, NULL, NULL, NULL, 'en'),
+(124, 64, 'هيدر صفحه Careers', NULL, NULL, 'لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص، بل انه حتى صار مستخدماً وبشكله الأصلي في الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن مع إصدار رقائق \"ليتراسيت\" (Letraset) البلاستيكية تحوي مقاطع من هذا النص، وعاد لينتشر مرة أخرى مؤخراَ مع ظهور برامج النشر الإلكتروني مثل \"ألدوس بايج مايكر\" (Aldus PageMaker) والتي حوت أيضاً على نسخ من نص لوريم إيبسوم.', NULL, 'ar'),
+(125, 64, 'Career Page Header', NULL, NULL, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', NULL, 'en'),
+(126, 65, 'هيدر صفحة Culture', NULL, NULL, 'لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص، بل انه حتى صار مستخدماً وبشكله الأصلي في الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن مع إصدار رقائق \"ليتراسيت\" (Letraset) البلاستيكية تحوي مقاطع من هذا النص، وعاد لينتشر مرة أخرى مؤخراَ مع ظهور برامج النشر الإلكتروني مثل \"ألدوس بايج مايكر\" (Aldus PageMaker) والتي حوت أيضاً على نسخ من نص لوريم إيبسوم.', NULL, 'ar'),
+(127, 65, 'Cultuer Page Header', NULL, NULL, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', NULL, 'en'),
+(128, 66, 'اللغة الافتراضية', NULL, NULL, NULL, NULL, 'ar'),
+(129, 66, 'Default Language', NULL, NULL, NULL, NULL, 'en'),
+(130, 67, 'حقوق الملكيه', 'All rights reserved for Capital desiel © 2019', NULL, NULL, NULL, 'ar'),
+(131, 67, 'Copy Rights', 'All rights reserved for Capital desiel © 2020', NULL, NULL, NULL, 'en');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscribers`
+--
+
+CREATE TABLE `subscribers` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subscribers`
+--
+
+INSERT INTO `subscribers` (`id`, `email`, `created_at`, `updated_at`) VALUES
+(1, 'test@test.com', '2020-10-25 11:34:58', '2020-10-25 11:34:58');
 
 -- --------------------------------------------------------
 
@@ -717,6 +1202,28 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `image`, `email_v
 --
 
 --
+-- Indexes for table `applicants`
+--
+ALTER TABLE `applicants`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `applicants_job_id_foreign` (`job_id`);
+
+--
+-- Indexes for table `areas`
+--
+ALTER TABLE `areas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `areas_city_id_foreign` (`city_id`);
+
+--
+-- Indexes for table `area_translations`
+--
+ALTER TABLE `area_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `area_translations_area_id_locale_unique` (`area_id`,`locale`),
+  ADD KEY `area_translations_locale_index` (`locale`);
+
+--
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
@@ -731,10 +1238,68 @@ ALTER TABLE `category_translations`
   ADD KEY `category_translations_locale_index` (`locale`);
 
 --
+-- Indexes for table `cities`
+--
+ALTER TABLE `cities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `city_translations`
+--
+ALTER TABLE `city_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `city_translations_city_id_locale_unique` (`city_id`,`locale`),
+  ADD KEY `city_translations_locale_index` (`locale`);
+
+--
 -- Indexes for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cultures`
+--
+ALTER TABLE `cultures`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `culture_translations`
+--
+ALTER TABLE `culture_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `culture_translations_culture_id_locale_unique` (`culture_id`,`locale`),
+  ADD KEY `culture_translations_locale_index` (`locale`);
+
+--
+-- Indexes for table `delars`
+--
+ALTER TABLE `delars`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `delars_city_id_foreign` (`city_id`),
+  ADD KEY `delars_area_id_foreign` (`area_id`);
+
+--
+-- Indexes for table `delar_translations`
+--
+ALTER TABLE `delar_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `delar_translations_delar_id_locale_unique` (`delar_id`,`locale`),
+  ADD KEY `delar_translations_locale_index` (`locale`);
+
+--
+-- Indexes for table `departments`
+--
+ALTER TABLE `departments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `department_translations`
+--
+ALTER TABLE `department_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `department_translations_department_id_locale_unique` (`department_id`,`locale`),
+  ADD KEY `department_translations_locale_index` (`locale`);
 
 --
 -- Indexes for table `images`
@@ -742,6 +1307,21 @@ ALTER TABLE `contact_messages`
 ALTER TABLE `images`
   ADD PRIMARY KEY (`id`),
   ADD KEY `images_surgery_id_foreign` (`surgery_id`);
+
+--
+-- Indexes for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jobs_department_id_foreign` (`department_id`);
+
+--
+-- Indexes for table `job_translations`
+--
+ALTER TABLE `job_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `job_translations_job_id_locale_unique` (`job_id`,`locale`),
+  ADD KEY `job_translations_locale_index` (`locale`);
 
 --
 -- Indexes for table `migrations`
@@ -826,6 +1406,28 @@ ALTER TABLE `post_translations`
   ADD KEY `post_translations_locale_index` (`locale`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `products_category_id_foreign` (`category_id`);
+
+--
+-- Indexes for table `product_images`
+--
+ALTER TABLE `product_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_images_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `product_translations`
+--
+ALTER TABLE `product_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_translations_product_id_locale_unique` (`product_id`,`locale`),
+  ADD KEY `product_translations_locale_index` (`locale`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
@@ -840,6 +1442,20 @@ ALTER TABLE `role_user`
   ADD KEY `role_user_role_id_foreign` (`role_id`);
 
 --
+-- Indexes for table `sectors`
+--
+ALTER TABLE `sectors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sector_translations`
+--
+ALTER TABLE `sector_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `sector_translations_sector_id_locale_unique` (`sector_id`,`locale`),
+  ADD KEY `sector_translations_locale_index` (`locale`);
+
+--
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
@@ -852,6 +1468,12 @@ ALTER TABLE `setting_translations`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `setting_translations_setting_id_locale_unique` (`setting_id`,`locale`),
   ADD KEY `setting_translations_locale_index` (`locale`);
+
+--
+-- Indexes for table `subscribers`
+--
+ALTER TABLE `subscribers`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `testmonials`
@@ -879,22 +1501,88 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `applicants`
+--
+ALTER TABLE `applicants`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `areas`
+--
+ALTER TABLE `areas`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `area_translations`
+--
+ALTER TABLE `area_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `category_translations`
 --
 ALTER TABLE `category_translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `cities`
+--
+ALTER TABLE `cities`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `city_translations`
+--
+ALTER TABLE `city_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `cultures`
+--
+ALTER TABLE `cultures`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `culture_translations`
+--
+ALTER TABLE `culture_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `delars`
+--
+ALTER TABLE `delars`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `delar_translations`
+--
+ALTER TABLE `delar_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `departments`
+--
+ALTER TABLE `departments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `department_translations`
+--
+ALTER TABLE `department_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `images`
@@ -903,10 +1591,22 @@ ALTER TABLE `images`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
+-- AUTO_INCREMENT for table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `job_translations`
+--
+ALTER TABLE `job_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -957,22 +1657,58 @@ ALTER TABLE `post_translations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `product_images`
+--
+ALTER TABLE `product_images`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `product_translations`
+--
+ALTER TABLE `product_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `sectors`
+--
+ALTER TABLE `sectors`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `sector_translations`
+--
+ALTER TABLE `sector_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `setting_translations`
 --
 ALTER TABLE `setting_translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
+
+--
+-- AUTO_INCREMENT for table `subscribers`
+--
+ALTER TABLE `subscribers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `testmonials`
@@ -997,16 +1733,77 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `applicants`
+--
+ALTER TABLE `applicants`
+  ADD CONSTRAINT `applicants_job_id_foreign` FOREIGN KEY (`job_id`) REFERENCES `jobs` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `areas`
+--
+ALTER TABLE `areas`
+  ADD CONSTRAINT `areas_city_id_foreign` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `area_translations`
+--
+ALTER TABLE `area_translations`
+  ADD CONSTRAINT `area_translations_area_id_foreign` FOREIGN KEY (`area_id`) REFERENCES `areas` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `category_translations`
 --
 ALTER TABLE `category_translations`
   ADD CONSTRAINT `category_translations_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `city_translations`
+--
+ALTER TABLE `city_translations`
+  ADD CONSTRAINT `city_translations_city_id_foreign` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `culture_translations`
+--
+ALTER TABLE `culture_translations`
+  ADD CONSTRAINT `culture_translations_culture_id_foreign` FOREIGN KEY (`culture_id`) REFERENCES `cultures` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `delars`
+--
+ALTER TABLE `delars`
+  ADD CONSTRAINT `delars_area_id_foreign` FOREIGN KEY (`area_id`) REFERENCES `areas` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `delars_city_id_foreign` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `delar_translations`
+--
+ALTER TABLE `delar_translations`
+  ADD CONSTRAINT `delar_translations_delar_id_foreign` FOREIGN KEY (`delar_id`) REFERENCES `delars` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `department_translations`
+--
+ALTER TABLE `department_translations`
+  ADD CONSTRAINT `department_translations_department_id_foreign` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `images`
 --
 ALTER TABLE `images`
   ADD CONSTRAINT `images_surgery_id_foreign` FOREIGN KEY (`surgery_id`) REFERENCES `surgeries` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD CONSTRAINT `jobs_department_id_foreign` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `job_translations`
+--
+ALTER TABLE `job_translations`
+  ADD CONSTRAINT `job_translations_job_id_foreign` FOREIGN KEY (`job_id`) REFERENCES `jobs` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `page_images`
@@ -1046,10 +1843,34 @@ ALTER TABLE `post_translations`
   ADD CONSTRAINT `post_translations_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_images`
+--
+ALTER TABLE `product_images`
+  ADD CONSTRAINT `product_images_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_translations`
+--
+ALTER TABLE `product_translations`
+  ADD CONSTRAINT `product_translations_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `role_user`
 --
 ALTER TABLE `role_user`
   ADD CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `sector_translations`
+--
+ALTER TABLE `sector_translations`
+  ADD CONSTRAINT `sector_translations_sector_id_foreign` FOREIGN KEY (`sector_id`) REFERENCES `sectors` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `setting_translations`

@@ -8,14 +8,12 @@
                 <h2 class="title">Careers Opportunities</h2>
             </div>
             <div class="content m-t-30 	">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                <br>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                {{get_setting_by_key('career_header')->description}}
             </div>
         </div>
         <div class="col-md-6 no-padding">
             <div class="borderedImg">
-                <img src="{{ asset('frontend/Technomasr/images/slide.jpg') }}" class="w-100"  alt="" >
+                <img src="{{get_setting_by_key('career_header')->image_path}}" class="w-100"  alt="" >
             </div> 
         </div>
 
@@ -24,9 +22,7 @@
                 <h2 class="title">Careers Opportunities</h2>
             </div>
             <div class="content m-t-30">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                <br>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                {{get_setting_by_key('career_header')->description}}
             </div>
         </div>
         

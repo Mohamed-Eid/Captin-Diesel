@@ -36,17 +36,17 @@
                 <li class="m-t-10">
                     <a href="mailto:info@example.com">
                         <i class="far fa-envelope  m-r-5"></i>
-                        info@capitaldiesel.com
+                        {{get_setting_by_key('email')->one_value}}
                     </a>
                 </li>
                 <li class="text-white m-t-10">
                     <i class="fas fa-map-marker-alt  m-r-5"></i>
-                    Your address will display here, Cairo – Egypt, Cairo – Egypt
+                    {{get_setting_by_key('address')->one_value}}
                 </li>             
                 <li class="m-t-10">
                     <a href="tel:010010001000">
                         <i class=" fa fa-phone-square  m-r-5"></i>
-                        +2010000000000 -0101224564 - 0154377 -0124564454787
+                        {{get_setting_by_key('contact_info')->one_value}}
                     </a>
                 </li>
             </div>
@@ -55,23 +55,23 @@
                 <h4 class="m-b-20 text-white">Follow us</h4>
                     <ul class="social-icons">
                         <li>
-                            <a href="https://www.facebook.com" target="_blank">
+                            <a href=" {{get_setting_by_key('facebook')->one_value}}" target="_blank">
                                 <i class="fab fa-facebook" id="facebook"></i>
                             </a>
                         </li> 
                         <li>
-                            <a href="https://www..com" target="_blank">
+                            <a href=" {{get_setting_by_key('linked_in')->one_value}}" target="_blank">
                                 <i class="fab fa-linkedin" id="linkedin"></i>
                             </a>
                         </li> 
                         <li>
-                            <a href="https://www..com" target="_blank">
-                                <i class="fab fa-twitter-square" id="twitter"></i>
+                            <a href="{{get_setting_by_key('twitter')->one_value}}" target="_blank">
+                                <i class="fab fa-twitter" id="twitter"></i>
                             </a>
                         </li> 
                     </ul>
                     @include('frontend.includes.subscribe')
-
+ 
             </div>
         </div>
         <hr/>
@@ -84,8 +84,9 @@
             </div>
             <div class="col-md-6">
                 <div class="copyright  text-white text-right">
-                    <p>All rights reserved for <a href=""> Capital desiel </a>
-                    &copy; 2019</p>
+                    {{-- <p>All rights reserved for <a href=""> Capital desiel </a>
+                    &copy; 2019</p> --}}
+                    {{get_setting_by_key('copy_rights')->value}}
                 </div>
             </div>
         </div>

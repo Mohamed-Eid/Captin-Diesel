@@ -59,7 +59,9 @@ Route::group(
 
 
 
-        //Route::get('/before_after','PagesController@before_after')->name('pages.before_after');
+        Route::get('/about',function(){
+            return view('frontend.pages.about');
+        })->name('about_us');
 
         Route::get('/contact','ContactController@index')->name('contact.index');
         Route::post('/contact','ContactController@store')->name('contact.store');

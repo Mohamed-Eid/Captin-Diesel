@@ -40,7 +40,9 @@ class SettingController extends Controller
             } 
         }
         //dd($data);
-        return view('dashboard.settings.site_settings',compact('data'));
+        //return view('dashboard.settings.site_settings',compact('data'));
+        return view('dashboard.settings.all_settings',compact('data'));
+
     }
  
 
@@ -134,6 +136,7 @@ class SettingController extends Controller
      */
     public function update(Request $request, Setting $setting)
     {
+        //dd(request()->all());
         $request->location = $request->lat.','.$request->lng;
         $rules = [
             //'lat' => 'required',
@@ -153,6 +156,11 @@ class SettingController extends Controller
             $data['image'] = upload_image_without_resize('setting_images',$request->image,null,null);
        }
 
+       if(isset($request->lang)){
+            unset($data['lang']);    
+            $data['image'] = $request->lang;
+       }
+
         $setting->update($data);
 
         session()->flash('success', __('site.updated_successfully'));
@@ -160,14 +168,88 @@ class SettingController extends Controller
         return redirect()->back();
     }
 
+    public function update_contact(){
+        //dd(request()->all());
+        foreach (request()->except(['_token','_method']) as $key => $value) {
+            //dd($key);
+            $setting = Setting::find($key);
+            $setting->update($value);
+        }
+
+        session()->flash('success', __('site.updated_successfully'));
+
+        return redirect()->back();
+    }
+
+
+    public function update_about(){
+        //dd(request()->all());
+        foreach (request()->except(['_token','_method']) as $key => $value) {
+            //dd($key);
+            $setting = Setting::find($key);
+            if(isset($value['image'])){
+                //todo : delete image first
+                delete_image('setting_images',$setting->image);
+                $value['image'] = upload_image_without_resize('setting_images',$value['image']);
+            }
+            $setting->update($value);
+        }
+
+        session()->flash('success', __('site.updated_successfully'));
+
+        return redirect()->back();
+    }
+
+    public function delete_meta_image(Setting $setting){
+        //dd($setting);
+        delete_image('setting_images',$setting->image);
+        $setting->image = null;
+        $setting->save();
+        session()->flash('success', __('site.deleted_successfully'));
+
+        return redirect()->back();
+    }
+
+    public function update_meta(){
+        //dd(request()->all());
+        foreach (request()->except(['_token','_method']) as $key => $value) {
+            //dd($key);
+            $setting = Setting::find($key);
+            if(isset($value['image'])){
+                //todo : delete image first
+                delete_image('setting_images',$setting->image);
+                $value['image'] = upload_image_without_resize('setting_images',$value['image']);
+            }
+            $setting->update($value);
+        }
+
+        session()->flash('success', __('site.updated_successfully'));
+
+        return redirect()->back();
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Setting $setting)
     {
-        //
+        if($setting->image != null){
+            delete_image('setting_images',$setting->image);
+        }
+
+        foreach (config('translatable.locales') as $locale){
+            $setting->image = NULL;
+            $setting->translate($locale)->value = NULL;
+            $setting->translate($locale)->title = NULL;
+            $setting->translate($locale)->description = NULL;
+            $setting->translate($locale)->link = NULL;
+        }
+        $setting->save();
+        
+        session()->flash('success', __('site.deleted_successfully'));
+
+        return redirect()->back();
     }
 }

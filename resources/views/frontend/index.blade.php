@@ -6,33 +6,16 @@
     <!-- Slider -->
         <div id="carouselExampleControls" class="carousel slide slider" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
-                <div class="carousel-item active">
-                    <img class="d-block img-fluid mx-auto" src="{{asset('frontend/Technomasr/images/slide.jpg')}}" alt="First slide">
+                
+                @foreach (get_settings_by_class('slider') as $index=>$slider)
+                <div class="carousel-item {{ $index==0 ? 'active' : ''}}">
+                    <img class="d-block img-fluid mx-auto" src="{{$slider->image_path}}" alt="First slide">
                     <div class="carousel-caption d-block d-md-block">
-                        <h2 class="wow zoomIn bold f-s-45" data-wow-duration="2s" data-wow-delay="1s"> Powering Your Success</h2>
+                        <h2 class="wow zoomIn bold f-s-45" data-wow-duration="2s" data-wow-delay="1s">{{$slider->value}}</h2>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block img-fluid mx-auto" src="{{asset('frontend/Technomasr/images/slide2.jpg')}}" alt="Second slide">
-                    <div class="carousel-caption d-block d-md-block">
-                        <h2 class="wow zoomIn bold f-s-45" data-wow-duration="2s" data-wow-delay="1s">Slide Title</h2>
-                    </div>
-
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block img-fluid mx-auto" src="{{asset('frontend/Technomasr/images/slide4.jpg')}}" alt="Third slide">
-                    <div class="carousel-caption d-block d-md-block">
-                            <h2 class="wow zoomIn bold f-s-45" data-wow-duration="2s" data-wow-delay="1s">Slide title</h2>
-                        
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                    <img class="d-block img-fluid mx-auto" src="{{asset('frontend/Technomasr/images/slide4.jpg')}}" alt="Third slide">
-                    <div class="carousel-caption d-block d-md-block">
-                            <h2 class="wow zoomIn bold f-s-45" data-wow-duration="2s" data-wow-delay="1s">Slide title</h2>
-                        
-                        </div>
-                    </div>
+                </div>                    
+                @endforeach
+                
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
@@ -41,14 +24,16 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
-                </div>
+                {{-- </div> ؟؟؟؟؟ --}}
             </div>
         </div>
     <!-- #END# slider -->
+   
     <!-- about -->
         <section class="about sec-padding">
             <div class="container">
                 <div class="row justify-content-center">
+                    
                     <div  class="col-md-12 ">
                         <div class="text-center">
                             <h2 class="middle-title wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">Company Rtbs</h2>
@@ -59,32 +44,20 @@
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                         </div>
                     </div>
+
                     <div class="col-md-8 no-padding m-t-30 wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">
                         <div class="row m-t-30">
+                            @foreach (get_settings_by_class('features') as $index=>$slider)
+
                             <div class="col-md-3 col-sm-6 col-xs-6 text-center">
                                 <figure class="about-icon m-b-10"> 
-                                    <img src="{{asset('frontend/Technomasr/images/icon1.png')}}" class="w-auto mh-100" alt="">
+                                    <img src="{{$slider->image_path}}" class="w-auto mh-100" alt="">
                                 </figure>
-                                <h4 class="m-t-15">Feature Title</h4>
+                                <h4 class="m-t-15">{{$slider->value}}</h4>
                             </div>
-                            <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                <figure class="about-icon m-b-10"> 
-                                    <img src="{{asset('frontend/Technomasr/images/icon2.png')}}" class="w-auto mh-100" alt="">
-                                </figure>
-                                <h4 class="m-t-15">Feature Title</h4>
-                            </div>
-                            <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                <figure class="about-icon m-b-10"> 
-                                    <img src="{{asset('frontend/Technomasr/images/icon3.png')}}" class="w-auto mh-100" alt="">
-                                </figure>
-                                <h4 class="m-t-15">Feature Title</h4>
-                            </div>
-                            <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                <figure class="about-icon m-b-10"> 
-                                    <img src="{{asset('frontend/Technomasr/images/icon4.png')}}" class="w-auto mh-100" alt="">
-                                </figure>
-                                <h4 class="m-t-15">Feature Title</h4>
-                            </div>
+                            @endforeach
+                        
+                       
                         </div>
                     </div>
                 </div>

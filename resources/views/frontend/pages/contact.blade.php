@@ -10,17 +10,17 @@
                 <li class="m-t-10 text-dark">
                     <a href="mailto:info@example.com" class="text-dark">
                         <i class="far fa-envelope  m-r-5"></i>
-                        info@capitaldiesel.com
+                        {{get_setting_by_key('email')->one_value}}
                     </a>
                 </li>
                 <li class="text-dark m-t-10">
                     <i class="fas fa-map-marker-alt  m-r-5"></i>
-                    Your address will display here, Cairo – Egypt
+                    {{get_setting_by_key('address')->one_value}}
                 </li>             
                 <li class="m-t-10 text-dark">
                     <a href="tel:010010001000"  class="text-dark">
                         <i class=" fa fa-phone-square  m-r-5"></i>
-                        +2010000000000 -0101224564 - 0154377 -0124564454787
+                        {{get_setting_by_key('contact_info')->one_value}}
                     </a>
                 </li>
             </div>
@@ -33,17 +33,17 @@
                 </div>
                 <ul class="social-icons contactSocial text-right">
                     <li>
-                        <a href="https://www.facebook.com" target="_blank">
+                        <a href="{{get_setting_by_key('facebook')->one_value}}" target="_blank">
                             <i class="fab fa-facebook" id="facebook"></i>
                         </a>
                     </li> 
                     <li>
-                        <a href="https://www..com" target="_blank">
+                        <a href="{{get_setting_by_key('linked_in')->one_value}}" target="_blank">
                             <i class="fab fa-linkedin" id="linkedin"></i>
                         </a>
                     </li> 
                     <li>
-                        <a href="https://www..com" target="_blank">
+                        <a href="{{get_setting_by_key('twitter')->one_value}}" target="_blank">
                             <i class="fab fa-twitter-square" id="twitter"></i>
                         </a>
                     </li> 
@@ -56,7 +56,7 @@
 
             <div class="col-md-6 m-b-15 m-t-30">
                 <div class="map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3452.126808002631!2d31.32490691444457!3d30.090554423349182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fd901f5756d%3A0x661a26a44d7c3894!2z2YXYrdi32Kkg2YXYqtix2Ygg2KfZhNij2YfYsdin2YU!5e0!3m2!1sen!2seg!4v1560917733588!5m2!1sen!2seg" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    {!! get_setting_by_key('map')->one_value !!}
                 </div>
             </div>
           
