@@ -71,3 +71,13 @@ Route::group(
         });//end of dashboard routes
 });
 
+
+
+Route::prefix('NewAdmin')->name('newadmin.')->group(function(){
+    Route::get('/',function(){
+        return view('admin_panel.index');
+    });
+});
+
+
+
