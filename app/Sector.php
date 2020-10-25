@@ -10,4 +10,12 @@ class Sector extends Model
 
     public $translatedAttributes = ['name','description'];
     public $guarded = [];
+
+    protected  $appends = ['image_path'];
+
+
+    public  function getImagePathAttribute(){
+        return asset('uploads/sector_images/'.$this->image);
+    }
+
 }

@@ -1,6 +1,9 @@
 <?php
 
 
+Route::get('area_by_city_id/{city}','DelarController@areas_by_city_id')->name('dashboard.get_area_by_city');
+
+
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -30,8 +33,6 @@ Route::group(
                 Route::resource('cities.areas','City\AreaController');
 
                 Route::resource('/delars','DelarController');
-
-                Route::get('area_by_city_id/{city}','DelarController@areas_by_city_id')->name('get_area_by_city');
 
                 Route::resource('/partners','PartnerController');
 

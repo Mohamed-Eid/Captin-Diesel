@@ -96,7 +96,7 @@
 @push('scripts')
 <script>
 
-
+ 
     $('.cities').change(function(){
         var city_id = $("select.cities").children("option:selected").val();
         console.log(city_id)

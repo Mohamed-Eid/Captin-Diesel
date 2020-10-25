@@ -70,17 +70,8 @@
                             </a>
                         </li> 
                     </ul>
-                <ul class=" p-0 f-s-15 m-t-30">
-                    <h5 class="m-b-20 text-white">Subscribe</h5>
-                    <form>
-                        <div class="form-row subscribe">
-                            <input type="email" class="form-control"  placeholder="Your Email Address">
-                            <button class="btn  gradient-top white-btn">
-                                <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    </form>
-                </ul>
+                    @include('frontend.includes.subscribe')
+
             </div>
         </div>
         <hr/>

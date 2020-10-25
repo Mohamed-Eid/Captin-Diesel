@@ -16,9 +16,9 @@ class CareerController extends Controller
     }
 
     public function vacancies(Department $department){
-        $jobs = $department->jobs;
+        //$jobs = $department->jobs;
+        $jobs = Job::where('department_id',$department->id)->paginate(10);
         //todo get jobs thet don't exceed the deadline
-        //add paginate
         return view('frontend.careers.vacancies',compact('jobs'));
     }
 

@@ -53,6 +53,8 @@ Route::group(
         Route::get('/inventory/{product}','ProductController@show')->name('products.show');
 
         Route::get('/delars','DelarController@index')->name('delars.index');
+  
+        Route::get('/sectors','SectorController@index')->name('sectors.index');
 
 
 
@@ -61,6 +63,7 @@ Route::group(
 
         Route::get('/contact','ContactController@index')->name('contact.index');
         Route::post('/contact','ContactController@store')->name('contact.store');
+        Route::post('/contact/subscribe','ContactController@subscribe')->name('subscribe');
 
 
         });//end of frontend routes
