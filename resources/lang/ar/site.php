@@ -5,7 +5,7 @@ return [
     'no_records' => 'للاسف لا يوجد اي سجلات',
 
     'dashboard' => 'الرئيسيه',
- 
+
     'create' => 'اضافه',
     'update' => 'تعديل',
     'read' => 'عرض',
@@ -18,13 +18,13 @@ return [
     'view_orders'  => 'عرض الطلبات',
     'street'       => 'الشارع',
     'download' => 'رابط التطبيق',
-    'joined_date' =>'تاريخ التسجيل',
-    
+    'joined_date' => 'تاريخ التسجيل',
+
     'sort' => 'الترتيب',
 
     'play_store_link' => 'رابط البلاي ستور',
     'app_store_link' => 'رابط الاّب ستور',
-    
+
     'orders_count' => 'عدد الطلبات',
 
     'search' => 'بحث',
@@ -73,7 +73,7 @@ return [
         'question' => 'السؤال باللغة العربيه',
         'answer'   => 'الإجابة باللغه العربيه',
         'title'    => 'اسم باللغه العربيه لـ',
-        'link'      =>'اللينك العربي لــ',
+        'link'      => 'اللينك العربي لــ',
 
     ],
 
@@ -88,10 +88,10 @@ return [
         'question' => 'السؤال باللغة الإنجليزية',
         'answer'   => 'الإجابة باللغه الإنجليزية',
         'title'    => 'اسم باللغه الإنجليزية لـ',
-        'link'      =>'اللينك الانجليزي لـ',
+        'link'      => 'اللينك الانجليزي لـ',
 
     ],
-    
+
     'banks' => 'حسابات بنكيه',
     'account' => 'الحساب',
     'iban' => 'الايبان',
@@ -136,7 +136,7 @@ return [
     'view_order' => 'عرض الطلب',
     'order'      => 'الطلب',
     'total'      => 'الاجمالي',
-    
+
     'save' => 'حفظ',
 
     'members' => 'العملاء',
@@ -150,7 +150,7 @@ return [
     'delivered_cost' => 'مصاريف التوصيل',
     'delivery_times' => 'مواعيد التوصيل',
     'all_cities'  => 'كل الدول',
-    
+
     'subdetails' => 'تفاصيل فرعيه',
     'subdetail' => 'تفاصيل فرعيه',
 
@@ -169,8 +169,8 @@ return [
     'new_password' => 'كلمة المرور الجديده',
     'update_profile' => 'تعديل بيانات الحساب',
     'change_password' => 'تغيير كلمة المرور',
-    'kbsh' => 'د/عطيه',
-    'khabsh' => 'د/عطيــــه',
+    'kbsh' => 'Admin Panel',
+    'khabsh' => 'Admin Panel',
 
     'tafsil' => 'تفصيل',
     'length' => 'الطول',
@@ -185,7 +185,7 @@ return [
     'depth_cost' => 'سعر المتر ف العمق',
     'coupon' => 'كوبون',
     'coupons' => 'الكوبونات',
-        'terms' => 'الشروط والاحكام',
+    'terms' => 'الشروط والاحكام',
 
     'expire_date' => 'تاريخ الانتهاء',
     'color' => 'اللون',
@@ -200,7 +200,7 @@ return [
     'view_rates' => 'عرض التقييمات',
     'view_client' => 'عرض العميل',
     'images'      => 'الصور',
-    
+
     'sizes'    => 'المقاسات',
     'all_status' => 'كل الحالات',
     'plz_choose_city' => 'كل المدن',
@@ -223,7 +223,7 @@ return [
     'donwload_app_now' => 'حمل التطبيق الآن',
     'tafsil'           => 'تفصيل',
 
-  
+
 
     'home'             => 'الرئيسية',
     'my_orders'        => 'طلباتي',
@@ -253,11 +253,11 @@ return [
     'patients' => 'المرضى',
     'our_services' => 'خدماتنا',
     'view_more_of' => 'عرض المزيد من ',
-    'videos'      => 'الفيديوهات', 
-    'view'        => 'عرض', 
+    'videos'      => 'الفيديوهات',
+    'view'        => 'عرض',
     'messages'    => 'الرسايل',
     'icon'        => 'صوره مصغرة',
-    'question'    => 'سؤال', 
+    'question'    => 'سؤال',
     'answer'     => 'إجابه',
     'settings'    => 'الإعدادات',
     'leave_message' => 'أترك رساله',
@@ -273,7 +273,45 @@ return [
     'about_center_settings' => 'عن السنتر',
     'features_settings' => 'اعداد الصور المصغرة',
     'contact_settings' => 'إعدادات التواصل',
-    'service_features_settings' => 'إعدادات الصور المصغره في صفحه الخدمات', 
+    'service_features_settings' => 'إعدادات الصور المصغره في صفحه الخدمات',
 
     'meta_settings' => 'إعدادات الارشفه',
+    'sub_categories' => 'الاقسام الفرعية',
+    'partners'       => 'الشركاء',
+    'testmonials'    => 'التوصيات',
+    'cultures'        => 'فريق العمل',
+    'careers'         => 'الوظائف',
+    'delars'         => 'التجار',
+    'areas'          => 'المناطق', 
+    'departments'   => 'أقسام إداريه', 
+
+    'about_settings' => 'صفحة من نحن ؟',
+    'career_settings' => 'صفحة الوظائف',
+    'culture_settings' => 'إعدادات صفحة فريق العمل',
+    'general_settings' => 'إعدادات عامه',
+
+    'member_since'=>'عضو ',
+    'related_areas' => 'المناطق',
+    'view_text'     => 'عرض النص',
+
+    'contact_info' => 'بيانات التواصل',
+    'map' => 'الخريطه',
+    'view_map' => 'عرض الخريطه',
+    'area' => 'المنطقه',
+    'applicants' => 'طلبات الوظائف',
+    'jobs'   => 'الوظائف',
+    'deadline' => 'الحد الاقصى',
+    'department' => 'القسم',
+    'responsabilities' => 'المسؤوليات',
+    'qualifications' => 'المؤهلات',
+    'salary' => 'المرتب',
+    'benefits' => 'الفوائد',
+    'reporting_line' => 'التسلسل الإداري',
+    'contract_type' => 'نوع العقد',
+    'current_job_title' => 'الوظيفه الحاليه',
+    'current_job_location' => 'مكان الوظيفه الحاليه',
+    'years_of_experience' => 'سنوات الخبرة',
+    'cv' => 'CV',
+    'view_cv' => 'عرض الـسي في',
+    'all_jobs' => 'كل الوظائف',
 ];

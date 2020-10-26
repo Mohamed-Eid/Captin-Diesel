@@ -14,16 +14,31 @@ use Illuminate\Support\Facades\DB;
 // */
 
 
+Route::get('change_language/{locale}',function($locale){
+    
+    app()->setLocale($locale);
+    session()->put('locale',$locale);
+    //dd(session()->get('locale'));
+    //dd(app()->getLocale());
+    return redirect()->back();
+
+})->name('change_language');
+
+
 Route::group(
     [
-        'prefix' => LaravelLocalization::setLocale(),
-     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    //     'prefix' => LaravelLocalization::setLocale(),
+    //  'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    'middleware' => [ 'change_lang' ]    
     ],
     
     function(){
         Route::name('frontend.')->group(function(){
         Route::get('/','HomeController@index')->name('index');
  
+        Route::get('/search','HomeController@search')->name('search');
+
+
         Route::get('/blog','BlogController@index')->name('blog.index');
 
         Route::get('/blog/{post}','BlogController@show')->name('blog.show');

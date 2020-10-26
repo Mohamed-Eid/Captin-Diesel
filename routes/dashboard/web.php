@@ -1,20 +1,26 @@
 <?php
 
 
-Route::get('area_by_city_id/{city}','DelarController@areas_by_city_id')->name('dashboard.get_area_by_city');
 
 
 Route::group(
-    [
-        'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    [        
+        'prefix' => '',
+        // 'prefix' => LaravelLocalization::setLocale(),
+        // 'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ],
     
     function(){
         Route::prefix('AdminPanel')->name('dashboard.')->group(function(){
            
             Auth::routes(['register' => false]);
+            
+            //Password reset link request routes...
+            Route::get('password/email', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.email');
+            Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 
+
+            Route::get('area_by_city_id/{city}','DelarController@areas_by_city_id')->name('get_area_by_city');
 
             Route::middleware(['auth'])->group(function(){
                 Route::get('/','DashboardController@index')->name('index');
@@ -24,11 +30,15 @@ Route::group(
                 Route::resource('/categories','CategoryController');
                 Route::resource('/sub_categories','SubcategoryController');
                 
+
+                Route::get('delete_product_image/{image}','productController@remove_image')->name('products.delete_image');
                 Route::resource('/products','productController');
 
                 Route::resource('/sectors','SectorController');
 
+                Route::resource('/applicants','ApplicantController')->only(['index','destroy']);
 
+ 
                 Route::resource('/cities','CityController');
                 Route::resource('cities.areas','City\AreaController');
 

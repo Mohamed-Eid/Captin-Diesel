@@ -34,7 +34,7 @@ class CultureController extends Controller
             $rules += [$locale.'.job' => ['required' ,Rule::unique('culture_translations','job')]];
             $rules += [$locale.'.body' => ['required' ,Rule::unique('culture_translations','body')]];
         }
-
+ 
         $request->validate($rules);
         
         $data = $request->all();

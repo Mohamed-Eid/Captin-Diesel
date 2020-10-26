@@ -50,7 +50,7 @@
                             <tr>
                                 <th style="width: 10px">#</th>
                                 <th>@lang('site.name')</th>
-                                <th>@lang('site.image')</th>
+                                <th>@lang('site.details')</th>
                                 <th>@lang('site.action')</th>
                             </tr>
                             </thead>

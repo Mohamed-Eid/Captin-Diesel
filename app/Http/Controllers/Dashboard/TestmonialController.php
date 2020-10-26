@@ -14,9 +14,13 @@ class TestmonialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $testmonials = Testmonial::paginate(10);
+
+        $testmonials = Testmonial::when($request->search, function ($q) use ($request) {
+            return $q->whereTranslationLike('name', '%' . $request->search . '%');
+        })->latest()->paginate(10);
+        //$testmonials = Testmonial::paginate(10);
         return view('dashboard.testmonials.index',compact('testmonials'));
     }
 

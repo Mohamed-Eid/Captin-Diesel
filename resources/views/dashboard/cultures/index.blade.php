@@ -69,7 +69,7 @@
                                     
                                     <td> 
                                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-default-{{$culture->id}}">
-                                            <i class="fa fa-file-image-o"></i> @lang('site.view_images')
+                                            <i class="fa fa-file-image-o"></i> @lang('site.view_text')
                                         </button>
 
                                         <div class="modal fade" id="modal-default-{{$culture->id}}">

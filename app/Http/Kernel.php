@@ -65,6 +65,11 @@ class Kernel extends HttpKernel
         'authorizedadmin' => \App\Http\Middleware\AuthorizedAdmin::class,
         'AuthClient'           => \App\Http\Middleware\Client::class,
 
+
+        'AuthClient'           => \App\Http\Middleware\Client::class,
+
+        'change_lang'          => \App\Http\Middleware\change_lang::class,
+
         'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
         'localizationRedirect'    => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
         'localeSessionRedirect'   => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,

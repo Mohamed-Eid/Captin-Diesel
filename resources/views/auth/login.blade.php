@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title>AdminLTE 2 | Log in</title>
+    <title>Start Your Journey</title>
 
     {{--<!-- Bootstrap 3.3.7 -->--}}
     <link rel="stylesheet" href="{{ asset('dashboard/css/bootstrap.min.css') }}">
@@ -13,14 +13,14 @@
         <link rel="stylesheet" href="{{ asset('dashboard/css/font-awesome-rtl.min.css') }}">
         <link rel="stylesheet" href="{{ asset('dashboard/css/AdminLTE-rtl.min.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Cairo:400,700" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('dashboard/css/bootstrap-rtl.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('dashboard/css/rtl.css') }}">
+        <link rel="stylesheet" href="{{ asset('dashboard/css/bootstrap.min.css') }}">
+  
 
         <style>
             body, h1, h2, h3, h4, h5, h6 {
                 font-family: 'Cairo', sans-serif !important;
             }
-        </style>
+        </style> 
     @else
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         <link rel="stylesheet" href="{{ asset('dashboard/css/font-awesome.min.css') }}">
@@ -36,7 +36,7 @@
 <div class="login-box">
 
     <div class="login-logo">
-        <a href="../../index2.html"><b>Admin</b>LTE</a>
+        <img src="{{ asset('dashboard/img/lock.png') }}" > 
     </div><!-- end of login lgo -->
 
     <div class="login-box-body">
@@ -49,20 +49,22 @@
             @include('partials._errors')
 
             <div class="form-group has-feedback">
-                <input type="email" name="email" class="form-control" placeholder="@lang('site.email')">
+                <input type="email" name="email" class="form-control" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
 
             <div class="form-group has-feedback">
-                <input type="password" name="password" class="form-control" placeholder="@lang('site.password')">
+                <input type="password" name="password" class="form-control" placeholder="Password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
 
             <div class="form-group">
-                <label style="font-weight: normal;"><input type="checkbox" name="remember"> @lang('site.remember_me')</label>
+                <label style="font-weight: normal;"><input type="checkbox" name="remember"> Remember me !</label>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block btn-flat">@lang('site.login')</button>
+            <a href="{{ route('dashboard.password.email') }}">I forgot my password</a><br>
+
+            <button type="submit" class="btn btn-primary btn-block btn-flat" style="margin-top:20px">Log in</button>
 
         </form><!-- end of form -->
 

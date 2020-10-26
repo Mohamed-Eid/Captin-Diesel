@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Dashboard\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -24,8 +24,8 @@ class ResetPasswordController extends Controller
      * Where to redirect users after resetting their password.
      *
      * @var string
-     */
-    protected $redirectTo = '/home';
+     */ 
+    protected $redirectTo = '/AdminPanel';
 
     /**
      * Create a new controller instance.

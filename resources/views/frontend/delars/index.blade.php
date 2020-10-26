@@ -108,7 +108,7 @@
             dataType: 'json',
             success: function (data) {
                 console.log(data);
-                List = data;
+                List = data.data;
                 $('.areas').empty();
                 $('.areas').append('<option value="">' + 'Select Area' + '</option>');
                 for (i in List ) {

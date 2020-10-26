@@ -6,13 +6,13 @@
 
         <section class="content-header">
 
-            <h1>@lang('site.products')
+            <h1>@lang('site.delars')
             </h1>
 
             <ol class="breadcrumb">
                 <li><a href="{{route('dashboard.index')}}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a>
                 </li>
-                <li><a href="{{route('dashboard.products.index')}}">@lang('site.products')</a></li>
+                <li><a href="{{route('dashboard.delars.index')}}">@lang('site.delars')</a></li>
                 <li class="active"></i> @lang('site.add')</li>
             </ol>
         </section>
@@ -68,7 +68,7 @@
                                     dataType: 'json',
                                     success: function (data) {
                                         console.log(data);
-                                        List = data;
+                                        List = data.data;
                                         $('.areas').empty();
                                         for (i in List ) {
                                             $('.areas').append('<option value="' + List[i].id + '">' + List[i].name + '</option>');
@@ -88,7 +88,7 @@
                                     dataType: 'json',
                                     success: function (data) {
                                         console.log(data);
-                                        List = data;
+                                        List = data.data;
                                         $('.areas').empty();
                                         for (i in List ) {
                                             $('.areas').append('<option value="' + List[i].id + '">' + List[i].name + '</option>');

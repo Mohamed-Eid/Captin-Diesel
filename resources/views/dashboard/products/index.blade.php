@@ -6,13 +6,13 @@
 
         <section class="content-header">
 
-            <h1>@lang('site.sub_categories')
+            <h1>@lang('site.products')
             </h1>
 
             <ol class="breadcrumb">
                 <li><a href="{{route('dashboard.index')}}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a>
                 </li>
-                <li class="active"></i> @lang('site.sub_categories')</li>
+                <li class="active"></i> @lang('site.products')</li>
             </ol>
         </section>
 
@@ -20,10 +20,10 @@
 
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title" style="margin-bottom: 10px;">@lang('site.sub_categories')
-                        <small>{{ $sub_categories->total() }}</small>
+                    <h3 class="box-title" style="margin-bottom: 10px;">@lang('site.products')
+                        <small>{{ $products->total() }}</small>
                     </h3>
-                    <form action="{{ route('dashboard.sub_categories.index') }}" method="get">
+                    <form action="{{ route('dashboard.products.index') }}" method="get">
                         <div class="row">
 
                             <div class="col-md-4">
@@ -34,7 +34,7 @@
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary"><i
                                             class="fa fa-search"></i>@lang('site.search')</button>
-                                    <a href="{{ route('dashboard.sub_categories.create') }}" class="btn btn-primary"><i
+                                    <a href="{{ route('dashboard.products.create') }}" class="btn btn-primary"><i
                                                 class="fa fa-plus"></i>@lang('site.add')</a>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="box-body">
 
-                    @if($sub_categories->count() > 0)
+                    @if($products->count() > 0)
                         <table class="table table-bordered">
                             <thead>
                             <tr>
@@ -55,25 +55,25 @@
                             </thead>
 
                             <tbody>
-                            @foreach($sub_categories as $index => $sub_category)
+                            @foreach($products as $index => $product)
                                 <tr>
                                     <td>{{ $index +1 }}</td>
-                                    <td>{{ $sub_category->name }}</td>
+                                    <td>{{ $product->name }}</td>
                                     <td>
-                                        {{ $sub_category->parent->name }}
+                                        {{ $product->category->name }}
                                     </td>
                                     <td>
-                                        {{-- @if(auth()->user()->hasPermission('update_sub_categories')) --}}
+                                        {{-- @if(auth()->user()->hasPermission('update_products')) --}}
                                             <a class="btn btn-info btn-sm"
-                                               href="{{route('dashboard.sub_categories.edit' , $sub_category->id)}}"><i
+                                               href="{{route('dashboard.products.edit' , $product->id)}}"><i
                                                         class="fa fa-edit"></i>@lang('site.edit')</a>
                                         {{-- @else
                                             <a class="btn btn-info btn-sm" href="#" disabled><i
                                                         class="fa fa-edit"></i>@lang('site.edit')</a>
                                         @endif --}}
-                                        {{-- @if(auth()->user()->hasPermission('delete_sub_categories')) --}}
+                                        {{-- @if(auth()->user()->hasPermission('delete_products')) --}}
                                             <form method="post"
-                                                  action="{{route('dashboard.sub_categories.destroy' , $sub_category->id)}}"
+                                                  action="{{route('dashboard.products.destroy' , $product->id)}}"
                                                   style="display: inline-block">
                                                 @csrf()
                                                 @method('delete')
@@ -90,7 +90,7 @@
                             </tbody>
 
                         </table>
-                        {{ $sub_categories->appends(request()->query())->links() }}
+                        {{ $products->appends(request()->query())->links() }}
                     @else
                         <h2>@lang('site.no_data_found')</h2>
                     @endif

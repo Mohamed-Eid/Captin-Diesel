@@ -66,8 +66,9 @@
                                         <img src="{{ $post->image_path }}" class="img-thumbnail" style="width: 50px;">
                                     </td>
 
+                                    
 
-                                    <td>{{ $post->created_at->diffForHumans() }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</td>
                                     <td>
                                         <a class="btn btn-info btn-sm"
                                             href="{{route('dashboard.blog.edit' , $post->id)}}"><i

@@ -51,6 +51,7 @@
                             <tr>
                                 <th style="width: 10px">#</th>
                                 <th>@lang('site.name')</th>
+                                <th>@lang('site.areas')</th>
                                 <th>@lang('site.action')</th>
                             </tr>
                             </thead>

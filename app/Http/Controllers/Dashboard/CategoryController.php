@@ -20,13 +20,13 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::when($request->search , function ($q) use ($request){
-            return $q->whereTranslationLike('name','%'.$request->search.'%');
+        $categories = Category::when($request->search, function ($q) use ($request) {
+            return $q->whereTranslationLike('name', '%' . $request->search . '%');
         })->latest()->paginate(10);
 
 
-        return view('dashboard.categories.index' , compact('categories'));
-    } 
+        return view('dashboard.categories.index', compact('categories'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -36,7 +36,6 @@ class CategoryController extends Controller
     public function create()
     {
         return view('dashboard.categories.create');
-
     }
 
     /**
@@ -47,27 +46,27 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $rules = [];
 
-        foreach (config('translatable.locales') as $locale){
-            $rules += [$locale.'.name' => ['required' ,Rule::unique('category_translations','name')]];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [$locale . '.name' => ['required', Rule::unique('category_translations', 'name')]];
         }
 
         $request->validate($rules);
-        
+
         $data = $request->except(['expectation']);
 
         $data['image'] = 'default.png';
 
-        if( isset($request->image)) {
+        if (isset($request->image)) {
             Image::make($request->image)->resize(300, null, function ($constraint) {
                 $constraint->aspectRatio();
             })
                 ->save(public_path('uploads/category_images/' . $request->image->hashName()));
-             $data['image'] = $request->image->hashName();
+            $data['image'] = $request->image->hashName();
         }
-        
+
 
         $category = Category::create($data);
 
@@ -83,9 +82,8 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category ,Request $request)
+    public function show(Category $category, Request $request)
     {
-
     }
 
     /**
@@ -111,25 +109,25 @@ class CategoryController extends Controller
         //dd($category);
         $rules = [];
 
-        foreach (config('translatable.locales') as $locale){
-            $rules += [$locale.'.name' => ['required' ,Rule::unique('category_translations','name')->ignore($category->id,'category_id')]];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [$locale . '.name' => ['required', Rule::unique('category_translations', 'name')->ignore($category->id, 'category_id')]];
         }
 
         $request->validate($rules);
 
         $data = $request->except(['expectation']);
 
-        if( isset($request->image)) {
+        if (isset($request->image)) {
             Image::make($request->image)->resize(300, null, function ($constraint) {
                 $constraint->aspectRatio();
             })
                 ->save(public_path('uploads/category_images/' . $request->image->hashName()));
-             $data['image'] = $request->image->hashName();
+            $data['image'] = $request->image->hashName();
         }
-        
-        
 
-        
+
+
+
         $category->update($data);
 
 
@@ -149,12 +147,12 @@ class CategoryController extends Controller
         //dd($category);
         if ($category->image != 'default.png') {
             Storage::disk('public_uploads')->delete('/category_images/' . $category->image);
-        } 
+        }
 
         $category->delete();
 
         session()->flash('success', __('site.deleted_successfully'));
 
         return redirect()->route('dashboard.categories.index');
-    } 
+    }
 }

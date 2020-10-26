@@ -6,14 +6,14 @@
 
         <section class="content-header">
 
-            <h1>@lang('site.users')
+            <h1>@lang('site.products')
             </h1>
 
             <ol class="breadcrumb">
                 <li><a href="{{route('dashboard.index')}}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a>
                 </li>
-                <li><a href="{{route('dashboard.categories.index')}}">@lang('site.categories')</a></li>
-                <li class="active"></i> @lang('site.update')</li>
+                <li><a href="{{route('dashboard.products.index')}}">@lang('site.products')</a></li>
+                <li class="active"></i> @lang('site.add')</li>
             </ol>
         </section>
 
@@ -26,97 +26,61 @@
                 <div class="box-body">
 
                     @include('partials._errors')
-                    <form action="{{ route('dashboard.categories.update' , $category->id) }}" method="post" enctype="multipart/form-data">
+                    
+
+                    <form action="{{ route('dashboard.products.update',$product) }}" method="post" enctype="multipart/form-data" >
                         @csrf
                         @method('put')
+                        <div class="form-group">
+                            <label>@lang('site.category')</label>
+
+                            <select name="category_id" class="form-control">
+                                @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" {{ $product->category->id==$category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                @endforeach 
+                            </select>
+                        </div>
+
                         @foreach(config('translatable.locales') as $locale)
-                            <div class="form-group">
-                                <label>@lang('site.'.$locale.'.name')</label>
-                                <input type="text" name="{{$locale}}[name]" class="form-control" value="{{ $category->translate($locale)->name }}" >
-                            </div>
+                        <div class="form-group">
+                            <label>@lang('site.'.$locale.'.name')</label>
+                            <input type="text" name="{{$locale}}[name]" class="form-control" value="{{ $product->translate($locale)->name }}" >
+                        </div>
+
+                        <div class="form-group">
+                            <label>@lang('site.'.$locale.'.description')</label>
+                            <textarea type="text" name="{{$locale}}[description]" class="form-control">{{ $product->translate($locale)->description }}</textarea>
+                        </div>
+
+                        <hr />
+
                         @endforeach
 
-
                         <div class="form-group">
-                            <label>@lang('site.image')</label>
-                            <input type="file" name="image" class="form-control image">
+                            <label>@lang('site.price')</label>
+                            <input type="text" name="price" class="form-control" value="{{ $product->price }}" >
                         </div>
 
                         <div class="form-group">
-                            <img src="{{ asset('uploads/category_images/'.$category->image) }}"
-                                 class="img-thumbnail image-preview" style="width: 100px;">
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="box box-solid">
-                                  <div class="box-body">
-                                    <div class="box-group" id="accordion">
-                                      <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-    
-                                      <div class="panel box box-primary">
-                                        <div class="box-header with-border">
-                                          <h4 class="box-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                              What To Expect from Category
-                                            </a>
-                                          </h4>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse in">
-                                          <div class="box-body">
-                                            @foreach ($category->expectations as $expectation)
-                                            
-                                            <div class="col-md-3">
-                                                
-                                                @foreach(config('translatable.locales') as $locale)
-                                                <div class="form-group">
-                                                    <label>@lang('site.'.$locale.'.name')</label>
-                                                    <input type="text" name="expectation[{{$expectation->id}}][{{$locale}}][name]" class="form-control" value="{{ $expectation->translate($locale)->name }}" >
-                                                </div>
-                                                @endforeach
-
-                                                <div class="form-group">
-                                                    <label>@lang('site.image')</label>
-                                                    <input type="file" name="expectation[{{$expectation->id}}][image]" class="form-control" id="image-{{$expectation->id}}">
-                                                </div>
-                                                <input type="hidden" name="expectation[{{$expectation->id}}][key]" value="{{$expectation->id}}" class="form-control"  />
-
-                                                <div class="form-group">
-                                                    <img src="{{ $expectation->image_path }}"
-                                                         class="img-thumbnail" id="image-preview-{{$expectation->id}}" style="width: 100px;">
-                                                </div>
-                                            </div> 
-                                            @push('scripts')
-                                            <script>
-                                                $("#image-{{$expectation->id}}").change(function() {
-                                                    if (this.files && this.files[0]) {
-                                                        var reader = new FileReader();
-                                        
-                                                        reader.onload = function(e) {
-                                                            $('#image-preview-{{$expectation->id}}').attr('src', e.target.result);
-                                                        }
-                                        
-                                                        reader.readAsDataURL(this.files[0]); // convert to base64 string
-                                                    }
-                                                });
-                                            </script>
-                                            @endpush                                              
-                                            @endforeach
-
-                                          </div>
-                                        </div>
-                                      </div>
-    
-                                    </div>
-                                  </div>
-                                  <!-- /.box-body -->
-                                </div>
-                                <!-- /.box -->
-                            </div>                            
+                            <label>@lang('site.images')</label>
+                            <input type="file" id="files" name="files[]" multiple />
                         </div>
 
                         <div class="form-group">
-                            <button class="btn btn-primary" type="submit"><i class="fa fa-plus"></i>@lang('site.edit')
+                            @foreach ($product->product_images as $image)
+                            <span class="pip">
+                                <img src="{{ $image->image_path }}"
+                                    class="img-thumbnail image-preview-ar" style="width: 100px;"> 
+                                    <br/>
+                                    <a href="{{ route('dashboard.products.delete_image',$image) }}">
+                                        <span class="remove">Remove image</span> 
+                                    </a>
+                            </span>                             
+                            @endforeach
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-primary" id="button" type="submit"><i class="fa fa-plus"></i>@lang('site.save')
                             </button>
                         </div>
 
@@ -129,3 +93,74 @@
     </div><!-- end of content wrapper -->
 
 @endsection
+
+@push('styles')
+<style>
+    input[type="file"] {
+  display: block;
+}
+.imageThumb {
+  max-height: 75px;
+  border: 2px solid;
+  padding: 1px;
+  cursor: pointer;
+}
+.pip {
+  display: inline-block;
+  margin: 10px 10px 0 0;
+}
+.remove {
+  display: block;
+  background: #444;
+  border: 1px solid black;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+.remove:hover {
+  background: white;
+  color: black;
+}
+</style>
+@endpush
+
+@push('scripts')
+
+<script>
+    $(document).ready(function() {
+  if (window.File && window.FileList && window.FileReader) {
+    $("#files").on("change", function(e) {
+      var files = e.target.files,
+        filesLength = files.length;
+      for (var i = 0; i < filesLength; i++) {
+        var f = files[i]
+        var fileReader = new FileReader();
+        fileReader.onload = (function(e) {
+          var file = e.target;
+          $("<span class=\"pip\">" +
+            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+            "<br/><span class=\"remove\">Remove image</span>" +
+            "</span>").insertAfter("#files");
+          $(".remove").click(function(){
+            $(this).parent(".pip").remove();
+          });
+          
+          // Old code here
+          /*$("<img></img>", {
+            class: "imageThumb",
+            src: e.target.result,
+            title: file.name + " | Click to remove"
+          }).insertAfter("#files").click(function(){$(this).remove();});*/
+          
+        });
+        fileReader.readAsDataURL(f);
+      }
+      console.log(files);
+    });
+  } else {
+    alert("Your browser doesn't support to File API")
+  }
+});
+</script>
+
+@endpush

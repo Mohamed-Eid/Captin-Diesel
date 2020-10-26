@@ -134,11 +134,10 @@
                     </li> --}}
 
                     {{--<!-- Tasks: style can be found in dropdown.less -->--}}
-                    <li class="dropdown tasks-menu">
+                    {{-- <li class="dropdown tasks-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag-o"></i></a>
                         <ul class="dropdown-menu">
                             <li>
-                                {{--<!-- inner menu: contains the actual data -->--}}
                                 <ul class="menu">
 
                                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
@@ -152,7 +151,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
 
                     {{--<!-- User Account: style can be found in dropdown.less -->--}}
                     <li class="dropdown user user-menu">
@@ -169,7 +168,7 @@
 
                                 <p>
                                     {{ auth()->user()->first_name .' '. auth()->user()->last_name }}
-                                    <small>Member since 2 days</small>
+                                    <small>@lang('site.member_since') {{ auth()->user()->created_at->diffForHumans() }}</small>
                                 </p>
                             </li>
 

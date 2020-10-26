@@ -35,7 +35,7 @@ class CareerController extends Controller
         //'career_files'
         //todo return errors
         $rules = [
-            'cv' => 'required',
+            'cv' => 'required|max:10000|mimes:doc,docx,pdf,jpg,png',
             'fullname' => 'required',
             'email' => 'required',
             'current_job_title' => 'required',

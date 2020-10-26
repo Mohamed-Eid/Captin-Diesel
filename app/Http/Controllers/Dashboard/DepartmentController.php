@@ -14,9 +14,12 @@ class DepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $departments = Department::paginate(10);
+        // $departments = Department::paginate(10);
+        $departments = Department::when($request->search , function ($q) use ($request){
+            return $q->whereTranslationLike('name','%'.$request->search.'%');
+        })->latest()->paginate(10);
         return view('dashboard.departments.index',compact('departments'));
     } 
 

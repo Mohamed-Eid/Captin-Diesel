@@ -6,13 +6,13 @@
 
         <section class="content-header">
 
-            <h1>@lang('site.sub_categories')
+            <h1>@lang('site.products')
             </h1>
 
             <ol class="breadcrumb">
                 <li><a href="{{route('dashboard.index')}}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a>
                 </li>
-                <li><a href="{{route('dashboard.sub_categories.index')}}">@lang('site.sub_categories')</a></li>
+                <li><a href="{{route('dashboard.products.index')}}">@lang('site.products')</a></li>
                 <li class="active"></i> @lang('site.add')</li>
             </ol>
         </section>
@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>@lang('site.'.$locale.'.description')</label>
+                            <label>@lang('site.images')</label>
                             <input type="file" id="files" name="files[]" multiple />
                         </div>
 

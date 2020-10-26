@@ -9,15 +9,18 @@ use App\Surgery;
 use Illuminate\Validation\Rule;
 
 class PostController extends Controller
-{
+{ 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::paginate(10);
+        // $posts = Post::paginate(10);
+        $posts = Post::when($request->search , function ($q) use ($request){
+            return $q->whereTranslationLike('name','%'.$request->search.'%');
+        })->latest()->paginate(10);
         return view('dashboard.posts.index',compact('posts'));  
     }
 
