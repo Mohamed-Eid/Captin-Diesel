@@ -35,6 +35,9 @@ class HomeController extends Controller
             'delars'      => Delar::whereTranslationLike('name', '%' . $request->search . '%')->get(),
         ];
 
-        return $data;
+        return view('frontend.search.index',compact('data'));
     }
+
+
 }
+

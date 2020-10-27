@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ app()->getLocale() }}">
 
-<meta name="description" content="">
-<meta name="keywords" content="">
-<meta name="author" content="TechnoMasr.Com">
+<meta name="description" content="{{ get_setting_by_key('description')->description }}">
+<meta name="keywords" content="{{ get_setting_by_key('keywords')->description }}">
+<meta name="author" content="{{ get_setting_by_key('author')->one_value }}">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:url" content="">

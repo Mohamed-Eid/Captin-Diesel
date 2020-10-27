@@ -69,7 +69,7 @@
                                 <div class="col-md-6">
                                     @foreach(config('translatable.locales') as $locale)                             
                                     <div class="form-group">
-                                        <label>@lang('site.header') </label>
+                                        <label>@lang('site.'.$locale.'.header') </label>
                                         <textarea type="text" name="{{$header_text->id}}[{{$locale}}][description]" class="form-control" >{{$header_text->translate($locale)->description}}</textarea>
                                     </div>
                                     @endforeach
@@ -84,7 +84,7 @@
                         <div class="box-header with-border">
                         <h4 class="box-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                @lang('our_vision')
+                                @lang('site.our_vision')
                             </a>
                         </h4>
                         </div>
@@ -93,7 +93,7 @@
         
                             @foreach(config('translatable.locales') as $locale)                             
                             <div class="form-group">
-                                <label>@lang('site.our_vision')</label>
+                                <label>@lang('site.'.$locale.'.our_vision')</label>
                                 <textarea type="text" name="{{$our_vision->id}}[{{$locale}}][description]" class="form-control" >{{$our_vision->translate($locale)->description}}</textarea>
                             </div>
                             @endforeach
@@ -115,7 +115,7 @@
         
                             @foreach(config('translatable.locales') as $locale)                             
                             <div class="form-group">
-                                <label>@lang('site.our_mission')</label>
+                                <label>@lang('site.'.$locale.'.our_mission')</label>
                                 <textarea type="text" name="{{$our_mission->id}}[{{$locale}}][description]" class="form-control" >{{$our_mission->translate($locale)->description}}</textarea>
                             </div>
                             @endforeach
@@ -199,7 +199,7 @@
                                 <div class="col-md-6">
                                     @foreach(config('translatable.locales') as $locale)                             
                                     <div class="form-group">
-                                        <label>@lang('site.certifications')</label>
+                                        <label>@lang('site.'.$locale.'.certifications')</label>
                                         <textarea type="text" name="{{$certifications->id}}[{{$locale}}][description]" class="form-control" >{{$certifications->translate($locale)->description}}</textarea>
                                     </div>
                                     @endforeach

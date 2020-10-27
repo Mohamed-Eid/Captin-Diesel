@@ -50,10 +50,61 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
+    <style>
+        /*--------------------------------------------------------------
+        # Preloader
+        --------------------------------------------------------------*/
+        #preloader {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 99999;
+        overflow: hidden;
+        background: #fff;
+        }
+
+        #preloader:before {
+        content: '';
+        position: fixed;
+        top: calc(50% - 30px);
+        left: calc(50% - 30px);
+        border: 6px solid #50ACE4;
+        border-top-color: #fff;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: animate-preloader 1s linear infinite;
+        animation: animate-preloader 1s linear infinite;
+        }
+
+        @-webkit-keyframes animate-preloader {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+        }
+
+        @keyframes animate-preloader {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+        }
+
+    </style>
+
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
 <div class="wrapper">
+    <div id="preloader"></div>
 
     <header class="main-header">
 
@@ -75,84 +126,6 @@
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-
-                    <!-- Messages: style can be found in dropdown.less-->
-                    {{-- <li class="dropdown messages-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success">4</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
-                            <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu">
-                                    <li><!-- start message -->
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="{{ asset('dashboard/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
-                                            </div>
-                                            <h4>
-                                                Support Team
-                                                <small>
-                                                    <i class="fa fa-clock-o"></i> 5 mins
-                                                </small>
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#">See All Messages</a>
-                            </li>
-                        </ul>
-                    </li> --}}
-
-                    {{-- Notifications: style can be found in dropdown.less
-                    <li class="dropdown notifications-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">10</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
-                            <li>
-                                {{-- inner menu: contains the actual data --}}
-                                {{-- <ul class="menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#">View all</a>
-                            </li>
-                        </ul>
-                    </li> --}}
-
-                    {{--<!-- Tasks: style can be found in dropdown.less -->--}}
-                    {{-- <li class="dropdown tasks-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag-o"></i></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <ul class="menu">
-
-                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                        <li>
-                                            <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                                {{ $properties['native'] }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-
-                                </ul>
-                            </li>
-                        </ul>
-                    </li> --}}
-
                     {{--<!-- User Account: style can be found in dropdown.less -->--}}
                     <li class="dropdown user user-menu">
 
@@ -321,6 +294,19 @@
 
 </script>
 @stack('scripts')
+<script>
+    (function ($) {
+    'use strict';
 
+    // Preloader
+    $(window).on('load', function () {
+            $('#preloader')
+            .delay(2000)
+            .fadeOut('slow', function () {
+                $(this).remove();
+            });
+        });
+    })(window.jQuery);
+</script>
 </body>
 </html>

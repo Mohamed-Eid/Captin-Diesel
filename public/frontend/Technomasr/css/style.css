@@ -131,7 +131,7 @@ input , input:focus {outline: none !important;}
 		#menu .largenav {padding-top: 0px;}
 		.responsive-menu{display:none;}
 		#menu ul li{position: relative;}
-		#menu ul li a{color:#000;font-size: 16px;} 
+		#menu ul li a{color:#000;font-size: 13px; font-weight: 600;} 
 		.responsive-menu .logo{width:90px;}
 		.responsive-menu .close-btn {
 			font-size: 30px;
@@ -382,6 +382,52 @@ input , input:focus {outline: none !important;}
 	.articleImg {height: 400px; overflow: hidden;}
 /** #END# Homepage **/
 
+/* START SEARCH PAGE ENGINE PAGE STYLE */
+.search .content .form-inline {
+    border-bottom: 2px solid #ea3838;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+}
+
+.search .content .form-inline input[type="text"] {
+    width: 50vw;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.search .content .form-inline  button {
+    width: 45px;
+    height: 45px;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.search h4 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.search ul li {
+    margin-bottom: 8px;
+}
+
+.search ul li a {
+    color: #555;
+}
+
+.search .not-found-message {
+    background-color: #ff7676;
+    color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    width: 50vw;
+    margin-left: 30px;
+}
+
+/* END SEARCH PAGE ENGINE PAGE STYLE */
+
+
+
 /***************** Footer ******************/
 footer{padding-bottom: 0px !important;}
 footer ul.links {
@@ -475,6 +521,13 @@ footer hr{
 @media (max-width: 991px) {
 	footer h4 {margin-top: 50px;}
 }
+
+/** START DELARS LOCATOR PAGE STYLE  **/
+.delar-sec h5 span {
+    margin-right: 10px;
+    font-weight: 600;
+}
+/** END DELARS LOCATOR PAGE STYLE  **/
 
 
     
