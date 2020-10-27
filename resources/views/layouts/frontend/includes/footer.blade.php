@@ -5,34 +5,34 @@
                 <div class="col-md-5 ">
                     <ul class="links p-0 f-s-15">
                         <li>
-                            <a href="#">Home</a>
+                            <a href="#">@lang('site.home')</a>
                         </li>
                         <li>
-                            <a href="#">About us</a>
+                            <a href="#">@lang('site.about_us')</a>
                         </li>
                         <li>
-                            <a href="inventory.php">View Inventory</a>
+                            <a href="inventory.php">@lang('site.inventory')</a>
                         </li>
                         <li>
-                            <a href="#">Partners & testimonials</a>
+                            <a href="#">@lang('site.partners_testmonials')</a>
                         </li>
                         <li>
-                            <a href="#">Career Opportunities</a>
+                            <a href="#">@lang('site.careers')</a>
                         </li>
                         <li>
-                            <a href="#">Culture</a>
+                            <a href="#">@lang('site.culture')</a>
                         </li>
                         <li>
-                            <a href="#">News</a>
+                            <a href="#">@lang('site.news')</a>
                         </li>
                         <li>
-                            <a href="#">Delar Locator</a>
+                            <a href="#">@lang('site.delar_locator')</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="col-md-4 ">
-                    <h4 class="m-b-20 text-white">Contact us</h4>
+                    <h4 class="m-b-20 text-white">@lang('site.contact_us')</h4>
                     <li class="m-t-10">
                         <a href="mailto:info@example.com">
                             <i class="far fa-envelope  m-r-5"></i>
@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="col-md-3 col-12">
-                    <h4 class="m-b-20 text-white">Follow us</h4>
+                    <h4 class="m-b-20 text-white">@lang('site.follow_us_on')</h4>
                     <ul class="social-icons">
                         <li>
                             <a href=" {{ get_setting_by_key('facebook')->one_value }}" target="_blank">

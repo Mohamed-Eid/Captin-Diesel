@@ -9,7 +9,7 @@
     <div class="sponsors sec-padding">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="middle-title ">Partners</h2>
+                    <h2 class="middle-title ">@lang('site.partners')</h2>
                 </div>
                 <!-- if have partner -->
                     <div class="owl-demo partners-owl-demo" style="margin-bottom:50px;">
@@ -29,7 +29,7 @@
                 <!---------- Testmonials ------------------------>
 
                 <div class="text-center m-t-30">
-                    <h2 class="middle-title ">Testmonials</h2>
+                    <h2 class="middle-title ">@lang('site.testmonials')</h2>
                 </div>
 
 

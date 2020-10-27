@@ -5,7 +5,7 @@
         <div class="row ">
             <div class="col-md-5 m-b-30"> 
                 <div class="about-sec m-t-30">
-                    <h3 class="title m-b-15">Reach us</h3>
+                    <h3 class="title m-b-15">@lang('site.reach_us')</h3>
                 </div>
                 <li class="m-t-10 text-dark">
                     <a href="mailto:info@example.com" class="text-dark">
@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-4 m-b-30">
                 <div class="about-sec2 m-t-30">
-                    <h3 class="title m-b-15">Follow</h3>
+                    <h3 class="title m-b-15">@lang('site.follow')</h3>
                 </div>
                 <ul class="social-icons contactSocial text-right">
                     <li>
@@ -63,7 +63,7 @@
            
            <div class="col-md-6">
                 <div  class="text-center m-b-30">
-                    <h4 class="middle-title">Leave Us A Message </h4>
+                    <h4 class="middle-title">@lang('site.leave_message') </h4>
                 </div>
                 @include('partials._errors')
 
@@ -83,7 +83,7 @@
                     <div class="form-group">
                         <textarea class="form-control" name="message" placeholder="Write your message"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-custom bold w-100">Send</button>
+                    <button type="submit" class="btn btn-custom bold w-100">@lang('site.send')</button>
                 </form>
             </div>
        </div>

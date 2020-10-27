@@ -10,28 +10,28 @@
                     
 
                     <div class="m-t-30">
-                        <h5 class="bold f-s-17">Job Responsabilities</h5>
+                        <h5 class="bold f-s-17">@lang('site.responsabilities')</h5>
                         <div class="content m-t-20">
                             {{ $job->responsabilities }}                        
                         </div>
                     </div>
 
                     <div class="m-t-30">
-                        <h5 class="bold f-s-17">Job Qualifications</h5>
+                        <h5 class="bold f-s-17">@lang('site.qualifications')</h5>
                         <div class="content m-t-20">
                             {{ $job->qualifications }}                        
                         </div>
                     </div>
 
                     <div class="m-t-30">
-                        <h5 class="bold f-s-17">Salary</h5>
+                        <h5 class="bold f-s-17">@lang('site.salary')</h5>
                         <div class="content m-t-20">
                             {{ $job->salary }}                        
                         </div>
                     </div>
 
                     <div class="m-t-30">
-                        <h5 class="bold f-s-17">Benefits</h5>
+                        <h5 class="bold f-s-17">@lang('site.benefits')</h5>
                         <div class="content m-t-20">
                             {{ $job->benefits }}                        
                         </div>
@@ -42,13 +42,13 @@
 
                 <div class="col-md-3">
                     <div class="m-t-30">
-                        <h5 class="bold f-s-17">Reporting Line</h5>
+                        <h5 class="bold f-s-17">@lang('site.reporting_line')</h5>
                         <div class="content m-t-20">
                             {{ $job->reporting_line }}                        
                         </div>
                     </div>
                     <div class="m-t-30">
-                        <h5 class="bold f-s-17">Contract Type</h5>
+                        <h5 class="bold f-s-17">@lang('site.contract_type')</h5>
                         <div class="content m-t-20">
                             {{ $job->contract_type }}                        
                         </div>

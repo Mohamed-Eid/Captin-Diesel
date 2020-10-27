@@ -11,9 +11,9 @@
                     <table class="table table-bordered table-hover m-b-30">
                         <thead>
                             <tr>
-                            <th scope="col">Job Title</th>
-                            <th scope="col">Related Department</th>
-                            <th scope="col">Job Post Deadline</th>
+                            <th scope="col">@lang('site.job_title')</th>
+                            <th scope="col">@lang('site.related_department')</th>
+                            <th scope="col">@lang('site.job_deadline')</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -60,44 +60,42 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="{{ route('frontend.index')  }}">Home</a>
+                                <li class="nav-item {{route('frontend.index')==url()->current() ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('frontend.index')  }}">@lang('site.home')</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('frontend.contact.index') }}">Contact us</a>
+                                <li class="nav-item {{route('frontend.contact.index')==url()->current() ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('frontend.contact.index') }}">@lang('site.contact_us')</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('frontend.about_us') }}">About us</a>
+                                <li class="nav-item {{route('frontend.about_us')==url()->current() ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('frontend.about_us') }}">@lang('site.about_us')</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('frontend.categories.index') }}">Products</a>
+                                <li class="nav-item {{route('frontend.categories.index')==url()->current() ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('frontend.categories.index') }}">@lang('site.products')</a>
                                     <ul class="sub-menu simple-shadow">
-                                        <li><a href="{{ route('frontend.products.index') }}">View Inventory</a></li>
-                                        <li><a href="product.php">Product</a></li>
-                                        <li><a href="{{ route('frontend.sectors.index') }}">market sectors</a></li>
+                                        <li><a href="{{ route('frontend.products.index') }}">@lang('site.inventory')</a></li>
+                                        <li><a href="{{ route('frontend.sectors.index') }}">@lang('site.market_sectors')</a></li>
 
                                     </ul>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('frontend.partners.index') }}">Partners &
-                                        Testimonials</a>
+                                <li class="nav-item {{route('frontend.partners.index')==url()->current() ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('frontend.partners.index') }}">@lang('site.partners_testmonials')</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('frontend.careers.index') }}">Careers</a>
+                                <li class="nav-item {{route('frontend.careers.index')==url()->current() ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('frontend.careers.index') }}">@lang('site.careers')</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('frontend.cultures.index') }}">Culture</a>
+                                <li class="nav-item {{route('frontend.cultures.index')==url()->current() ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('frontend.cultures.index') }}">@lang('site.culture')</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('frontend.blog.index') }}">News</a>
+                                <li class="nav-item {{route('frontend.blog.index')==url()->current() ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('frontend.blog.index') }}">@lang('site.news')</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('frontend.delars.index') }}">Delar Locator</a>
+                                <li class="nav-item {{route('frontend.delars.index')==url()->current() ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('frontend.delars.index') }}">@lang('site.delar_locator')</a>
                                 </li>
 
                             </ul>
-                            <form class="form-inline my-2 my-lg-0 header-search">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Search"
+                            <form class="form-inline my-2 my-lg-0 header-search" method="GET" action="{{ route('frontend.search') }}">
+                                <input class="form-control mr-sm-2" type="search" placeholder="@lang('site.search')"
                                     aria-label="Search">
                                 <button class="btn  my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
                             </form>

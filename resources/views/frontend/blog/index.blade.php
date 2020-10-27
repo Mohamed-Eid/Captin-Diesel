@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="row">
                     <div class=" col-md-12 text-center">
-                        <h2 class="middle-title wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">News</h2>
+                        <h2 class="middle-title wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">@lang('site.news')</h2>
                     </div>
                     @foreach ($articles as $article)
                     <div class="col-md-4  m-t-30 m-b-30 wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">
@@ -24,7 +24,7 @@
                                         {!! htmlspecialchars_decode(get_snippts($article->body)) !!} ....
                                     </p>
                                 </div>
-                                <a href="{{ route('frontend.blog.show',$article) }}" class="btn btn-danger pull-right m-r-15 m-b-20">Read More</a>
+                                <a href="{{ route('frontend.blog.show',$article) }}" class="btn btn-danger pull-right m-r-15 m-b-20">@lang('site.read_more')</a>
                             </article>
                         </a>
                     </div>

@@ -22,8 +22,8 @@
 
     @foreach(config('translatable.locales') as $locale)                             
     <div class="form-group">
-        <label>@lang('site.'.$locale.'.title') {{ $item->name }}</label>
-        <input type="text" name="{{$item->id}}[{{$locale}}][value]" class="form-control" value="{{$item->translate($locale)->value}}" >
+        <label>{{ $item->name }} @lang('site.in_'.$locale)</label>
+        <textarea type="text" name="{{$item->id}}[{{$locale}}][value]" class="form-control">{{$item->translate($locale)->value}}</textarea>
     </div>
     @endforeach
     </div>

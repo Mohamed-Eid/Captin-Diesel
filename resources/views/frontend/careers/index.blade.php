@@ -5,7 +5,7 @@
     <div class="row no-padding no-margin">
         <div class="col-md-6 d-none d-md-block">
              <div class="about-sec m-t-30 p-l-100">
-                <h2 class="title">Careers Opportunities</h2>
+                <h2 class="title">@lang('site.career_opportunities')</h2>
             </div>
             <div class="content m-t-30 	">
                 {{get_setting_by_key('career_header')->description}}
@@ -19,7 +19,7 @@
 
         <div class="col-md-6 d-md-none d-sm-block">
             <div class="about-sec m-t-30 p-l-100">
-                <h2 class="title">Careers Opportunities</h2>
+                <h2 class="title">@lang('site.career_opportunities')</h2>
             </div>
             <div class="content m-t-30">
                 {{get_setting_by_key('career_header')->description}}

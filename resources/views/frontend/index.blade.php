@@ -33,15 +33,13 @@
         <section class="about sec-padding">
             <div class="container">
                 <div class="row justify-content-center">
-                    
+                    {{-- //settings --}}
                     <div  class="col-md-12 ">
                         <div class="text-center">
                             <h2 class="middle-title wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">Company Rtbs</h2>
                         </div>
                         <div class="content m-t-20 wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                            <br>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            {{get_setting_by_key('text_section')->value}}
                         </div>
                     </div>
 
@@ -70,7 +68,7 @@
         <div class="container">
             <div class="row">
                 <div class=" col-md-12 text-center">
-                    <h2 class="middle-title wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">News</h2>
+                    <h2 class="middle-title wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">@lang('site.news')</h2>
                 </div>
                 @foreach ($posts as $post)
                 <div class="col-md-4  m-t-30 m-b-30 wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">
@@ -87,7 +85,7 @@
                                     {!! htmlspecialchars_decode(get_snippts($post->body)) !!} ....
                                 </p>
                             </div>
-                            <a href="#" class="btn btn-danger pull-right m-r-15 m-b-20">Read More</a>
+                            <a href="#" class="btn btn-danger pull-right m-r-15 m-b-20">@lang('site.read_more')</a>
                         </article>
                     </a>
                 </div>                    
@@ -95,7 +93,7 @@
 
 
                 <div class="col-md-12 text-center m-t-20 wow zoomIn" animation-delay="1s" data-wow-delay="0.4s">
-                    <a href="blog.php" class="btn-gray btn">View More Articles </a>
+                <a href="{{ route('frontend.blog.index') }}" class="btn-gray btn">@lang('site.view_more_of') @lang('site.articles') </a>
                 </div>
             </div>
         </div>
