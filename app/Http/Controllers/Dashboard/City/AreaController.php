@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Dashboard\City;
 
 use App\Area;
 use App\City;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class AreaController extends Controller
@@ -17,7 +17,7 @@ class AreaController extends Controller
      */
     public function index(City $city)
     {
-        return view('dashboard.cities.areas.index' , compact('city'));
+        return view('dashboard.cities.areas.index', compact('city'));
     }
 
     /**
@@ -33,15 +33,16 @@ class AreaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , City $city)
+    public function store(Request $request, City $city)
     {
         $rules = [];
 
-        foreach (config('translatable.locales') as $locale){
-            $rules += [$locale.'.name' => ['required' ,Rule::unique('area_translations','name')]];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [$locale.'.name' => ['required', Rule::unique('area_translations', 'name')]];
         }
 
         $request->validate($rules);
@@ -50,13 +51,14 @@ class AreaController extends Controller
 
         session()->flash('success', __('site.added_successfully'));
 
-        return redirect()->route('dashboard.cities.areas.index',['city' => $city]);
+        return redirect()->route('dashboard.cities.areas.index', ['city' => $city]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\District  $district
+     * @param \App\District $district
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Area $area)
@@ -67,7 +69,8 @@ class AreaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\District  $district
+     * @param \App\District $district
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Area $area)
@@ -78,8 +81,9 @@ class AreaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\District  $district
+     * @param \Illuminate\Http\Request $request
+     * @param \App\District            $district
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Area $area)
@@ -90,15 +94,16 @@ class AreaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\District  $district
+     * @param \App\District $district
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(City $city ,Area $area)
+    public function destroy(City $city, Area $area)
     {
         $area->delete();
 
         session()->flash('success', __('site.deleted_successfully'));
 
-        return redirect()->route('dashboard.cities.areas.index',['city' => $city]);
+        return redirect()->route('dashboard.cities.areas.index', ['city' => $city]);
     }
 }

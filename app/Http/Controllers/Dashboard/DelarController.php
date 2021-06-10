@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\City;
 use App\Delar;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AreaResource;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class DelarController extends Controller
@@ -19,12 +19,12 @@ class DelarController extends Controller
     public function index(Request $request)
     {
         $cities = City::all();
-        
-        $delars = Delar::when($request->search , function ($q) use ($request){
-            return $q->whereTranslationLike('name','%'.$request->search.'%');
+
+        $delars = Delar::when($request->search, function ($q) use ($request) {
+            return $q->whereTranslationLike('name', '%'.$request->search.'%');
         })->latest()->paginate(10);
-        
-        return view('dashboard.delars.index',compact('cities','delars'));
+
+        return view('dashboard.delars.index', compact('cities', 'delars'));
     }
 
     /**
@@ -35,37 +35,38 @@ class DelarController extends Controller
     public function create()
     {
         $cities = City::all();
-        return view('dashboard.delars.create',compact('cities'));
+
+        return view('dashboard.delars.create', compact('cities'));
     }
 
-
-    public function areas_by_city_id(City $city){
+    public function areas_by_city_id(City $city)
+    {
         return AreaResource::collection($city->areas);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //dd(request()->all());
         $rules = [
-            'area_id' => 'required',
-            'city_id' => 'required',
+            'area_id'      => 'required',
+            'city_id'      => 'required',
             'contact_info' => 'required',
             'map'          => 'required',
         ];
 
-        foreach (config('translatable.locales') as $locale){
-            $rules += [$locale.'.name' => ['required' ,Rule::unique('delar_translations','name')]];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [$locale.'.name' => ['required', Rule::unique('delar_translations', 'name')]];
             $rules += [$locale.'.address' => ['required']];
         }
-        
-        $data = $request->all();
 
+        $data = $request->all();
 
         $request->validate($rules);
 
@@ -79,7 +80,8 @@ class DelarController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -90,38 +92,40 @@ class DelarController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Delar $delar)
     {
         $cities = City::all();
-        return view('dashboard.delars.edit',compact('cities','delar'));
+
+        return view('dashboard.delars.edit', compact('cities', 'delar'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Delar $delar)
     {
         $rules = [
-            'area_id' => 'required',
-            'city_id' => 'required',
+            'area_id'      => 'required',
+            'city_id'      => 'required',
             'contact_info' => 'required',
             'map'          => 'required',
         ];
 
-        foreach (config('translatable.locales') as $locale){
+        foreach (config('translatable.locales') as $locale) {
             $rules += [$locale.'.name' => ['required']];
             $rules += [$locale.'.address' => ['required']];
         }
-        
-        $data = $request->all();
 
+        $data = $request->all();
 
         $request->validate($rules);
 
@@ -135,7 +139,8 @@ class DelarController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Delar $delar)

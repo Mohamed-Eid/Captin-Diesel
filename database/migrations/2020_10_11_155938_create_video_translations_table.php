@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateVideoTranslationsTable extends Migration
 {
@@ -16,13 +16,12 @@ class CreateVideoTranslationsTable extends Migration
         Schema::create('video_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('video_id')->unsigned();
-            
+
             $table->string('name');
 
             $table->string('locale')->index();
-            $table->unique(['video_id','locale']);
+            $table->unique(['video_id', 'locale']);
             $table->foreign('video_id')->references('id')->on('videos')->onDelete('cascade');
-
         });
     }
 

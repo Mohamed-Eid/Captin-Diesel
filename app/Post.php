@@ -11,12 +11,11 @@ class Post extends Model
     public $translatedAttributes = ['name', 'body'];
     public $guarded = [];
 
-    protected  $appends = ['image_path'];
+    protected $appends = ['image_path'];
 
-
-    public  function getImagePathAttribute()
+    public function getImagePathAttribute()
     {
-        return asset('uploads/blog_images/' . $this->image);
+        return asset('uploads/blog_images/'.$this->image);
     }
 
     public function getCreatedAtAttribute($date)

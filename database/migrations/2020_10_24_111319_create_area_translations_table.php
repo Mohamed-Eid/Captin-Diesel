@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateAreaTranslationsTable extends Migration
 {
@@ -15,15 +15,14 @@ class CreateAreaTranslationsTable extends Migration
     {
         Schema::create('area_translations', function (Blueprint $table) {
             $table->increments('id');
-            
+
             $table->integer('area_id')->unsigned();
 
             $table->string('name');
-        
+
             $table->string('locale')->index();
-            $table->unique(['area_id','locale']);
+            $table->unique(['area_id', 'locale']);
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
-          
         });
     }
 

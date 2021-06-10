@@ -3,9 +3,8 @@
 namespace App\Http\Resources;
 
 use App\Detail;
-use App\Subdetail;
-use App\Tax;
 use App\Size;
+use App\Subdetail;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ShoppingCartResource extends JsonResource
@@ -13,7 +12,8 @@ class ShoppingCartResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return array
      */
     public function toArray($request)
@@ -27,9 +27,9 @@ class ShoppingCartResource extends JsonResource
         foreach ($this->details as $detail) {
             $detail_ = Detail::find($detail['detail_id']);
             $subdetail = Subdetail::find($detail['subdetail_id']);
-            $data[] = [ 
-                "key" => $detail_->name,
-                "value" => $subdetail->name 
+            $data[] = [
+                'key'   => $detail_->name,
+                'value' => $subdetail->name,
             ];
         }
 
@@ -37,22 +37,21 @@ class ShoppingCartResource extends JsonResource
             'id'            => $this->id,
             //'product'       => $product,
             'product'       => new ProductResource($this->product),
-            'cart_data'     => $data ,
+            'cart_data'     => $data,
             'special_sizes' => $this->special_sizes == null ? false : true,
             'quantity'      => $this->quantity,
             'price'         => $this->price,
         ];
-        
-        
-        if($return_data['special_sizes'] == false){
-           $return_data+= [
-               'size' => new SizeResource(Size::find($this->size_id))
-               ];
+
+        if ($return_data['special_sizes'] == false) {
+            $return_data += [
+                'size' => new SizeResource(Size::find($this->size_id)),
+            ];
         }
-        if($return_data['special_sizes']){
-           $return_data+= [
-               'special_sizes_data' => $this->special_sizes,
-               ];
+        if ($return_data['special_sizes']) {
+            $return_data += [
+                'special_sizes_data' => $this->special_sizes,
+            ];
         }
 
         return $return_data;

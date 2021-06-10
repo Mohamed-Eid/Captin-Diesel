@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateCultureTranslationsTable extends Migration
 {
@@ -17,16 +17,14 @@ class CreateCultureTranslationsTable extends Migration
             $table->increments('id');
 
             $table->integer('culture_id')->unsigned();
-            
+
             $table->string('name');
             $table->string('job');
             $table->text('body');
 
             $table->string('locale')->index();
-            $table->unique(['culture_id','locale']);
+            $table->unique(['culture_id', 'locale']);
             $table->foreign('culture_id')->references('id')->on('cultures')->onDelete('cascade');
-  
-
 
             $table->timestamps();
         });

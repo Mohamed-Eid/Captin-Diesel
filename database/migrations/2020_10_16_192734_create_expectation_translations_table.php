@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateExpectationTranslationsTable extends Migration
 {
@@ -16,11 +16,11 @@ class CreateExpectationTranslationsTable extends Migration
         Schema::create('expectation_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('expectation_id')->unsigned();
-            
+
             $table->string('name');
 
             $table->string('locale')->index();
-            $table->unique(['expectation_id','locale']);
+            $table->unique(['expectation_id', 'locale']);
             $table->foreign('expectation_id')->references('id')->on('expectations')->onDelete('cascade');
         });
     }

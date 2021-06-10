@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateVideosTable extends Migration
 {
@@ -15,15 +15,15 @@ class CreateVideosTable extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->increments('id');
-            
+
             $table->string('link');
             $table->integer('surgery_id')->unsigned();
-            $table->foreign('surgery_id')->references('id')->on('surgeries')->onDelete('cascade');  
-            
+            $table->foreign('surgery_id')->references('id')->on('surgeries')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      *

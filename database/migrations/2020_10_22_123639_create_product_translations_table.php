@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateProductTranslationsTable extends Migration
 {
@@ -19,12 +19,11 @@ class CreateProductTranslationsTable extends Migration
             $table->integer('product_id')->unsigned();
 
             $table->string('name');
-        
 
             $table->text('description')->nullable();
 
             $table->string('locale')->index();
-            $table->unique(['product_id','locale']);
+            $table->unique(['product_id', 'locale']);
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });

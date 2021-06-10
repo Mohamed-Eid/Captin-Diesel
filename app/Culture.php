@@ -8,12 +8,12 @@ class Culture extends Model
 {
     use \Dimsav\Translatable\Translatable;
 
-    public $translatedAttributes = ['name','job','body'];
+    public $translatedAttributes = ['name', 'job', 'body'];
     public $guarded = [];
-    protected  $appends = ['image_path',];
+    protected $appends = ['image_path'];
 
-
-    public  function getImagePathAttribute(){
+    public function getImagePathAttribute()
+    {
         return asset('uploads/culture_images/'.$this->image);
     }
 }

@@ -11,7 +11,8 @@ class City extends Model
     public $translatedAttributes = ['name'];
     public $guarded = [];
 
-    public function areas(){
+    public function areas()
+    {
         return $this->hasMany(Area::class);
     }
 }

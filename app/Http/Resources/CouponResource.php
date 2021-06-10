@@ -9,15 +9,16 @@ class CouponResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'coupon' => $this->coupon,
-            'discount' => $this->offer,
+            'id'          => $this->id,
+            'coupon'      => $this->coupon,
+            'discount'    => $this->offer,
             'expire_date' => $this->expire_date,
         ];
     }

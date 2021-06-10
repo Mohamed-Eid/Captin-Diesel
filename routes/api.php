@@ -17,15 +17,11 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-
-
-
 // Route::group(
 //     ['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]],
 //     function(){
 //         Route::prefix('api')->name('api.')->middleware(['api'])->group(function(){
 //             Route::get('test','ClientController@get_client');
-
 
 //             Route::group(['prefix' => 'clients'], function () {
 //                 Route::post('register','ClientController@register_client');
@@ -46,9 +42,7 @@ use Illuminate\Http\Request;
 //                 // Route::get('/{product}','ProductController@get_one');
 //             });
 
-
 //             Route::resource('special_orders','SpecialOrderController')->middleware('authorizeclient');;
-
 
 //             Route::group(['prefix' => 'rate'], function () {
 //                 Route::post('' , 'RateController@rate')->middleware('authorizeclient');
@@ -58,7 +52,6 @@ use Illuminate\Http\Request;
 
 //             Route::get('categories' , 'CategoryController@index');
 //             Route::get('categories/{category}' , 'CategoryController@products');
-
 
 //             Route::group(['prefix' => 'cities'], function () {
 //                 Route::get('','CityController@all_cities')->name('all_cities');
@@ -73,16 +66,14 @@ use Illuminate\Http\Request;
 //                 Route::get('latest','ProductController@get_latest_products');
 //                 Route::get('most_ordered','ProductController@get_most_ordered_products');
 //                 Route::get('search','ProductController@index');
-                
+
 //                 Route::get('test','ProductController@test');
-                
+
 //                 Route::get('bycountry/{id}','ProductController@get_all_by_city_id');
 //                 Route::get('byuserselection','ProductController@get_all_by_user_selection')->middleware('authorizeclient');
 //                 Route::get('/{product}','ProductController@get_one')->middleware('authorizeclient');
 //                 Route::get('/{product}/page','ProductController@product_page')->middleware('authorizeclient');;
 //             });
-            
-            
 
 //             Route::group(['prefix' => 'orders', 'middleware' => ['authorizeclient']], function () {
 //                 Route::get('order_page' , 'OrderController@order_page');
@@ -95,7 +86,7 @@ use Illuminate\Http\Request;
 //                 Route::get('check_coupon','OrderController@check_coupon');
 //                 Route::delete('delete/{cart}','OrderController@delete_from_cart');
 //             });
-            
+
 //             Route::get('delivery_times' , 'OrderController@delivery_times');
 
 //             Route::group(['prefix' => 'client', 'middleware' => ['authorizeclient']], function () {
@@ -103,23 +94,21 @@ use Illuminate\Http\Request;
 //                 Route::put('update_locale' , 'ClientController@update_locale');
 //             });
 
-
 //             Route::group(['prefix' => 'admin'], function () {
 //                 Route::post('login','AdminController@login');
 //                 Route::get('cc','AdminController@cc')->middleware('authorizedadmin');
 //                 Route::get('orders','AdminController@get_client_orders')->middleware('authorizedadmin');
-                
+
 //                 Route::get('orders/tabs','AdminController@get_client_orders_by_status')->middleware('authorizedadmin');
 
-                
 //                 Route::get('orders/{order}','AdminController@get_client_order_by_id')->middleware('authorizedadmin');
 
 //                 Route::post('orders/{order}','AdminController@change_status')->middleware('authorizedadmin');
-                
+
 //                 Route::put('update_fcm_token' , 'AdminController@update_token')->middleware('authorizedadmin');
 
 //             });
-            
+
 //             Route::get('contact_details','ServiceNumberController@service_number');
 
 //             Route::get('download',function(){

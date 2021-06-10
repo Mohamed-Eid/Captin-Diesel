@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Category;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\ProductImage;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Rule;
 
@@ -19,55 +19,55 @@ class ProductController extends Controller
      */
     public function index()
     {
-
         $products = Product::when(request()->search, function ($q) {
-            return $q->whereTranslationLike('name', '%' . request()->search. '%');
+            return $q->whereTranslationLike('name', '%'.request()->search.'%');
         })->latest()->paginate(10);
         // $products = Product::paginate(10);
-        return view('dashboard.products.index',compact('products'));
+        return view('dashboard.products.index', compact('products'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */ 
+     */
     public function create()
     {
-        $categories = Category::where('parent_id','!=',NULL)->get();
-        return view('dashboard.products.create',compact('categories'));    }
+        $categories = Category::where('parent_id', '!=', null)->get();
+
+        return view('dashboard.products.create', compact('categories'));
+    }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
-        
         $rules = [
             'category_id' => 'required',
         ];
 
-        foreach (config('translatable.locales') as $locale){
-            $rules += [$locale.'.name' => ['required' ,Rule::unique('product_translations','name')]];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [$locale.'.name' => ['required', Rule::unique('product_translations', 'name')]];
             $rules += [$locale.'.description' => ['required']];
         }
 
         $request->validate($rules);
-        
+
         $data = $request->except(['files']);
 
-        $product =  Product::create($data);
+        $product = Product::create($data);
 
         $images = Collection::wrap(request()->file('files'));
 
-        $images->each(function($image) use ($product){
-            $image_name = upload_image('product_images',$image);
+        $images->each(function ($image) use ($product) {
+            $image_name = upload_image('product_images', $image);
             $product->product_images()->create([
-                'image' => $image_name
+                'image' => $image_name,
             ]);
         });
 
@@ -79,7 +79,8 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -90,27 +91,31 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
     {
-        $categories = Category::where('parent_id','!=',NULL)->get();
+        $categories = Category::where('parent_id', '!=', null)->get();
 
-        return view('dashboard.products.edit',compact('product','categories'));
+        return view('dashboard.products.edit', compact('product', 'categories'));
     }
 
-    public function remove_image(ProductImage $image){
-        delete_image('product_images',$image->image);
+    public function remove_image(ProductImage $image)
+    {
+        delete_image('product_images', $image->image);
         $image->delete();
+
         return redirect()->back();
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
@@ -119,23 +124,23 @@ class ProductController extends Controller
             'category_id' => 'required',
         ];
 
-        foreach (config('translatable.locales') as $locale){
-            $rules += [$locale.'.name' => ['required' ,Rule::unique('product_translations','name')->ignore($product->id, 'product_id')]];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [$locale.'.name' => ['required', Rule::unique('product_translations', 'name')->ignore($product->id, 'product_id')]];
             $rules += [$locale.'.description' => ['required']];
         }
 
         $request->validate($rules);
-        
+
         $data = $request->except(['files']);
 
         $product->update($data);
 
         $images = Collection::wrap(request()->file('files'));
 
-        $images->each(function($image) use ($product){
-            $image_name = upload_image('product_images',$image);
+        $images->each(function ($image) use ($product) {
+            $image_name = upload_image('product_images', $image);
             $product->product_images()->create([
-                'image' => $image_name
+                'image' => $image_name,
             ]);
         });
 
@@ -147,7 +152,8 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class PageTranslation extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['name','body'];
+    protected $fillable = ['name', 'body'];
 }

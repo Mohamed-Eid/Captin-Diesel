@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateQuestionAnswersTable extends Migration
 {
@@ -15,10 +15,10 @@ class CreateQuestionAnswersTable extends Migration
     {
         Schema::create('question_answers', function (Blueprint $table) {
             $table->increments('id');
-            
+
             $table->integer('surgery_id')->unsigned();
-            $table->foreign('surgery_id')->references('id')->on('surgeries')->onDelete('cascade');  
-            
+            $table->foreign('surgery_id')->references('id')->on('surgeries')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

@@ -8,10 +8,11 @@ class Job extends Model
 {
     use \Dimsav\Translatable\Translatable;
 
-    public $translatedAttributes = ['name','responsabilities','qualifications','salary','benefits','reporting_line','contract_type'];
+    public $translatedAttributes = ['name', 'responsabilities', 'qualifications', 'salary', 'benefits', 'reporting_line', 'contract_type'];
     protected $guarded = [];
 
-    public function department(){
+    public function department()
+    {
         return $this->belongsTo(Department::class);
     }
 }

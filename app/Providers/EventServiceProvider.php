@@ -6,10 +6,8 @@ use App\Events\NewProductHasOrdered;
 use App\Events\OrderStatusHasChanged;
 use App\Listeners\NotifyTheAdmin;
 use App\Listeners\NotifyTheClient;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -22,7 +20,7 @@ class EventServiceProvider extends ServiceProvider
         NewProductHasOrdered::class => [
             NotifyTheAdmin::class,
         ],
-        
+
         OrderStatusHasChanged::class => [
             NotifyTheClient::class,
         ],

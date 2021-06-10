@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Category;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Surgery;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
@@ -21,9 +19,8 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $categories = Category::when($request->search, function ($q) use ($request) {
-            return $q->whereTranslationLike('name', '%' . $request->search . '%');
+            return $q->whereTranslationLike('name', '%'.$request->search.'%');
         })->latest()->paginate(10);
-
 
         return view('dashboard.categories.index', compact('categories'));
     }
@@ -41,16 +38,16 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
         $rules = [];
 
         foreach (config('translatable.locales') as $locale) {
-            $rules += [$locale . '.name' => ['required', Rule::unique('category_translations', 'name')]];
+            $rules += [$locale.'.name' => ['required', Rule::unique('category_translations', 'name')]];
         }
 
         $request->validate($rules);
@@ -63,13 +60,11 @@ class CategoryController extends Controller
             Image::make($request->image)->resize(300, null, function ($constraint) {
                 $constraint->aspectRatio();
             })
-                ->save(public_path('uploads/category_images/' . $request->image->hashName()));
+                ->save(public_path('uploads/category_images/'.$request->image->hashName()));
             $data['image'] = $request->image->hashName();
         }
 
-
         $category = Category::create($data);
-
 
         session()->flash('success', __('site.added_successfully'));
 
@@ -79,7 +74,8 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param \App\Category $category
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category, Request $request)
@@ -89,7 +85,8 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param \App\Category $category
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
@@ -100,8 +97,9 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Category            $category
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
@@ -110,7 +108,7 @@ class CategoryController extends Controller
         $rules = [];
 
         foreach (config('translatable.locales') as $locale) {
-            $rules += [$locale . '.name' => ['required', Rule::unique('category_translations', 'name')->ignore($category->id, 'category_id')]];
+            $rules += [$locale.'.name' => ['required', Rule::unique('category_translations', 'name')->ignore($category->id, 'category_id')]];
         }
 
         $request->validate($rules);
@@ -121,15 +119,11 @@ class CategoryController extends Controller
             Image::make($request->image)->resize(300, null, function ($constraint) {
                 $constraint->aspectRatio();
             })
-                ->save(public_path('uploads/category_images/' . $request->image->hashName()));
+                ->save(public_path('uploads/category_images/'.$request->image->hashName()));
             $data['image'] = $request->image->hashName();
         }
 
-
-
-
         $category->update($data);
-
 
         session()->flash('success', __('site.updated_successfully'));
 
@@ -139,14 +133,15 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param \App\Category $category
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)
     {
         //dd($category);
         if ($category->image != 'default.png') {
-            Storage::disk('public_uploads')->delete('/category_images/' . $category->image);
+            Storage::disk('public_uploads')->delete('/category_images/'.$category->image);
         }
 
         $category->delete();

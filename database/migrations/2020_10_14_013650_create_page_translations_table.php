@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePageTranslationsTable extends Migration
 {
@@ -16,14 +16,13 @@ class CreatePageTranslationsTable extends Migration
         Schema::create('page_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('page_id')->unsigned();
-            
+
             $table->string('name');
             $table->text('body');
 
             $table->string('locale')->index();
-            $table->unique(['page_id','locale']);
+            $table->unique(['page_id', 'locale']);
             $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
-
         });
     }
 

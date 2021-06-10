@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePartnerTranslationsTable extends Migration
 {
@@ -17,13 +17,13 @@ class CreatePartnerTranslationsTable extends Migration
             $table->increments('id');
 
             $table->integer('partner_id')->unsigned();
-            
+
             $table->string('name');
 
             $table->string('locale')->index();
-            $table->unique(['partner_id','locale']);
+            $table->unique(['partner_id', 'locale']);
             $table->foreign('partner_id')->references('id')->on('partners')->onDelete('cascade');
-  
+
             $table->timestamps();
         });
     }

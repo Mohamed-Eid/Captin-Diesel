@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Page;
 use App\PageImage;
-use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Validation\Rule;
 
 class PageController extends Controller
 {
@@ -19,8 +19,9 @@ class PageController extends Controller
     public function index()
     {
         $pages = page::paginate(10);
-        return view('dashboard.pages.index',compact('pages'));
-    } 
+
+        return view('dashboard.pages.index', compact('pages'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +36,8 @@ class PageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -43,22 +45,20 @@ class PageController extends Controller
         //dd(request()->all());
         $rules = [];
 
-        foreach (config('translatable.locales') as $locale){
-            $rules += [$locale.'.name' => ['required' ,Rule::unique('page_translations','name')]];
-            $rules += [$locale.'.body' => ['required' ,Rule::unique('page_translations','body')]];
-
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [$locale.'.name' => ['required', Rule::unique('page_translations', 'name')]];
+            $rules += [$locale.'.body' => ['required', Rule::unique('page_translations', 'body')]];
         }
 
         $request->validate($rules);
-        
+
         $data = $request->all();
 
         $data['image'] = 'default.png';
 
-        if( isset($request->image)) {
-             $data['image'] = upload_image('page_images',$request->image,400,400);
+        if (isset($request->image)) {
+            $data['image'] = upload_image('page_images', $request->image, 400, 400);
         }
-        
 
         Page::create($data);
 
@@ -70,95 +70,96 @@ class PageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Page $page)
     {
-
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Page $page)
     {
-        return view('dashboard.pages.edit',compact('page'));
+        return view('dashboard.pages.edit', compact('page'));
     }
 
-
-    public function upload_images(Page $page){        
+    public function upload_images(Page $page)
+    {
         $request_images = Collection::wrap(request()->file('file'));
 
-        $request_images->each(function($image) use ($page){
-            $image_name = upload_image('page_images',$image);
+        $request_images->each(function ($image) use ($page) {
+            $image_name = upload_image('page_images', $image);
             $page->page_images()->create([
                 'image' => $image_name,
             ]);
         });
-    } 
+    }
 
-    public function delete_image(Page $page, $id){
+    public function delete_image(Page $page, $id)
+    {
         $image = PageImage::find($id);
         if ($image->image != 'default.png') {
-            delete_image('page_images',$image->image);
-        } 
+            delete_image('page_images', $image->image);
+        }
 
         $image->delete();
 
         session()->flash('success', __('site.deleted_successfully'));
 
-        return redirect()->route('dashboard.pages.edit',$page);        
+        return redirect()->route('dashboard.pages.edit', $page);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Page $page)
     {
-       $rules = [];
+        $rules = [];
 
-        foreach (config('translatable.locales') as $locale){
-            $rules += [$locale.'.name' => ['required' ,Rule::unique('page_translations','name')->ignore($page->id,'page_id')]];
-            $rules += [$locale.'.body' => ['required' ,Rule::unique('page_translations','body')->ignore($page->id,'page_id')]];
-
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [$locale.'.name' => ['required', Rule::unique('page_translations', 'name')->ignore($page->id, 'page_id')]];
+            $rules += [$locale.'.body' => ['required', Rule::unique('page_translations', 'body')->ignore($page->id, 'page_id')]];
         }
 
         $request->validate($rules);
-        
+
         $data = $request->all();
 
-
-        if( isset($request->image)) {
-             $data['image'] = upload_image('page_images',$request->image,400,400);
+        if (isset($request->image)) {
+            $data['image'] = upload_image('page_images', $request->image, 400, 400);
         }
-        
 
         $page->update($data);
 
         session()->flash('success', __('site.updated_successfully'));
 
-        return redirect()->route('dashboard.pages.edit',$page);
+        return redirect()->route('dashboard.pages.edit', $page);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Page $page)
     {
         if ($page->image != 'default.png') {
-            delete_image('page_images',$page->image);
-        } 
+            delete_image('page_images', $page->image);
+        }
 
         $page->delete();
 

@@ -2,20 +2,20 @@
 
 namespace App\Mail;
 
-use App\Cart;
 use App\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class OrderMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public $order;
     public $carts;
     public $total;
+
     /**
      * Create a new message instance.
      *

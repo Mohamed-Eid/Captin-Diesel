@@ -10,18 +10,20 @@ class Expectation extends Model
 
     public $translatedAttributes = ['name'];
     protected $guarded = [];
-    protected  $appends = ['image_path'];
+    protected $appends = ['image_path'];
 
-
-    public  function getImagePathAttribute(){
+    public function getImagePathAttribute()
+    {
         return asset('uploads/surgery_images/'.$this->image);
     }
 
-    public function surgery(){
+    public function surgery()
+    {
         return $this->belongsTo(Surgery::class);
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 }

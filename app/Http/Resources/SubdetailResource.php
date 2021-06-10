@@ -9,16 +9,17 @@ class SubdetailResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
+            'id'    => $this->id,
             'index' => $this->sort,
-            'name' => $this->translate(app()->getLocale())->name,
-            'type' => $this->detail->name,
+            'name'  => $this->translate(app()->getLocale())->name,
+            'type'  => $this->detail->name,
             'price' => $this->price,
         ];
     }

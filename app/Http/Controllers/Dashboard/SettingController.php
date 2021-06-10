@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Setting;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
@@ -18,33 +18,31 @@ class SettingController extends Controller
     public function index()
     {
         $settings = Setting::paginate(20);
-        return view('dashboard.settings.index',compact('settings'));
+
+        return view('dashboard.settings.index', compact('settings'));
     }
 
     public function all()
     {
-
         $settings_classes = DB::table('settings')
             ->select(DB::raw('count(*) as setting_count, class'))
             ->groupBy('class')->get();
-        
-        $settings = Setting::all();    
+
+        $settings = Setting::all();
         $data = [];
 
         foreach ($settings as $setting) {
             //$data['dd'][] = $setting;
             foreach ($settings_classes as $class) {
-                if($class->class == $setting->class){
-                    $setting->class!="" ? $data[$class->class."_settings"][] = $setting : $data["other_settings"][] = $setting; 
+                if ($class->class == $setting->class) {
+                    $setting->class != '' ? $data[$class->class.'_settings'][] = $setting : $data['other_settings'][] = $setting;
                 }
-            } 
+            }
         }
         //dd($data);
         //return view('dashboard.settings.site_settings',compact('data'));
-        return view('dashboard.settings.all_settings',compact('data'));
-
+        return view('dashboard.settings.all_settings', compact('data'));
     }
- 
 
     /**
      * Show the form for creating a new resource.
@@ -59,7 +57,8 @@ class SettingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -68,17 +67,17 @@ class SettingController extends Controller
         $rules = [
             //'lat' => 'required',
             'type' => 'required',
-            'key' => 'required|unique:settings',
+            'key'  => 'required|unique:settings',
         ];
 
-        foreach (config('translatable.locales') as $locale){
+        foreach (config('translatable.locales') as $locale) {
             $rules += [$locale.'.name' => ['required']];
             // $rules += [$locale.'.value' => ['required' ,Rule::unique('setting_translations','value')]];
         }
 
-        $request->validate($rules);    
+        $request->validate($rules);
         $data = [
-            'type' => '',
+            'type'  => '',
             'class' => '',
         ];
 
@@ -87,20 +86,18 @@ class SettingController extends Controller
         $data['class'] = $request->class;
         $data['key'] = $request->key;
 
-        
-
-        if($request->type == 'text'){
+        if ($request->type == 'text') {
             $data['type'] = 'text';
-        }elseif($request->type == 'image'){
+        } elseif ($request->type == 'image') {
             $data['type'] = 'image';
-            $data['image'] = upload_image_without_resize('setting_images',$request->value,null,null);
-        }else{
+            $data['image'] = upload_image_without_resize('setting_images', $request->value, null, null);
+        } else {
             $data['type'] = 'location';
             $data['value'] = $request->location;
         }
 
         Setting::create($data);
-        
+
         session()->flash('success', __('site.added_successfully'));
 
         return redirect()->route('dashboard.settings.index');
@@ -109,7 +106,8 @@ class SettingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -119,7 +117,8 @@ class SettingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -130,8 +129,9 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Setting $setting)
@@ -143,23 +143,23 @@ class SettingController extends Controller
             'type' => 'required',
         ];
 
-        foreach (config('translatable.locales') as $locale){
+        foreach (config('translatable.locales') as $locale) {
             //$rules += [$locale.'.key' => ['required' ,Rule::unique('setting_translations','key')]];
             // $rules += [$locale.'.value' => ['required' ,Rule::unique('setting_translations','value')]];
         }
 
-        // $request->validate($rules);    
+        // $request->validate($rules);
 
         $data = $request->all();
-  
-        if( isset($request->image)) {
-            $data['image'] = upload_image_without_resize('setting_images',$request->image,null,null);
-       }
 
-       if(isset($request->lang)){
-            unset($data['lang']);    
+        if (isset($request->image)) {
+            $data['image'] = upload_image_without_resize('setting_images', $request->image, null, null);
+        }
+
+        if (isset($request->lang)) {
+            unset($data['lang']);
             $data['image'] = $request->lang;
-       }
+        }
 
         $setting->update($data);
 
@@ -168,9 +168,10 @@ class SettingController extends Controller
         return redirect()->back();
     }
 
-    public function update_contact(){
+    public function update_contact()
+    {
         //dd(request()->all());
-        foreach (request()->except(['_token','_method']) as $key => $value) {
+        foreach (request()->except(['_token', '_method']) as $key => $value) {
             //dd($key);
             $setting = Setting::find($key);
             $setting->update($value);
@@ -181,16 +182,16 @@ class SettingController extends Controller
         return redirect()->back();
     }
 
-
-    public function update_about(){
+    public function update_about()
+    {
         //dd(request()->all());
-        foreach (request()->except(['_token','_method']) as $key => $value) {
+        foreach (request()->except(['_token', '_method']) as $key => $value) {
             //dd($key);
             $setting = Setting::find($key);
-            if(isset($value['image'])){
+            if (isset($value['image'])) {
                 //todo : delete image first
-                delete_image('setting_images',$setting->image);
-                $value['image'] = upload_image_without_resize('setting_images',$value['image']);
+                delete_image('setting_images', $setting->image);
+                $value['image'] = upload_image_without_resize('setting_images', $value['image']);
             }
             $setting->update($value);
         }
@@ -200,9 +201,10 @@ class SettingController extends Controller
         return redirect()->back();
     }
 
-    public function delete_meta_image(Setting $setting){
+    public function delete_meta_image(Setting $setting)
+    {
         //dd($setting);
-        delete_image('setting_images',$setting->image);
+        delete_image('setting_images', $setting->image);
         $setting->image = null;
         $setting->save();
         session()->flash('success', __('site.deleted_successfully'));
@@ -210,15 +212,16 @@ class SettingController extends Controller
         return redirect()->back();
     }
 
-    public function update_meta(){
+    public function update_meta()
+    {
         //dd(request()->all());
-        foreach (request()->except(['_token','_method']) as $key => $value) {
+        foreach (request()->except(['_token', '_method']) as $key => $value) {
             //dd($key);
             $setting = Setting::find($key);
-            if(isset($value['image'])){
+            if (isset($value['image'])) {
                 //todo : delete image first
-                delete_image('setting_images',$setting->image);
-                $value['image'] = upload_image_without_resize('setting_images',$value['image']);
+                delete_image('setting_images', $setting->image);
+                $value['image'] = upload_image_without_resize('setting_images', $value['image']);
             }
             $setting->update($value);
         }
@@ -227,27 +230,29 @@ class SettingController extends Controller
 
         return redirect()->back();
     }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Setting $setting)
     {
-        if($setting->image != null){
-            delete_image('setting_images',$setting->image);
+        if ($setting->image != null) {
+            delete_image('setting_images', $setting->image);
         }
 
-        foreach (config('translatable.locales') as $locale){
-            $setting->image = NULL;
-            $setting->translate($locale)->value = NULL;
-            $setting->translate($locale)->title = NULL;
-            $setting->translate($locale)->description = NULL;
-            $setting->translate($locale)->link = NULL;
+        foreach (config('translatable.locales') as $locale) {
+            $setting->image = null;
+            $setting->translate($locale)->value = null;
+            $setting->translate($locale)->title = null;
+            $setting->translate($locale)->description = null;
+            $setting->translate($locale)->link = null;
         }
         $setting->save();
-        
+
         session()->flash('success', __('site.deleted_successfully'));
 
         return redirect()->back();

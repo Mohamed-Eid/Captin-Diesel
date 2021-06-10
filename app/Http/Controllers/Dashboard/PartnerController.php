@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Partner;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class PartnerController extends Controller
@@ -17,7 +17,8 @@ class PartnerController extends Controller
     public function index()
     {
         $partners = Partner::paginate(10);
-        return view('dashboard.partners.index',compact('partners'));
+
+        return view('dashboard.partners.index', compact('partners'));
     }
 
     /**
@@ -33,35 +34,36 @@ class PartnerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $rules = [ 'image' => 'required'];
+        $rules = ['image' => 'required'];
 
-        foreach (config('translatable.locales') as $locale){
-            $rules += [$locale.'.name' => ['required' ,Rule::unique('partner_translations','name')]];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [$locale.'.name' => ['required', Rule::unique('partner_translations', 'name')]];
         }
 
         $request->validate($rules);
-        
+
         $data = $request->all();
 
-        $data['image'] = upload_image('partner_images',$request->image);
+        $data['image'] = upload_image('partner_images', $request->image);
 
         $partner = Partner::create($data);
-
 
         session()->flash('success', __('site.added_successfully'));
 
         return redirect()->route('dashboard.partners.index');
     }
- 
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -72,7 +74,8 @@ class PartnerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Partner $partner)
@@ -83,30 +86,29 @@ class PartnerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Partner $partner)
     {
         $rules = [];
 
-        foreach (config('translatable.locales') as $locale){
-            $rules += [$locale.'.name' => ['required' ,Rule::unique('partner_translations','name')->ignore($partner->id,'partner_id')]];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [$locale.'.name' => ['required', Rule::unique('partner_translations', 'name')->ignore($partner->id, 'partner_id')]];
         }
 
         $request->validate($rules);
 
         $data = $request->all();
 
-        if(isset($request->image)) {
-            delete_image('partner_images',$partner->image);
-            $data['image'] = upload_image('partner_images',$request->image);
+        if (isset($request->image)) {
+            delete_image('partner_images', $partner->image);
+            $data['image'] = upload_image('partner_images', $request->image);
         }
-        
-        
-        $partner->update($data);
 
+        $partner->update($data);
 
         session()->flash('success', __('site.updated_successfully'));
 
@@ -116,13 +118,13 @@ class PartnerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Partner $partner)
     {
-        delete_image('partner_images',$partner->image);
-
+        delete_image('partner_images', $partner->image);
 
         $partner->delete();
 

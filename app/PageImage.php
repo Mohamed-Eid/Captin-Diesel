@@ -8,15 +8,17 @@ class PageImage extends Model
 {
     protected $guarded = [];
 
-    protected  $appends = ['image_path'];
+    protected $appends = ['image_path'];
 
-
-    public  function getImagePathAttribute(){
+    public function getImagePathAttribute()
+    {
         return asset('uploads/page_images/'.$this->image);
     }
+
     //==================relations===================//
 
-    public function page(){
+    public function page()
+    {
         return $this->belongsTo(Page::class);
     }
 }

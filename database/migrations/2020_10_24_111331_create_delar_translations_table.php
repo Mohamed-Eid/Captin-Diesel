@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateDelarTranslationsTable extends Migration
 {
@@ -20,9 +20,8 @@ class CreateDelarTranslationsTable extends Migration
             $table->string('name');
             $table->string('address');
 
-            
             $table->string('locale')->index();
-            $table->unique(['delar_id','locale']);
+            $table->unique(['delar_id', 'locale']);
             $table->foreign('delar_id')->references('id')->on('delars')->onDelete('cascade');
         });
     }

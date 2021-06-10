@@ -8,15 +8,17 @@ class ProductImage extends Model
 {
     protected $guarded = [];
 
-    protected  $appends = ['image_path'];
+    protected $appends = ['image_path'];
 
-
-    public  function getImagePathAttribute(){
+    public function getImagePathAttribute()
+    {
         return asset('uploads/product_images/'.$this->image);
     }
+
     //==================relations===================//
 
-    public function product(){
+    public function product()
+    {
         return $this->belongsTo(Product::class);
-    }    
+    }
 }

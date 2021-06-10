@@ -10,11 +10,10 @@ class Partner extends Model
 
     public $translatedAttributes = ['name'];
     protected $guarded = [];
-    protected  $appends = ['image_path'];
+    protected $appends = ['image_path'];
 
-
-    public  function getImagePathAttribute(){
+    public function getImagePathAttribute()
+    {
         return asset('uploads/partner_images/'.$this->image);
     }
-
 }

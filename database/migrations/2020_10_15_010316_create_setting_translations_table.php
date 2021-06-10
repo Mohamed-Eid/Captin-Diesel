@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateSettingTranslationsTable extends Migration
 {
@@ -15,7 +15,7 @@ class CreateSettingTranslationsTable extends Migration
     {
         Schema::create('setting_translations', function (Blueprint $table) {
             $table->increments('id');
-            
+
             $table->integer('setting_id')->unsigned();
 
             $table->string('key');
@@ -25,7 +25,7 @@ class CreateSettingTranslationsTable extends Migration
             $table->string('link')->nullable();
 
             $table->string('locale')->index();
-            $table->unique(['setting_id','locale']);
+            $table->unique(['setting_id', 'locale']);
             $table->foreign('setting_id')->references('id')->on('settings')->onDelete('cascade');
         });
     }

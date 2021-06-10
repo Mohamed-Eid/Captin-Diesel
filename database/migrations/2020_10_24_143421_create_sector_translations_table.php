@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateSectorTranslationsTable extends Migration
 {
@@ -20,9 +20,8 @@ class CreateSectorTranslationsTable extends Migration
             $table->string('name');
             $table->text('description');
 
-            
             $table->string('locale')->index();
-            $table->unique(['sector_id','locale']);
+            $table->unique(['sector_id', 'locale']);
             $table->foreign('sector_id')->references('id')->on('sectors')->onDelete('cascade');
         });
     }

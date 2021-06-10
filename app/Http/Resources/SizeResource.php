@@ -9,18 +9,19 @@ class SizeResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
+            'id'     => $this->id,
             'length' => $this->length,
-            'width' => $this->width,
+            'width'  => $this->width,
             'height' => $this->height,
-            'depth' => $this->depth,
-            'cost' => $this->cost,
+            'depth'  => $this->depth,
+            'cost'   => $this->cost,
         ];
     }
 }

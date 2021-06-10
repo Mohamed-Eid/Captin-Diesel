@@ -11,7 +11,8 @@ class Area extends Model
     public $translatedAttributes = ['name'];
     public $guarded = [];
 
-    public function city(){
+    public function city()
+    {
         return $this->belongsTo(City::class);
     }
 }

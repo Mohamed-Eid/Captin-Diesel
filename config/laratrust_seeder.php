@@ -12,7 +12,7 @@ return [
             'settings'         => 'c,r,u,d',
             'question_answers' => 'c,r,u,d',
             'surgeries'        => 'c,r,u,d',
-            'videos'           => 'c,r,u,d',            
+            'videos'           => 'c,r,u,d',
         ],
 
         'admin' => [],
@@ -21,6 +21,6 @@ return [
         'c' => 'create',
         'r' => 'read',
         'u' => 'update',
-        'd' => 'delete'
-    ]
+        'd' => 'delete',
+    ],
 ];

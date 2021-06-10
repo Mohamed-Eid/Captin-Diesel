@@ -10,15 +10,15 @@ class Department extends Model
 
     public $translatedAttributes = ['name'];
     protected $guarded = [];
-    protected  $appends = ['image_path'];
+    protected $appends = ['image_path'];
 
-
-    public  function getImagePathAttribute(){
+    public function getImagePathAttribute()
+    {
         return asset('uploads/department_images/'.$this->image);
     }
 
-    public function jobs(){
+    public function jobs()
+    {
         return $this->hasMany(Job::class);
     }
-
 }

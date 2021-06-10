@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateDepartmentTranslationsTable extends Migration
 {
@@ -17,14 +17,12 @@ class CreateDepartmentTranslationsTable extends Migration
             $table->increments('id');
 
             $table->integer('department_id')->unsigned();
-            
+
             $table->string('name');
 
             $table->string('locale')->index();
-            $table->unique(['department_id','locale']);
+            $table->unique(['department_id', 'locale']);
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
-  
-
         });
     }
 

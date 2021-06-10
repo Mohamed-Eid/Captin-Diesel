@@ -144,10 +144,10 @@ return [
     'attributes' => [
 
         'products' => 'Prodcuts',
-        'ar' => [
+        'ar'       => [
             'name' => 'Arabic Name',
         ],
-    
+
         'en' => [
             'name' => 'English Name',
         ],
@@ -156,6 +156,5 @@ return [
         'lng'   => 'Address',
         'lat'   => 'Address',
     ],
-
 
 ];

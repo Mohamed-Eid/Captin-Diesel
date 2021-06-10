@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateJobTranslationsTable extends Migration
 {
@@ -17,7 +17,7 @@ class CreateJobTranslationsTable extends Migration
             $table->increments('id');
 
             $table->integer('job_id')->unsigned();
-            
+
             $table->string('name');
             $table->text('responsabilities');
             $table->text('qualifications');
@@ -27,9 +27,8 @@ class CreateJobTranslationsTable extends Migration
             $table->text('contract_type');
 
             $table->string('locale')->index();
-            $table->unique(['job_id','locale']);
+            $table->unique(['job_id', 'locale']);
             $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
-  
         });
     }
 

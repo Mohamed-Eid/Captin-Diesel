@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\City;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class CityController extends Controller
@@ -16,15 +16,13 @@ class CityController extends Controller
      */
     public function index(Request $request)
     {
-        $cities = City::when($request->search , function ($q) use ($request){
-            return $q->whereTranslationLike('name','%'.$request->search.'%');
+        $cities = City::when($request->search, function ($q) use ($request) {
+            return $q->whereTranslationLike('name', '%'.$request->search.'%');
         })->latest()->paginate(5);
 
+        return view('dashboard.cities.index', compact('cities'));
+    }
 
-        return view('dashboard.cities.index' , compact('cities'));
-    } 
-
- 
     /**
      * Show the form for creating a new resource.
      *
@@ -38,7 +36,8 @@ class CityController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -46,12 +45,11 @@ class CityController extends Controller
         $rules = [
         ];
 
-        foreach (config('translatable.locales') as $locale){
-            $rules += [$locale.'.name' => ['required' ,Rule::unique('city_translations','name')]];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [$locale.'.name' => ['required', Rule::unique('city_translations', 'name')]];
         }
-        
-        $data = $request->all();
 
+        $data = $request->all();
 
         $request->validate($rules);
 
@@ -65,7 +63,8 @@ class CityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\City  $city
+     * @param \App\City $city
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(City $city)
@@ -76,7 +75,8 @@ class CityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\City  $city
+     * @param \App\City $city
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(City $city)
@@ -87,19 +87,19 @@ class CityController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\City  $city
+     * @param \Illuminate\Http\Request $request
+     * @param \App\City                $city
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, City $city)
     {
         $rules = [];
 
-        foreach (config('translatable.locales') as $locale){
-            $rules += [$locale.'.name' => ['required' ,Rule::unique('city_translations','name')->ignore($city->id,'city_id')]];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [$locale.'.name' => ['required', Rule::unique('city_translations', 'name')->ignore($city->id, 'city_id')]];
         }
         $data = $request->all();
-
 
         $request->validate($rules);
 
@@ -113,12 +113,12 @@ class CityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\City  $city
+     * @param \App\City $city
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(City $city)
-    {        
-
+    {
         $city->delete();
 
         session()->flash('success', __('site.deleted_successfully'));
